@@ -6,10 +6,12 @@ const {
 } = require("../constants/permission");
 
 const rootAuthenticate = (req, res, next) => {
+  // TODO - fill logic
   next();
 };
 
 const customCheckMiddleware = (policyName, permissionName) => (req, res, next) => {
+  // TODO - fill logic
   next();
 };
 

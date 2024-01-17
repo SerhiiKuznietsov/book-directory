@@ -5,6 +5,8 @@ const { rootRouter } = require("./routers");
 
 const app = express();
 
+// TODO - add security logic (helmet, cors)
+
 app.disable("x-powered-by");
 app.use(cookieParser());
 app.use(express.json());

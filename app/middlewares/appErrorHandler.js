@@ -1,11 +1,13 @@
 exports.appErrorHandlers = (app) => {
   app.use((req, res, next) => {
-    console.log(req.originUrl);
+    // TODO - fill logic
     next();
   });
 
   app.use((err, req, res, next) => {
     console.error(err);
+
+    // TODO - fill logic
 
     const { name = "error", message = "something wrong", status = 500 } = err;
 
