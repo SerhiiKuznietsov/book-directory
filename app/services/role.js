@@ -1,6 +1,10 @@
 const { getDbModels } = require("../models");
 const { CustomError } = require("../utils/error");
-const { validRoleCreate, validRoleUpdate, validRoleRemove } = require("../validations/role");
+const {
+  validRoleCreate,
+  validRoleUpdate,
+  validRoleRemove,
+} = require("../validations/role");
 
 const getRolesList = async () => {
   // TODO - add filters and limits

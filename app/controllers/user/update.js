@@ -1,8 +1,5 @@
-const { getDbModels } = require("../../models");
-const { getUserById } = require("../../services/user");
+const { updateUser } = require("../../services/user");
 const { ctrl } = require("../../utils/controller-wrapper");
-const { CustomError } = require("../../utils/error");
-const { validUserUpdate } = require("../../validations/user");
 
 exports.update = ctrl(async (req) => {
   const {
@@ -10,21 +7,7 @@ exports.update = ctrl(async (req) => {
     params: { id },
   } = req;
 
-  validUserUpdate(id, body);
+  const userId = await updateUser(id, body);
 
-  await getUserById(id);
-
-  const { Book } = getDbModels();
-
-  const [isUserUpdated] = await Book.update(body, {
-    where: {
-      id,
-    },
-  });
-
-  if (!isUserUpdated) {
-    throw new CustomError(`user with id: "${id}" not updated`).setStatus(404);
-  }
-
-  return id;
+  return userId;
 });
