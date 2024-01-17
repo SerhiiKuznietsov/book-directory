@@ -28,6 +28,16 @@ const getDbModels = () => {
   return getDbInstance().models;
 };
 
+const getDbModelByName = (modelName) => {
+  const models = getDbModels();
+
+  if (!models.getOwnProperty(modelName)) {
+    throw new CustomError(`model with name: "${modelName}" not found`).setStatus(404);
+  }
+
+  return models[modelName];
+};
+
 const authenticate = async (sequelizeInstance) => {
   try {
     sequelizeInstance.authenticate();
@@ -116,4 +126,5 @@ module.exports = {
   createInstance,
   getDbInstance,
   getDbModels,
+  getDbModelByName,
 };
