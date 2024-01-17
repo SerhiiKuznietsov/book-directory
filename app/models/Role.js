@@ -2,9 +2,10 @@ exports.init = (sequelize, DataTypes) => {
   const Model = sequelize.define(
     "Role",
     {
-      title: {
+      name: {
         type: DataTypes.STRING(100),
         allowNull: false,
+        unique: true,
       },
       createdAt: {
         type: "TIMESTAMP WITHOUT TIME ZONE",
