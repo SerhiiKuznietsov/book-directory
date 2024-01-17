@@ -1,17 +1,16 @@
 exports.init = (sequelize, DataTypes) => {
   const Model = sequelize.define(
-    "User",
+    "RolePolicy",
     {
-      name: {
-        type: DataTypes.STRING(123),
-        allowNull: false,
-      },
-      email: {
-        type: DataTypes.STRING(256),
-      },
       roleId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
         field: "role_id",
-        type: DataTypes.SMALLINT,
+      },
+      policyId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        field: "policy_id",
       },
       createdAt: {
         type: "TIMESTAMP WITHOUT TIME ZONE",
@@ -27,17 +26,9 @@ exports.init = (sequelize, DataTypes) => {
       },
     },
     {
-      tableName: "user",
+      tableName: "role_policy",
     }
   );
-
-  Model.link = function ({ models }) {
-    const { Role, Book } = models;
-
-    this.belongsTo(Role, { foreignKey: "roleId" });
-
-    this.belongsToMany(Book, { through: "UserBook", foreignKey: "userId" });
-  };
 
   return Model;
 };

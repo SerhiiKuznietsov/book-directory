@@ -6,16 +6,30 @@ exports.init = (sequelize, DataTypes) => {
         type: DataTypes.STRING(100),
         allowNull: false,
       },
+      createdAt: {
+        type: "TIMESTAMP WITHOUT TIME ZONE",
+        allowNull: false,
+        defaultValue: sequelize.fn("NOW"),
+        field: "created_at",
+      },
+      updatedAt: {
+        type: "TIMESTAMP WITHOUT TIME ZONE",
+        allowNull: false,
+        defaultValue: sequelize.fn("NOW"),
+        field: "updated_at",
+      },
     },
     {
       tableName: "role",
     }
   );
 
-  Model.link = function () {
-    const { User } = sequelize.models;
+  Model.link = function ({ models }) {
+    const { User, Policy } = models;
 
-    this.hasMany(User, {});
+    this.hasMany(User, { foreignKey: "roleId" });
+
+    this.belongsToMany(Policy, { through: "RolePolicy", foreignKey: "roleId" });
   };
 
   return Model;

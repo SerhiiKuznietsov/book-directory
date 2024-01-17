@@ -1,11 +1,18 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const fs = require("fs/promises");
-const path = require("path");
 const { db } = require("../config");
 const { CustomError } = require("../utils/error");
 const { Flag } = require("../utils/flag");
 const { IS_DEV } = require("../config/server");
 
+const modelsBootstrap = [
+  require("./Book"),
+  require("./Policy"),
+  require("./Role-Policy"),
+  require("./Role"),
+  require("./User-Book"),
+  require("./User"),
+];
+// TODO - bear the logic of sequalize
 const dbFlag = new Flag();
 const dbContext = {};
 
@@ -21,9 +28,9 @@ const getDbModels = () => {
   return getDbInstance().models;
 };
 
-const authenticate = async (instance) => {
+const authenticate = async (sequelizeInstance) => {
   try {
-    instance.authenticate();
+    sequelizeInstance.authenticate();
     console.log("Database connection has been established successfully.");
   } catch (e) {
     new CustomError(
@@ -32,78 +39,60 @@ const authenticate = async (instance) => {
   }
 };
 
-const synchronization = async (instance) => {
+const synchronization = async (sequelizeInstance) => {
   try {
-    instance.sync({ force: true });
+    sequelizeInstance.sync({ alter: true });
     console.log("Database synchronization has been successfully.");
   } catch (e) {
     new CustomError(`database synchronization error`).setCause(e);
   }
 };
 
-const getModelsBootstrapFunctions = async (modelsDir) => {
-  const modelsFiles = await fs.readdir(modelsDir);
-  const selfFileName = path.basename(__filename);
-  const result = [];
-
-  for (let i = modelsFiles.length - 1; i >= 0; --i) {
-    const fileName = modelsFiles[i];
-
-    if (fileName === selfFileName) continue;
-
-    const modelFilepath = path.join(__dirname, fileName);
-
-    const fileContent = require(modelFilepath);
-
-    if (!fileContent) {
-      throw new CustomError(`model file on path ${modelFilepath} empty`);
-    }
-
-    result.push(fileContent.init);
-  }
-
-  return result;
+const initLinks = (links, sequelize) => {
+  links.forEach((model) => {
+    model.link(sequelize);
+  });
 };
-
-const initLinks = () => {};
 
 const initModels = (modelsBootstrap, sequelize) => {
   const links = [];
 
-  modelsBootstrap.forEach((init) => {
+  modelsBootstrap.forEach(({ init }) => {
     const model = init(sequelize, DataTypes);
 
-    if (!model.hasOwnProperty('link')) return;
+    if (!model.hasOwnProperty("link")) return;
 
     links.push(model);
   });
 
-  initLinks(links);
+  initLinks(links, sequelize);
 };
 
 const createSequelizeInstance = () => {
-  const sequelize = new Sequelize(db.database, db.username, db.password, {
-    host: db.host,
-    port: db.port,
-    dialect: db.dialect,
-    logging: IS_DEV,
-    pool: {
-      min: 0,
-      max: 10,
-    },
-    define: {
-      underscored: false,
-      freezeTableName: false,
-      syncOnAssociation: true,
-      charset: "utf8",
-      timestamps: true,
-      createdAt: "created_at",
-      deletedAt: "deleted_at",
-      updatedAt: "updated_at",
-    },
-  });
+  const sequelizeInstance = new Sequelize(
+    db.database,
+    db.username,
+    db.password,
+    {
+      host: db.host,
+      port: db.port,
+      dialect: db.dialect,
+      logging: IS_DEV,
+      pool: {
+        min: 0,
+        max: 10,
+      },
+      define: {
+        underscored: false,
+        freezeTableName: false,
+        syncOnAssociation: true,
+        charset: "utf8",
+        timestamps: false,
+      },
+    }
+  );
 
-  return sequelize;
+  return sequelizeInstance;
 };
 
 const createInstance = async () => {
@@ -111,15 +100,14 @@ const createInstance = async () => {
     throw new CustomError("re-creating the database instance");
   }
 
-  const sequelize = createSequelizeInstance();
-  const modelsBootstrap = await getModelsBootstrapFunctions(__dirname);
+  const sequelizeInstance = createSequelizeInstance();
 
-  initModels(modelsBootstrap, sequelize);
+  initModels(modelsBootstrap, sequelizeInstance);
 
-  await authenticate(sequelize);
-  await synchronization(sequelize);
+  await authenticate(sequelizeInstance);
+  await synchronization(sequelizeInstance);
 
-  dbContext.dbInstance = sequelize;
+  dbContext.dbInstance = sequelizeInstance;
 
   dbFlag.on();
 };
