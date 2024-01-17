@@ -11,6 +11,19 @@ const validBookItem = (bookItem) => {
   throw error;
 };
 
+const validBookId = (id) => {
+  const { error } = Joi.number().validate(id);
+
+  if (!error) return;
+
+  throw error;
+};
+
 exports.validBookCreate = vld(validBookItem);
 
-exports.validBookUpdate = vld(validBookItem);
+exports.validBookUpdate = vld((id, bookItem) => {
+  validBookId(id);
+  validBookItem(bookItem);
+});
+
+exports.validBookRemove = vld(validBookId);
