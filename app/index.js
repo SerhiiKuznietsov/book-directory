@@ -1,9 +1,9 @@
 const { createInstance } = require("./models");
 const { startServer } = require("./server");
-
-// TODO add "redis" to app
+const { initStoragesConnection } = require("./services/storage");
 
 exports.start = async () => {
+  await initStoragesConnection();
   await createInstance();
   startServer();
 };
