@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const { db } = require("../config");
+const { db: { development: dbConfig } } = require("../config");
 const { CustomError } = require("../utils/error");
 const { Flag } = require("../utils/flag");
 const { IS_DEV } = require("../config/server");
@@ -49,18 +49,11 @@ const authenticate = async (sequelizeInstance) => {
   }
 };
 
-const synchronization = async (sequelizeInstance) => {
-  try {
-    sequelizeInstance.sync({ alter: true });
-    console.log("Database synchronization has been successfully.");
-  } catch (e) {
-    new CustomError(`database synchronization error`).setCause(e);
-  }
-};
-
-const initLinks = (links, sequelize) => {
-  links.forEach((model) => {
-    model.link(sequelize);
+const initLinks = (sequelize) => {
+  Object.keys(sequelize.models).forEach(modelName => {
+    if (sequelize.models[modelName].hasOwnProperty('link')) {
+      sequelize.models[modelName].link(sequelize);
+    }
   });
 };
 
@@ -75,18 +68,18 @@ const initModels = (modelsBootstrap, sequelize) => {
     links.push(model);
   });
 
-  initLinks(links, sequelize);
+  initLinks(sequelize);
 };
 
 const createSequelizeInstance = () => {
   const sequelizeInstance = new Sequelize(
-    db.database,
-    db.username,
-    db.password,
+    dbConfig.database,
+    dbConfig.username,
+    dbConfig.password,
     {
-      host: db.host,
-      port: db.port,
-      dialect: db.dialect,
+      host: dbConfig.host,
+      port: dbConfig.port,
+      dialect: dbConfig.dialect,
       logging: IS_DEV,
       pool: {
         min: 0,
@@ -115,7 +108,6 @@ const createInstance = async () => {
   initModels(modelsBootstrap, sequelizeInstance);
 
   await authenticate(sequelizeInstance);
-  await synchronization(sequelizeInstance);
 
   dbContext.dbInstance = sequelizeInstance;
 

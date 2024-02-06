@@ -6,7 +6,9 @@
   "preinstall": "npm i -g nodemon",
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
-    "start:dev": "cross-env NODE_ENV=development nodemon index.js"
+    "start:dev": "cross-env NODE_ENV=development nodemon index.js",
+    "migrate:up": "npx sequelize-cli db:migrate",
+    "migrate:undo": "npx sequelize-cli db:migrate:undo"
   },
   "keywords": [],
   "author": "",
@@ -23,6 +25,7 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "nodemon": "^3.0.2"
+    "nodemon": "^3.0.2",
+    "sequelize-cli": "^6.6.2"
   }
 }
