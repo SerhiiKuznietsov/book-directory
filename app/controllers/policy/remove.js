@@ -1,1 +1,12 @@
-exports.remove = async () => {};
+const { ctrl } = require("../../utils/controller-wrapper");
+const { removePolicy } = require("../../services/policy");
+
+exports.remove = ctrl(async (req) => {
+  const {
+    params: { id },
+  } = req;
+
+  const policyId = await removePolicy(id);
+
+  return policyId;
+});

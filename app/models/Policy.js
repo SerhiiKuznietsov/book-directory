@@ -3,8 +3,9 @@ exports.init = (sequelize, DataTypes) => {
     "Policy",
     {
       title: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(128),
         allowNull: false,
+        unique: true,
       },
       permission: {
         type: DataTypes.JSONB,
