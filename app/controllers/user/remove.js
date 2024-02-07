@@ -2,7 +2,9 @@ const { ctrl } = require("../../utils/controller-wrapper");
 const { removeUser } = require("../../services/user");
 
 exports.remove = ctrl(async (req) => {
-  const { id } = req.params;
+  const {
+    params: { id },
+  } = req;
 
   const userId = await removeUser(id);
 
