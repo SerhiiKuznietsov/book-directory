@@ -7,6 +7,8 @@ const dbConfig = {
   host: process.env.DB_HOST || "localhost",
   port: process.env.DB_PORT || 5455,
   dialect: process.env.DB_DIALECT || "postgres",
+  migrationStorageTableSchema: '_migration',
+  migrationStorageTableName: 'migration_meta',
 };
 
 module.exports = {
