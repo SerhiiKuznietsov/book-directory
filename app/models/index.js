@@ -1,5 +1,7 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const { db: { development: dbConfig } } = require("../config");
+const {
+  db: { development: dbConfig },
+} = require("../config");
 const { CustomError } = require("../utils/error");
 const { Flag } = require("../utils/flag");
 const { IS_DEV } = require("../config/server");
@@ -32,7 +34,9 @@ const getDbModelByName = (modelName) => {
   const models = getDbModels();
 
   if (!models.getOwnProperty(modelName)) {
-    throw new CustomError(`model with name: "${modelName}" not found`).setStatus(404);
+    throw new CustomError(
+      `model with name: "${modelName}" not found`
+    ).setStatus(404);
   }
 
   return models[modelName];
@@ -40,7 +44,7 @@ const getDbModelByName = (modelName) => {
 
 const authenticate = async (sequelizeInstance) => {
   try {
-    sequelizeInstance.authenticate();
+    await sequelizeInstance.authenticate();
     console.log("Database connection has been established successfully.");
   } catch (e) {
     new CustomError(
@@ -50,9 +54,11 @@ const authenticate = async (sequelizeInstance) => {
 };
 
 const initLinks = (sequelize) => {
-  Object.keys(sequelize.models).forEach(modelName => {
-    if (sequelize.models[modelName].hasOwnProperty('link')) {
-      sequelize.models[modelName].link(sequelize);
+  const { models } = sequelize;
+
+  Object.keys(models).forEach((modelName) => {
+    if (models[modelName].hasOwnProperty("link")) {
+      models[modelName].link(sequelize);
     }
   });
 };
