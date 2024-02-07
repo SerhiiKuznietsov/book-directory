@@ -52,6 +52,7 @@ module.exports = {
         created_at timestamp without time zone NOT NULL DEFAULT now(),
         updated_at timestamp without time zone NOT NULL DEFAULT now(),
         CONSTRAINT user_pkey PRIMARY KEY (id),
+        CONSTRAINT user_name_key UNIQUE (name),
         CONSTRAINT user_role_id_fkey FOREIGN KEY (role_id)
           REFERENCES public.role (id) MATCH SIMPLE
           ON UPDATE CASCADE

@@ -8,6 +8,7 @@ exports.init = (sequelize, DataTypes) => {
       },
       email: {
         type: DataTypes.STRING(256),
+        unique: true,
       },
       roleId: {
         field: "role_id",
