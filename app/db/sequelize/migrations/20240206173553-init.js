@@ -7,7 +7,7 @@ module.exports = {
       DROP TABLE IF EXISTS public.role;
       CREATE TABLE IF NOT EXISTS public.role
       (
-        id integer NOT NULL,
+        id serial,
         created_at timestamp without time zone NOT NULL DEFAULT now(),
         updated_at timestamp without time zone NOT NULL DEFAULT now(),
         name character varying(100) NOT NULL,
@@ -20,12 +20,13 @@ module.exports = {
       DROP TABLE IF EXISTS public.policy;
       CREATE TABLE IF NOT EXISTS public.policy
       (
-        id integer NOT NULL,
+        id serial,
         title character varying(255) NOT NULL,
         permission jsonb NOT NULL,
         created_at timestamp without time zone NOT NULL DEFAULT now(),
         updated_at timestamp without time zone NOT NULL DEFAULT now(),
-        CONSTRAINT policy_pkey PRIMARY KEY (id)
+        CONSTRAINT policy_pkey PRIMARY KEY (id),
+        CONSTRAINT policy_title_key UNIQUE (title)
       );
     `);
 
@@ -35,8 +36,8 @@ module.exports = {
       (
         created_at timestamp without time zone NOT NULL DEFAULT now(),
         updated_at timestamp without time zone NOT NULL DEFAULT now(),
-        role_id integer NOT NULL,
-        policy_id integer NOT NULL
+        role_id serial,
+        policy_id serial
       );
     `);
 
@@ -44,7 +45,7 @@ module.exports = {
       DROP TABLE IF EXISTS public."user";
       CREATE TABLE IF NOT EXISTS public."user"
       (
-        id integer NOT NULL,
+        id serial,
         name character varying(123) NOT NULL,
         email character varying(256),
         role_id smallint,
@@ -62,7 +63,7 @@ module.exports = {
       DROP TABLE IF EXISTS public.book;
       CREATE TABLE IF NOT EXISTS public.book
       (
-        id integer NOT NULL,
+        id serial,
         title character varying(255) NOT NULL,
         created_at timestamp without time zone NOT NULL DEFAULT now(),
         updated_at timestamp without time zone NOT NULL DEFAULT now(),
@@ -77,8 +78,8 @@ module.exports = {
       (
         created_at timestamp without time zone NOT NULL DEFAULT now(),
         updated_at timestamp without time zone NOT NULL DEFAULT now(),
-        book_id integer NOT NULL,
-        user_id integer NOT NULL,
+        book_id serial,
+        user_id serial,
         CONSTRAINT user_book_user_id_fkey FOREIGN KEY (user_id)
           REFERENCES public."user" (id) MATCH SIMPLE
           ON UPDATE CASCADE
