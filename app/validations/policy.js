@@ -11,6 +11,8 @@ const validPolicyItem = (policyItem) => {
 
   if (error) throw error;
 
+  // validations are duplicated due to incorrect error output in joi
+
   // TODO - add validation to accurately display errors based on the key
   const { error: keyCaseError } = Joi.object()
     .pattern(Joi.string().lowercase(), Joi.boolean())

@@ -14,7 +14,12 @@ const modelsBootstrap = [
   require("./User-Book"),
   require("./User"),
 ];
+
+
 // TODO - bear the logic of sequalize
+// TODO - move the models to the sequelize folder and organize access through the interface
+
+
 const dbFlag = new Flag();
 const dbContext = {};
 
