@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines" : {
+    "npm" : ">=10.0.0",
+    "node" : ">=20.0.0"
+  },
   "preinstall": "npm i -g nodemon",
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
