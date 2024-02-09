@@ -2,9 +2,11 @@ class CustomError extends Error {
   constructor(message) {
     super(message);
 
-    this.name = 'Error';
-    this.message = message || 'Undefined error';
-    this.status = 500;
+    // TODO - Add capitalization for first letters
+    // TODO - Add the ability to report an error
+    this.setName('Error');
+    this.setMassage(message || 'Undefined error');
+    this.setStatus(500);
   }
 
   setName(name) {
