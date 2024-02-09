@@ -10,7 +10,10 @@ const getBooksList = async () => {
   // TODO - add filters and limits
   const { Book } = getDbModels();
 
-  const booksList = await Book.findAll({ attributes: ['id', 'title', 'createdAt'], raw: true });
+  const booksList = await Book.findAll({
+    attributes: ["id", "title", "createdAt"],
+    raw: true,
+  });
 
   return booksList;
 };

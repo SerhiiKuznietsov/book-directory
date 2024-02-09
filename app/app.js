@@ -1,6 +1,6 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
-const { appErrorHandlers } = require("./middlewares/appErrorHandler");
+const { rootErrorHandlers } = require("./middlewares/rootErrorHandler");
 const { rootRouter } = require("./routers");
 
 const app = express();
@@ -12,7 +12,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(rootRouter);
 
-appErrorHandlers(app);
+rootErrorHandlers(app);
 
 module.exports = {
   app,
