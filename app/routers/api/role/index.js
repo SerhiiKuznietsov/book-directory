@@ -1,5 +1,4 @@
 const router = require("express").Router();
-
 const {
   getList,
   create,
@@ -7,8 +6,22 @@ const {
   update,
   remove,
 } = require("../../../controllers/role");
+const {
+  readCheckMiddleware,
+  createCheckMiddleware,
+  updateCheckMiddleware,
+  deleteCheckMiddleware,
+} = require("../../../middlewares/role");
 
-router.route("/").get(getList).post(create);
-router.route("/:id(\\d+)").get(getSingle).put(update).delete(remove);
+router
+  .route("/")
+  .get(readCheckMiddleware, getList)
+  .post(createCheckMiddleware, create);
+
+router
+  .route("/:id(\\d+)")
+  .get(readCheckMiddleware, getSingle)
+  .put(updateCheckMiddleware, update)
+  .delete(deleteCheckMiddleware, remove);
 
 module.exports = router;

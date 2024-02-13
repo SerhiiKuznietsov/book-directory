@@ -10,10 +10,11 @@ const rootAuthenticate = (req, res, next) => {
   next();
 };
 
-const customCheckMiddleware = (policyName, permissionName) => (req, res, next) => {
-  // TODO - fill logic
-  next();
-};
+const customCheckMiddleware =
+  (policyName, permissionName) => (req, res, next) => {
+    // TODO - fill logic
+    next();
+  };
 
 const readCheckMiddleware = (policyName) =>
   customCheckMiddleware(policyName, READ_PERMISSION_NAME);
