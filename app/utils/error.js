@@ -1,16 +1,16 @@
+const { capitalize } = require("./string-converter");
+
 class CustomError extends Error {
   constructor(message) {
     super(message);
 
-    // TODO - Add capitalization for first letters
-    // TODO - Add the ability to report an error
-    this.setName('Error');
-    this.setMassage(message || 'Undefined error');
+    this.setName("Error");
+    this.setMassage(message || "Undefined error");
     this.setStatus(500);
   }
 
   setName(name) {
-    this.name = name;
+    this.name = capitalize(name);
 
     return this;
   }
@@ -22,6 +22,8 @@ class CustomError extends Error {
   }
 
   setMassage(message) {
+    message = capitalize(message);
+
     this.stack = this.stack.replace(this.message, message);
     this.message = message;
 
