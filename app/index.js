@@ -1,9 +1,11 @@
 const { createInstance } = require("./models");
 const { startServer } = require("./server");
-const { initStoragesConnection } = require("./services/storage");
+// const { initStoragesConnection } = require("./services/storage");
 
 exports.start = async () => {
-  await initStoragesConnection();
+
+  // TODO - remove the comment when the storage logic is needed
+  // await initStoragesConnection();
   await createInstance();
   startServer();
 };
