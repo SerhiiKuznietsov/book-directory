@@ -4,9 +4,20 @@ const {
   UPDATE_PERMISSION_NAME,
   DELETE_PERMISSION_NAME,
 } = require("../constants/permission");
+// const {
+//   ACCESS_TOKEN_COOKIE_NAME,
+//   REFRESH_TOKEN_COOKIE_NAME,
+// } = require("../constants/token-cookie");
 
 const rootAuthenticate = (req, res, next) => {
   // TODO - fill logic
+  // const {
+  //   [ACCESS_TOKEN_COOKIE_NAME]: accessToken,
+  //   [REFRESH_TOKEN_COOKIE_NAME]: refreshToken,
+  // } = req.cookies;
+
+  // if (!accessToken || !refreshToken) next();
+
   next();
 };
 
