@@ -1,10 +1,12 @@
-const Joi = require('joi');
-const { vld } = require('../utils/validator-wrapper');
+const Joi = require("joi");
+const { vld } = require("../utils/validator-wrapper");
 
 const validRoleItem = (roleItem) => {
   const { error } = Joi.object({
     name: Joi.string().min(1).max(255),
-  }).required().validate(roleItem);
+  })
+    .required()
+    .validate(roleItem);
 
   if (!error) return;
 
