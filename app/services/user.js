@@ -5,15 +5,17 @@ const {
   validUserUpdate,
   validUserRemove,
 } = require("../validations/user");
+const { SequelizeQueryBuilder } = require("./db-query");
 
-const getUsersList = async () => {
-  // TODO - add filters and limits
+const getUsersList = async (query) => {
   const { User } = getDbModels();
 
-  const usersList = await User.findAll({
-    attributes: ["id", "email", "roleId", "createdAt"],
-    raw: true,
-  });
+  const q = new SequelizeQueryBuilder(Role, query)
+    .setAccessFields(["id", "email", "roleId", "createdAt"])
+    .activateRaw()
+    .getDbQuery();
+
+  const usersList = await User.findAll(q);
 
   return usersList;
 };

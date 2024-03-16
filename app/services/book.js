@@ -5,15 +5,17 @@ const {
   validBookCreate,
   validBookRemove,
 } = require("../validations/book");
+const { SequelizeQueryBuilder } = require("./db-query");
 
-const getBooksList = async () => {
-  // TODO - add filters and limits
+const getBooksList = async (query) => {
   const { Book } = getDbModels();
 
-  const booksList = await Book.findAll({
-    attributes: ["id", "title", "createdAt"],
-    raw: true,
-  });
+  const q = new SequelizeQueryBuilder(Book, query)
+    .setAccessFields(["id", "title", "createdAt"])
+    .activateRaw()
+    .getDbQuery();
+
+  const booksList = await Book.findAll(q);
 
   return booksList;
 };

@@ -5,15 +5,17 @@ const {
   validPolicyCreate,
   validPolicyRemove,
 } = require("../validations/policy");
+const { SequelizeQueryBuilder } = require("./db-query");
 
-const getPolicesList = async () => {
-  // TODO - add filters and limits
+const getPolicesList = async (query) => {
   const { Policy } = getDbModels();
 
-  const policesList = await Policy.findAll({
-    attributes: ["id", "title", "createdAt"],
-    raw: true,
-  });
+  const q = new SequelizeQueryBuilder(Policy, query)
+    .setAccessFields(["id", "title", "createdAt"])
+    .activateRaw()
+    .getDbQuery();
+
+  const policesList = await Policy.findAll(q);
 
   return policesList;
 };
