@@ -1,7 +1,7 @@
-const { getDbInstance, createInstance } = require("./sequelize");
+const { getDbInstance, getDbModels, createInstance } = require("./sequelize");
 
 exports.getDbInstance = () => getDbInstance();
 
-exports.getDbModels = () => getDbInstance().models;
+exports.getDbModels = () => getDbModels();
 
 exports.createInstance = () => createInstance();
