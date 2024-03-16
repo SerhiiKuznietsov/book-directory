@@ -1,4 +1,4 @@
-const { getDbModels } = require("../models");
+const { getDbModels } = require("../db");
 const { CustomError } = require("../utils/error");
 const {
   validUserCreate,
