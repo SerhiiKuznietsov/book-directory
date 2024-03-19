@@ -3,14 +3,15 @@ const {
   db: { development: dbConfig },
 } = require("../../config");
 const { IS_DEV } = require("../../config/server");
+const { CustomError } = require("../../utils/error");
 
 exports.authenticate = async (sequelizeInstance) => {
   try {
     await sequelizeInstance.authenticate();
     console.log("Database connection has been established successfully.");
   } catch (e) {
-    new CustomError(
-      `Unable to connect to the database: ${db.database}`
+    throw new CustomError(
+      `Unable to connect to the database: ${sequelizeInstance.config.database}`
     ).setCause(e);
   }
 };

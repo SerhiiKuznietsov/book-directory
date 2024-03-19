@@ -1,6 +1,5 @@
-const { validDbConfig } = require("../validations/config/db");
-
 require("dotenv").config();
+const { validDbConfig } = require("../validations/config/db");
 
 const dbConfig = {
   username: process.env.DB_USER || "postgres",

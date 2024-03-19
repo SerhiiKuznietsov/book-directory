@@ -1,0 +1,41 @@
+version: '3.4'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: app
+    env_file: .env
+    command: bash -c "npm run migrate:up && npm run start:dev"
+    depends_on:
+      - db
+      - redis
+    ports:
+      - 80:80
+    networks:
+      - my_network
+
+  db:
+    image: postgres:15.5
+    restart: always
+    environment:
+      PSQL_HOST: database
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - 5432:5432
+    networks:
+      - my_network
+
+  redis:
+    image: redis:7.2.4-alpine
+    restart: always
+    environment:
+      - REDIS_PORT=6379
+    ports:
+      - 6379:6379
+
+networks:
+  my_network:
