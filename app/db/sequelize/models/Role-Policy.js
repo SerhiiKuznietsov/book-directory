@@ -12,6 +12,11 @@ exports.init = (sequelize, DataTypes) => {
         allowNull: false,
         field: "policy_id",
       },
+      accessPermission: {
+        type: DataTypes.JSONB,
+        allowNull: false,
+        field: "access_permission",
+      },
       createdAt: {
         type: "TIMESTAMP WITHOUT TIME ZONE",
         allowNull: false,

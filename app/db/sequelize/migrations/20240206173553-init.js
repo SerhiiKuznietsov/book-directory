@@ -1,11 +1,13 @@
 "use strict";
 
+const schemaName = "public";
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface) {
     await queryInterface.sequelize.query(`
-      DROP TABLE IF EXISTS public.role;
-      CREATE TABLE IF NOT EXISTS public.role
+      DROP TABLE IF EXISTS ${schemaName}.role;
+      CREATE TABLE IF NOT EXISTS ${schemaName}.role
       (
         id serial,
         created_at timestamp without time zone NOT NULL DEFAULT now(),
@@ -17,12 +19,12 @@ module.exports = {
     `);
 
     await queryInterface.sequelize.query(`
-      DROP TABLE IF EXISTS public.policy;
-      CREATE TABLE IF NOT EXISTS public.policy
+      DROP TABLE IF EXISTS ${schemaName}.policy;
+      CREATE TABLE IF NOT EXISTS ${schemaName}.policy
       (
         id serial,
         title character varying(255) NOT NULL,
-        permission jsonb NOT NULL,
+        permission character varying[] NOT NULL,
         created_at timestamp without time zone NOT NULL DEFAULT now(),
         updated_at timestamp without time zone NOT NULL DEFAULT now(),
         CONSTRAINT policy_pkey PRIMARY KEY (id),
@@ -31,19 +33,20 @@ module.exports = {
     `);
 
     await queryInterface.sequelize.query(`
-      DROP TABLE IF EXISTS public.role_policy;
-      CREATE TABLE IF NOT EXISTS public.role_policy
+      DROP TABLE IF EXISTS ${schemaName}.role_policy;
+      CREATE TABLE IF NOT EXISTS ${schemaName}.role_policy
       (
+        role_id numeric,
+        policy_id numeric,
+        access_permission jsonb NOT NULL,
         created_at timestamp without time zone NOT NULL DEFAULT now(),
-        updated_at timestamp without time zone NOT NULL DEFAULT now(),
-        role_id serial,
-        policy_id serial
+        updated_at timestamp without time zone NOT NULL DEFAULT now()
       );
     `);
 
     await queryInterface.sequelize.query(`
-      DROP TABLE IF EXISTS public."user";
-      CREATE TABLE IF NOT EXISTS public."user"
+      DROP TABLE IF EXISTS ${schemaName}."user";
+      CREATE TABLE IF NOT EXISTS ${schemaName}."user"
       (
         id serial,
         name character varying(123) NOT NULL,
@@ -54,15 +57,15 @@ module.exports = {
         CONSTRAINT user_pkey PRIMARY KEY (id),
         CONSTRAINT user_name_key UNIQUE (name),
         CONSTRAINT user_role_id_fkey FOREIGN KEY (role_id)
-          REFERENCES public.role (id) MATCH SIMPLE
+          REFERENCES ${schemaName}.role (id) MATCH SIMPLE
           ON UPDATE CASCADE
           ON DELETE CASCADE
       );
     `);
 
     await queryInterface.sequelize.query(`
-      DROP TABLE IF EXISTS public.book;
-      CREATE TABLE IF NOT EXISTS public.book
+      DROP TABLE IF EXISTS ${schemaName}.book;
+      CREATE TABLE IF NOT EXISTS ${schemaName}.book
       (
         id serial,
         title character varying(255) NOT NULL,
@@ -74,15 +77,15 @@ module.exports = {
     `);
 
     await queryInterface.sequelize.query(`
-      DROP TABLE IF EXISTS public.user_book;
-      CREATE TABLE IF NOT EXISTS public.user_book
+      DROP TABLE IF EXISTS ${schemaName}.user_book;
+      CREATE TABLE IF NOT EXISTS ${schemaName}.user_book
       (
         created_at timestamp without time zone NOT NULL DEFAULT now(),
         updated_at timestamp without time zone NOT NULL DEFAULT now(),
         book_id serial,
         user_id serial,
         CONSTRAINT user_book_user_id_fkey FOREIGN KEY (user_id)
-          REFERENCES public."user" (id) MATCH SIMPLE
+          REFERENCES ${schemaName}."user" (id) MATCH SIMPLE
           ON UPDATE CASCADE
           ON DELETE CASCADE
       );
@@ -91,12 +94,12 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     await queryInterface.sequelize.query(`
-      DROP TABLE IF EXISTS public.role CASCADE;
-      DROP TABLE IF EXISTS public.policy CASCADE;
-      DROP TABLE IF EXISTS public.role_policy CASCADE;
-      DROP TABLE IF EXISTS public."user" CASCADE;
-      DROP TABLE IF EXISTS public.book CASCADE;
-      DROP TABLE IF EXISTS public.user_book CASCADE;
+      DROP TABLE IF EXISTS ${schemaName}.role CASCADE;
+      DROP TABLE IF EXISTS ${schemaName}.policy CASCADE;
+      DROP TABLE IF EXISTS ${schemaName}.role_policy CASCADE;
+      DROP TABLE IF EXISTS ${schemaName}."user" CASCADE;
+      DROP TABLE IF EXISTS ${schemaName}.book CASCADE;
+      DROP TABLE IF EXISTS ${schemaName}.user_book CASCADE;
     `);
   },
 };

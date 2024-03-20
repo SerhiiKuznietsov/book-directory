@@ -8,7 +8,7 @@ exports.init = (sequelize, DataTypes) => {
         unique: true,
       },
       permission: {
-        type: DataTypes.JSONB,
+        type: DataTypes.ARRAY(DataTypes.STRING),
         allowNull: false,
       },
       createdAt: {
