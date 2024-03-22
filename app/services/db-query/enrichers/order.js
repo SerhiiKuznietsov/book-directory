@@ -8,10 +8,10 @@ const {
 exports.enrichOrder = (result, query, queryConfiguration) => {
   const { model, accessFields } = queryConfiguration;
   const { order } = query;
-  const newOrder = [];
+  let newOrder = [];
 
   if (!order || !order[0]) {
-    newOrder.push([getModelPrimaryKeyFieldName(model), NORMAL_GROUPING_NAME]);
+    newOrder = [getModelPrimaryKeyFieldName(model), NORMAL_GROUPING_NAME] ;
   } else {
     newOrder[0] = order[0];
 
