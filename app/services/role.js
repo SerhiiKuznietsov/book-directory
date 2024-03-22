@@ -1,4 +1,4 @@
-const { getDbModels } = require("../db");
+const { Role } = require("../db/sequelize");
 const { CustomError } = require("../utils/error");
 const {
   validRoleCreate,
@@ -8,8 +8,6 @@ const {
 const { SequelizeQueryBuilder } = require("./db-query");
 
 const getRolesList = async (query) => {
-  const { Role } = getDbModels();
-
   const q = new SequelizeQueryBuilder(Role, query)
     .setAccessFields(["id", "name", "createdAt"])
     .activateRaw()
@@ -21,8 +19,6 @@ const getRolesList = async (query) => {
 };
 
 const getRoleById = async (id) => {
-  const { Role } = getDbModels();
-
   const foundRole = await Role.findByPk(id, { raw: true });
 
   if (!foundRole) {
@@ -34,8 +30,6 @@ const getRoleById = async (id) => {
 
 const createRole = async (roleItem) => {
   validRoleCreate(roleItem);
-
-  const { Role } = getDbModels();
 
   const { id } = await Role.create(roleItem);
 
@@ -50,8 +44,6 @@ const updateRole = async (id, roleItem) => {
   validRoleUpdate(id, roleItem);
 
   await getRoleById(id);
-
-  const { Role } = getDbModels();
 
   const [isRoleUpdated] = await Role.update(roleItem, {
     where: {
@@ -70,8 +62,6 @@ const removeRole = async (id) => {
   validRoleRemove(id);
 
   await getRoleById(id);
-
-  const { Role } = getDbModels();
 
   const isRoleRemoved = await Role.destroy({
     where: {

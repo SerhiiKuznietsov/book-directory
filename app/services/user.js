@@ -1,4 +1,4 @@
-const { getDbModels } = require("../db");
+const { User } = require("../db/sequelize");
 const { CustomError } = require("../utils/error");
 const {
   validUserCreate,
@@ -8,8 +8,6 @@ const {
 const { SequelizeQueryBuilder } = require("./db-query");
 
 const getUsersList = async (query) => {
-  const { User } = getDbModels();
-
   const q = new SequelizeQueryBuilder(Role, query)
     .setAccessFields(["id", "email", "roleId", "createdAt"])
     .activateRaw()
@@ -21,8 +19,6 @@ const getUsersList = async (query) => {
 };
 
 const getUserById = async (id) => {
-  const { User } = getDbModels();
-
   const foundUser = await User.findByPk(id, { raw: true });
 
   if (!foundUser) {
@@ -34,8 +30,6 @@ const getUserById = async (id) => {
 
 const createUser = async (userItem) => {
   validUserCreate(userItem);
-
-  const { User } = getDbModels();
 
   const { id } = await User.create(userItem);
 
@@ -68,8 +62,6 @@ const removeUser = async (id) => {
   validUserRemove(id);
 
   await getUserById(id);
-
-  const { User } = getDbModels();
 
   const isUserRemoved = await User.destroy({
     where: {

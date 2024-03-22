@@ -25,6 +25,7 @@ exports.createSequelizeInstance = () => {
       host: dbConfig.host,
       port: dbConfig.port,
       dialect: dbConfig.dialect,
+      schema: "public",
       logging: IS_DEV,
       pool: {
         min: 0,

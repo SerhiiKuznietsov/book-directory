@@ -1,4 +1,4 @@
-const { getDbModels } = require("../db");
+const { Book } = require("../db/sequelize");
 const { CustomError } = require("../utils/error");
 const {
   validBookUpdate,
@@ -8,8 +8,6 @@ const {
 const { SequelizeQueryBuilder } = require("./db-query");
 
 const getBooksList = async (query) => {
-  const { Book } = getDbModels();
-
   const q = new SequelizeQueryBuilder(Book, query)
     .setAccessFields(["id", "title", "createdAt"])
     .activateRaw()
@@ -21,8 +19,6 @@ const getBooksList = async (query) => {
 };
 
 const getBookById = async (id) => {
-  const { Book } = getDbModels();
-
   const foundBook = await Book.findByPk(id, { raw: true });
 
   if (!foundBook) {
@@ -34,8 +30,6 @@ const getBookById = async (id) => {
 
 const createBook = async (bookItem) => {
   validBookCreate(bookItem);
-
-  const { Book } = getDbModels();
 
   const { id } = await Book.create(bookItem);
 
@@ -50,8 +44,6 @@ const updateBook = async (id, bookItem) => {
   validBookUpdate(id, bookItem);
 
   await getBookById(id);
-
-  const { Book } = getDbModels();
 
   const [isBookUpdated] = await Book.update(bookItem, {
     where: {
@@ -70,8 +62,6 @@ const removeBook = async (id) => {
   validBookRemove(id);
 
   await getBookById(id);
-
-  const { Book } = getDbModels();
 
   const isBookRemoved = await Book.destroy({
     where: {

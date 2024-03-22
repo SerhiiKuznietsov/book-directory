@@ -1,4 +1,4 @@
-const { getDbModels } = require("../db");
+const { Policy } = require("../db/sequelize");
 const { CustomError } = require("../utils/error");
 const {
   validPolicyUpdate,
@@ -8,8 +8,6 @@ const {
 const { SequelizeQueryBuilder } = require("./db-query");
 
 const getPolicesList = async (query) => {
-  const { Policy } = getDbModels();
-
   const q = new SequelizeQueryBuilder(Policy, query)
     .setAccessFields(["id", "title", "createdAt"])
     .activateRaw()
@@ -21,8 +19,6 @@ const getPolicesList = async (query) => {
 };
 
 const getPolicyById = async (id) => {
-  const { Policy } = getDbModels();
-
   const foundPolicy = await Policy.findByPk(id, { raw: true });
 
   if (!foundPolicy) {
@@ -34,8 +30,6 @@ const getPolicyById = async (id) => {
 
 const createPolicy = async (bookItem) => {
   validPolicyCreate(bookItem);
-
-  const { Policy } = getDbModels();
 
   const { id } = await Policy.create(bookItem);
 
@@ -50,8 +44,6 @@ const updatePolicy = async (id, bookItem) => {
   validPolicyUpdate(id, bookItem);
 
   await getPolicyById(id);
-
-  const { Policy } = getDbModels();
 
   const [isPolicyUpdated] = await Policy.update(bookItem, {
     where: {
@@ -70,8 +62,6 @@ const removePolicy = async (id) => {
   validPolicyRemove(id);
 
   await getPolicyById(id);
-
-  const { Policy } = getDbModels();
 
   const isPolicyRemoved = await Policy.destroy({
     where: {
