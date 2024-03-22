@@ -9,7 +9,10 @@ const dbConfig = {
   port: +process.env.DB_PORT || 5432,
   dialect: process.env.DB_DIALECT || "postgres",
   migrationStorageTableSchema: "_migration",
-  migrationStorageTableName: "migration_meta",
+  migrationStorageTableName: "_migration_meta",
+  seederStorage: 'sequelize',
+  seederStorageTableName: "_seeder_meta",
+  seederStorageTableSchema: "_migration",
 };
 
 module.exports = {
