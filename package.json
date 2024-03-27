@@ -2,11 +2,29 @@
   "name": "book-directory",
   "version": "1.0.0",
   "description": "Pet project for a website repository for books and authors",
+  "author": "Serhii Kuznietsov <sergeykyz19998@gmail.com>",
+  "license": "ISC",
   "main": "index.js",
   "engines": {
     "npm": ">=8.6.0",
     "node": ">=18.0.0"
   },
+  "keywords": [
+    "web",
+    "api",
+    "node",
+    "js",
+    "express",
+    "joi",
+    "sequelize",
+    "docker",
+    "redis"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SerhiiKuznietsov/book-directory.git"
+  },
+  "homepage": "https://github.com/SerhiiKuznietsov/book-directory.git#readme",
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
     "start:dev": "cross-env NODE_ENV=development nodemon index.js",
@@ -15,14 +33,6 @@
     "seed:up": "npx sequelize-cli db:seed:all",
     "seed:undo": "npx sequelize-cli db:seed:undo"
   },
-  "keywords": ["web", "api", "node", "js", "express", "joi", "sequelize", "docker", "redis"],
-  "author": "Serhii Kuznietsov <sergeykyz19998@gmail.com>",
-  "homepage": "https://github.com/SerhiiKuznietsov/book-directory.git#readme",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/SerhiiKuznietsov/book-directory.git"
-  },
-  "license": "ISC",
   "dependencies": {
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.5",
