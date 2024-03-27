@@ -1,4 +1,4 @@
-const path = require("path");
+const path = require("node:path");
 const appFolder = path.join(".", "app");
 const sequelizeFolder = path.resolve(appFolder, "db", "sequelize");
 
