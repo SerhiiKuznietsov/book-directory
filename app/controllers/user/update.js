@@ -1,7 +1,7 @@
 const { updateUser } = require("../../services/user");
 const { ctrl } = require("../../utils/controller-wrapper");
 
-exports.update = ctrl(async (req) => {
+exports.update = ctrl(async (req, res) => {
   const {
     body,
     params: { id },
@@ -9,5 +9,5 @@ exports.update = ctrl(async (req) => {
 
   const userId = await updateUser(id, body);
 
-  return userId;
+  res.json(userId);
 });

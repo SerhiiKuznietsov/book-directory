@@ -48,6 +48,7 @@ const getRolePolicyByUUID = async (uuid) => {
 const createRolePolicy = async (rolePolicyItem) => {
   validRolePolicyCreate(rolePolicyItem);
 
+  // TODO - add a check to compare permissions against those of the original policy
   const { uuid } = await RolePolicy.create(rolePolicyItem);
 
   if (!uuid) {
@@ -62,6 +63,7 @@ const updateRolePolicy = async (uuid, rolePolicyItem) => {
 
   await getRolePolicyByUUID(uuid);
 
+  // TODO - add a check to compare permissions against those of the original policy
   const [isRolePolicyUpdated] = await RolePolicy.update(rolePolicyItem, {
     where: {
       uuid,

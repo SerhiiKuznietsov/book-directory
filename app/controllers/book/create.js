@@ -1,10 +1,10 @@
 const { createBook } = require("../../services/book");
 const { ctrl } = require("../../utils/controller-wrapper");
 
-exports.create = ctrl(async (req) => {
+exports.create = ctrl(async (req, res) => {
   const { body } = req;
 
-  const id = await createBook(body);
+  const bookId = await createBook(body);
 
-  return id;
+  res.status(201).json(bookId);
 });

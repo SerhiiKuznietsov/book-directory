@@ -1,12 +1,12 @@
 const { getPolicyById } = require("../../services/policy");
 const { ctrl } = require("../../utils/controller-wrapper");
 
-exports.getSingle = ctrl(async (req) => {
+exports.getSingle = ctrl(async (req, res) => {
   const {
     params: { id },
   } = req;
 
-  const book = await getPolicyById(id);
+  const policyItem = await getPolicyById(id);
 
-  return book;
+  res.json(policyItem);
 });

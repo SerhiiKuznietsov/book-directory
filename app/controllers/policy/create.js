@@ -1,10 +1,10 @@
 const { createPolicy } = require("../../services/policy");
 const { ctrl } = require("../../utils/controller-wrapper");
 
-exports.create = ctrl(async (req) => {
+exports.create = ctrl(async (req, res) => {
   const { body } = req;
 
-  const id = await createPolicy(body);
+  const policyId = await createPolicy(body);
 
-  return id;
+  res.status(201).json(policyId);
 });

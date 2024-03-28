@@ -1,12 +1,12 @@
 const { getRoleById } = require("../../services/role");
 const { ctrl } = require("../../utils/controller-wrapper");
 
-exports.getSingle = ctrl(async (req) => {
+exports.getSingle = ctrl(async (req, res) => {
   const {
     params: { id },
   } = req;
 
-  const user = await getRoleById(id);
+  const roleItem = await getRoleById(id);
 
-  return user;
+  return roleItem;
 });

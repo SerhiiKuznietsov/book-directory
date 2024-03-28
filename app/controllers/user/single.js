@@ -1,12 +1,12 @@
 const { getUserById } = require("../../services/user");
 const { ctrl } = require("../../utils/controller-wrapper");
 
-exports.getSingle = ctrl(async (req) => {
+exports.getSingle = ctrl(async (req, res) => {
   const {
     params: { id },
   } = req;
 
-  const user = await getUserById(id);
+  const userItem = await getUserById(id);
 
-  return user;
+  res.json(userItem);
 });
