@@ -28,10 +28,10 @@ const getPolicyById = async (id) => {
   return foundPolicy;
 };
 
-const createPolicy = async (bookItem) => {
-  validPolicyCreate(bookItem);
+const createPolicy = async (policyItem) => {
+  validPolicyCreate(policyItem);
 
-  const { id } = await Policy.create(bookItem);
+  const { id } = await Policy.create(policyItem);
 
   if (!id) {
     throw new CustomError("policy not created");
@@ -40,12 +40,12 @@ const createPolicy = async (bookItem) => {
   return id;
 };
 
-const updatePolicy = async (id, bookItem) => {
-  validPolicyUpdate(id, bookItem);
+const updatePolicy = async (id, policyItem) => {
+  validPolicyUpdate(id, policyItem);
 
   await getPolicyById(id);
 
-  const [isPolicyUpdated] = await Policy.update(bookItem, {
+  const [isPolicyUpdated] = await Policy.update(policyItem, {
     where: {
       id,
     },
