@@ -19,7 +19,9 @@ exports.validStaticParams = vld((query) => {
       .min(MIN_PAGE_NUMBER)
       .integer()
       .default(DEFAULT_PAGE_NUMBER),
-    order: Joi.array().items(Joi.string().lowercase().trim()),
+    order: Joi.array().items(Joi.string().trim()),
+    nested: Joi.object(), // TODO - add details validation
+    attrs: Joi.array().items(Joi.string().trim()),
   }).validate(query);
 
   if (error) throw error;

@@ -26,11 +26,10 @@ exports.init = (sequelize, DataTypes) => {
   );
 
   Model.link = function ({ models }) {
-    const { User, Policy } = models;
+    const { User, Policy, RolePolicy } = models;
 
     this.hasMany(User, { foreignKey: "roleId" });
-
-    this.belongsToMany(Policy, { through: "RolePolicy", foreignKey: "roleId" });
+    this.belongsToMany(Policy, { through: RolePolicy, foreignKey: "roleId" });
   };
 
   return Model;

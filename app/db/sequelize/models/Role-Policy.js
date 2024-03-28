@@ -2,6 +2,11 @@ exports.init = (sequelize, DataTypes) => {
   const Model = sequelize.define(
     "RolePolicy",
     {
+      uuid: {
+        type: DataTypes.UUID,
+        defaultValue: sequelize.UUIDV4,
+        primaryKey: true,
+      },
       roleId: {
         type: DataTypes.INTEGER,
         allowNull: false,
@@ -34,6 +39,13 @@ exports.init = (sequelize, DataTypes) => {
       tableName: "role_policy",
     }
   );
+
+  Model.link = function ({ models }) {
+    const { Role, Policy } = models;
+
+    this.belongsTo(Role, { foreignKey: "roleId", as: "policyRoles" });
+    this.belongsTo(Policy, { foreignKey: "policyId", as: "policyPolicies" });
+  };
 
   return Model;
 };

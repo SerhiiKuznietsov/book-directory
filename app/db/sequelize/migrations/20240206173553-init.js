@@ -6,6 +6,10 @@ const schemaName = "public";
 module.exports = {
   async up(queryInterface) {
     await queryInterface.sequelize.query(`
+      CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+    `);
+
+    await queryInterface.sequelize.query(`
       DROP TABLE IF EXISTS ${schemaName}.role;
       CREATE TABLE IF NOT EXISTS ${schemaName}.role
       (
@@ -36,13 +40,17 @@ module.exports = {
       DROP TABLE IF EXISTS ${schemaName}.role_policy;
       CREATE TABLE IF NOT EXISTS ${schemaName}.role_policy
       (
-        role_id numeric,
-        policy_id numeric,
+        uuid UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+        role_id numeric NOT NULL,
+        policy_id numeric NOT NULL,
         access_permission jsonb NOT NULL,
         created_at timestamp without time zone NOT NULL DEFAULT now(),
         updated_at timestamp without time zone NOT NULL DEFAULT now()
       );
+      CREATE UNIQUE INDEX idx_unique_role_id_policy_id ON ${schemaName}.role_policy (role_id, policy_id);
     `);
+
+    // TODO - add constrain fkey for role_id, policy_id
 
     await queryInterface.sequelize.query(`
       DROP TABLE IF EXISTS ${schemaName}."user";
@@ -94,6 +102,7 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     await queryInterface.sequelize.query(`
+      DROP EXTENSION IF EXISTS "uuid-ossp";
       DROP TABLE IF EXISTS ${schemaName}.role CASCADE;
       DROP TABLE IF EXISTS ${schemaName}.policy CASCADE;
       DROP TABLE IF EXISTS ${schemaName}.role_policy CASCADE;

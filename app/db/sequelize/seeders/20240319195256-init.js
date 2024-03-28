@@ -5,12 +5,6 @@ const { sequenceUpdateQuery } = require("../model-queries");
 const { transactionWrapper } = require("../sequelize-utils");
 
 const permission = ["read", "create", "update", "delete"];
-const accessPermission = {
-  read: true,
-  create: true,
-  update: true,
-  delete: true,
-};
 
 const addPolicies = async (transaction, queryInterface) => {
   await Policy.bulkCreate(
@@ -86,37 +80,32 @@ const addRolesPolicies = async (transaction) => {
       {
         roleId: 1,
         policyId: 1,
-        accessPermission,
+        accessPermission: permission,
       },
       {
         roleId: 1,
         policyId: 2,
-        accessPermission,
+        accessPermission: permission,
       },
       {
         roleId: 1,
         policyId: 3,
-        accessPermission,
+        accessPermission: permission,
       },
       {
         roleId: 4,
         policyId: 1,
-        accessPermission,
+        accessPermission: permission,
       },
       {
         roleId: 4,
         policyId: 4,
-        accessPermission,
+        accessPermission: permission,
       },
       {
         roleId: 4,
         policyId: 5,
-        accessPermission: {
-          ...accessPermission,
-          create: false,
-          update: false,
-          delete: false,
-        },
+        accessPermission: ["read"],
       },
     ],
     {

@@ -1,13 +1,17 @@
 const { CustomError } = require("../../../utils/error");
-const { modelHasField } = require("../sequelize-model-methods");
+const { modelHasField, getModelName } = require("../sequelize-model-methods");
 
-exports.enrichAttributes = (result, queryConfiguration) => {
-  const { accessFields, model } = queryConfiguration;
+exports.enrichAttributes = (result, attrs, queryConfiguration) => {
+  const { defaultAttrs, model } = queryConfiguration;
 
-  if (!accessFields) return;
+  if (!attrs || !attrs.length) {
+    result.attributes = defaultAttrs;
+    return;
+  }
 
-  for (let i = 0; i < accessFields.length; i++) {
-    const fieldName = accessFields[i];
+  // TODO - move validation to another location
+  for (let i = 0; i < attrs.length; i++) {
+    const fieldName = attrs[i];
 
     if (!modelHasField(fieldName, model)) {
       throw new CustomError(
@@ -16,5 +20,5 @@ exports.enrichAttributes = (result, queryConfiguration) => {
     }
   }
 
-  result.attributes = accessFields;
+  result.attributes = attrs;
 };
