@@ -16,7 +16,7 @@ const validUserItem = (userItem) => {
 };
 
 const validUserId = (id) => {
-  const { error } = Joi.number().validate(id);
+  const { error } = Joi.number().required().validate(id);
 
   if (!error) return;
 
