@@ -5,13 +5,14 @@ const {
   validPolicyCreate,
   validPolicyRemove,
 } = require("../validations/policy");
-const { SequelizeQueryBuilder } = require("./db-query");
+const { SequelizeFindInterface } = require("./db-query");
+
+const policyInterface = new SequelizeFindInterface(Policy)
+  .setDefaultAttrs("id", "title")
+  .activateRaw();
 
 const getPolicesList = async (query) => {
-  const q = new SequelizeQueryBuilder(Policy, query)
-    .setAccessFields(["id", "title", "createdAt"])
-    .activateRaw()
-    .getDbQuery();
+  const q = policyInterface.getFindQuery(query);
 
   const policesList = await Policy.findAll(q);
 

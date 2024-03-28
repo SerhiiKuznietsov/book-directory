@@ -8,5 +8,5 @@ exports.getSingle = ctrl(async (req, res) => {
 
   const roleItem = await getRoleById(id);
 
-  return roleItem;
+  res.json(roleItem);
 });

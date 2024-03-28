@@ -5,13 +5,14 @@ const {
   validRoleUpdate,
   validRoleRemove,
 } = require("../validations/role");
-const { SequelizeQueryBuilder } = require("./db-query");
+const { SequelizeFindInterface } = require("./db-query");
+
+const roleInterface = new SequelizeFindInterface(Role)
+  .setDefaultAttrs("id", "name")
+  .activateRaw();
 
 const getRolesList = async (query) => {
-  const q = new SequelizeQueryBuilder(Role, query)
-    .setAccessFields(["id", "name", "createdAt"])
-    .activateRaw()
-    .getDbQuery();
+  const q = roleInterface.getFindQuery(query);
 
   const rolesList = await Role.findAll(q);
 

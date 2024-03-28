@@ -1,6 +1,5 @@
 const { Role, Policy, RolePolicy } = require("../db/sequelize");
 const { CustomError } = require("../utils/error");
-
 const {
   validRolePolicyUpdate,
   validRolePolicyCreate,
@@ -9,7 +8,7 @@ const {
 const { SequelizeFindInterface } = require("./db-query");
 
 const rolePolicyInterface = new SequelizeFindInterface(RolePolicy)
-  .setDefaultAttrs(["uuid", "roleId", "policyId"])
+  .setDefaultAttrs("uuid", "roleId", "policyId")
   .setNestedModel(Role, "policyRoles", ["id", "name"])
   .setNestedModel(Policy, "policyPolicies", ["id", "title"]);
 

@@ -1,17 +1,18 @@
-const { User } = require("../db/sequelize");
+const { User, Role } = require("../db/sequelize");
 const { CustomError } = require("../utils/error");
 const {
   validUserCreate,
   validUserUpdate,
   validUserRemove,
 } = require("../validations/user");
-const { SequelizeQueryBuilder } = require("./db-query");
+const { SequelizeFindInterface } = require("./db-query");
+
+const userInterface = new SequelizeFindInterface(User)
+  .setDefaultAttrs("id", "email")
+  .setNestedModel(Role, "role", ["name"])
 
 const getUsersList = async (query) => {
-  const q = new SequelizeQueryBuilder(Role, query)
-    .setAccessFields(["id", "email", "roleId", "createdAt"])
-    .activateRaw()
-    .getDbQuery();
+  const q = userInterface.getFindQuery(query);
 
   const usersList = await User.findAll(q);
 

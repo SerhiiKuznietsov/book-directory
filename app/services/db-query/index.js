@@ -11,44 +11,6 @@ const createDbQuery = (parsedQuery, queryConfiguration) => {
   return result;
 };
 
-class SequelizeQueryBuilder {
-  #config = {};
-  #parsedQuery;
-
-  constructor(model, query) {
-    this.#setModel(model);
-    this.#setQuery(query);
-  }
-
-  #setModel(model) {
-    this.#config.model = model;
-
-    return this;
-  }
-
-  #setQuery(query) {
-    this.#parsedQuery = parseQuery(query);
-
-    return this;
-  }
-
-  setAccessFields(accessFields) {
-    this.#config.accessFields = accessFields;
-
-    return this;
-  }
-
-  activateRaw() {
-    this.#config.raw = true;
-
-    return this;
-  }
-
-  getDbQuery() {
-    return createDbQuery(this.#parsedQuery, this.#config);
-  }
-}
-
 class SequelizeFindInterface {
   #config = {
     accessFields: [],
@@ -104,7 +66,7 @@ class SequelizeFindInterface {
     return this;
   }
 
-  setDefaultAttrs(defaultAttrs) {
+  setDefaultAttrs(...defaultAttrs) {
     // TODO - add validation for array
     const { name, rawAttributes } = this.#config.model;
 
@@ -140,6 +102,5 @@ class SequelizeFindInterface {
 }
 
 module.exports = {
-  SequelizeQueryBuilder,
   SequelizeFindInterface,
 };

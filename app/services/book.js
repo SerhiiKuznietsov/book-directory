@@ -5,13 +5,14 @@ const {
   validBookCreate,
   validBookRemove,
 } = require("../validations/book");
-const { SequelizeQueryBuilder } = require("./db-query");
+const { SequelizeFindInterface } = require("./db-query");
+
+const bookInterface = new SequelizeFindInterface(Book)
+  .setDefaultAttrs("id", "title")
+  .activateRaw();
 
 const getBooksList = async (query) => {
-  const q = new SequelizeQueryBuilder(Book, query)
-    .setAccessFields(["id", "title", "createdAt"])
-    .activateRaw()
-    .getDbQuery();
+  const q = bookInterface.getFindQuery(query);
 
   const booksList = await Book.findAll(q);
 
