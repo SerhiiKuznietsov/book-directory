@@ -9,7 +9,7 @@ const {
 //   REFRESH_TOKEN_COOKIE_NAME,
 // } = require("../constants/token-cookie");
 
-const rootAuthenticate = (req, res, next) => {
+exports.rootAuthenticate = (req, res, next) => {
   // TODO - fill logic
   // const {
   //   [ACCESS_TOKEN_COOKIE_NAME]: accessToken,
@@ -27,23 +27,16 @@ const customCheckMiddleware =
     next();
   };
 
-const readCheckMiddleware = (policyName) =>
+exports.customCheckMiddleware = customCheckMiddleware;
+
+exports.readCheckMiddleware = (policyName) =>
   customCheckMiddleware(policyName, READ_PERMISSION_NAME);
 
-const createCheckMiddleware = (policyName) =>
+exports.createCheckMiddleware = (policyName) =>
   customCheckMiddleware(policyName, CREATE_PERMISSION_NAME);
 
-const updateCheckMiddleware = (policyName) =>
+exports.updateCheckMiddleware = (policyName) =>
   customCheckMiddleware(policyName, UPDATE_PERMISSION_NAME);
 
-const deleteCheckMiddleware = (policyName) =>
+exports.deleteCheckMiddleware = (policyName) =>
   customCheckMiddleware(policyName, DELETE_PERMISSION_NAME);
-
-module.exports = {
-  rootAuthenticate,
-  customCheckMiddleware,
-  readCheckMiddleware,
-  createCheckMiddleware,
-  updateCheckMiddleware,
-  deleteCheckMiddleware,
-};
