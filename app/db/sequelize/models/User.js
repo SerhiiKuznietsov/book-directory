@@ -1,13 +1,15 @@
+const { MAX_NAME_LENGHT, MAX_EMAIL_LENGTH } = require("../../../constants/user");
+
 exports.init = (sequelize, DataTypes) => {
   const Model = sequelize.define(
     "User",
     {
       name: {
-        type: DataTypes.STRING(123),
+        type: DataTypes.STRING(MAX_NAME_LENGHT),
         allowNull: false,
       },
       email: {
-        type: DataTypes.STRING(256),
+        type: DataTypes.STRING(MAX_EMAIL_LENGTH),
         unique: true,
       },
       roleId: {

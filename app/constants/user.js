@@ -1,0 +1,5 @@
+module.exports = {
+  MIN_NAME_LENGHT: 2,
+  MAX_NAME_LENGHT: 128,
+  MAX_EMAIL_LENGTH: 256,
+};

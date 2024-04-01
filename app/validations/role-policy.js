@@ -1,38 +1,45 @@
 const Joi = require("joi");
 const { vld } = require("../utils/validator-wrapper");
 
-const accessPermissionValidator = Joi.array().min(1).items(Joi.string().lowercase())
+const rolePolicyUuidShema = Joi.string().guid().required();
+const accessPermissionShema = Joi.object({
+  accessPermission: Joi.array().not().empty().items(Joi.string().lowercase()),
+}).required();
 
-const validRolePolicyUUID = (uuid) => {
-  const { error } = Joi.string().guid().required().validate(uuid);
+const rolePolicyIdsShema = Joi.object({
+  roleId: Joi.number().positive(),
+  policyId: Joi.number().positive(),
+}).required();
 
-  if (!error) return;
+const itemShema = Joi.alternatives().try(
+  rolePolicyIdsShema,
+  accessPermissionShema
+);
 
-  throw error;
+const validRolePolicyUuid = (uuid) => {
+  const { error } = rolePolicyUuidShema.validate(uuid, {
+    convert: false,
+  });
+
+  if (error) throw error;
 };
 
 exports.validRolePolicyCreate = vld((rolePolicyItem) => {
-  const { error } = Joi.object({
-    roleId: Joi.number().min(1),
-    policyId: Joi.number().min(1),
-    accessPermission: accessPermissionValidator,
-  })
-    .required()
-    .validate(rolePolicyItem, { convert: false });
+  const { error } = itemShema.validate(rolePolicyItem, {
+    convert: false,
+  });
 
   if (error) throw error;
 });
 
 exports.validRolePolicyUpdate = vld((id, rolePolicyItem) => {
-  validRolePolicyUUID(id);
+  validRolePolicyUuid(id);
 
-  const { error } = Joi.object({
-    accessPermission: accessPermissionValidator,
-  })
-    .required()
-    .validate(rolePolicyItem, { convert: false });
+  const { error } = accessPermissionShema.validate(rolePolicyItem, {
+    convert: false,
+  });
 
   if (error) throw error;
 });
 
-exports.validRolePolicyRemove = vld(validRolePolicyUUID);
+exports.validRolePolicyRemove = vld(validRolePolicyUuid);

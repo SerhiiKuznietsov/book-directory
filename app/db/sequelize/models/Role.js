@@ -1,9 +1,11 @@
+const { MAX_NAME_LENGHT } = require("../../../constants/role");
+
 exports.init = (sequelize, DataTypes) => {
   const Model = sequelize.define(
     "Role",
     {
       name: {
-        type: DataTypes.STRING(100),
+        type: DataTypes.STRING(MAX_NAME_LENGHT),
         allowNull: false,
         unique: true,
       },
