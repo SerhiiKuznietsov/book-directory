@@ -1,5 +1,3 @@
-// TODO - maybe need to delete this file, because unused
-
 const isEmpty = (val) => {
   if (isBoolean(val)) {
     return false;
