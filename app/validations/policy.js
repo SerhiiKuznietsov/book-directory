@@ -1,34 +1,34 @@
 const Joi = require("joi");
 const { vld } = require("../utils/validator-wrapper");
 const {
-  MIN_TITLE_LENGHT,
-  MAX_TITLE_LENGHT,
-  MIN_PERMISSION_NAME_LENGHT,
-  MAX_PERMISSION_NAME_LENGHT,
+  MIN_TITLE_LENGTH,
+  MAX_TITLE_LENGTH,
+  MIN_PERMISSION_NAME_LENGTH,
+  MAX_PERMISSION_NAME_LENGTH,
 } = require("../constants/policy");
 
-const policyIdShema = Joi.number().positive().required();
-const policyItemShema = Joi.object({
-  title: Joi.string().uppercase().min(MIN_TITLE_LENGHT).max(MAX_TITLE_LENGHT),
+const policyIdSchema = Joi.number().positive().required();
+const policyItemSchema = Joi.object({
+  title: Joi.string().uppercase().min(MIN_TITLE_LENGTH).max(MAX_TITLE_LENGTH),
   permission: Joi.array()
     .not()
     .empty()
     .items(
       Joi.string()
-        .min(MIN_PERMISSION_NAME_LENGHT)
-        .max(MAX_PERMISSION_NAME_LENGHT)
+        .min(MIN_PERMISSION_NAME_LENGTH)
+        .max(MAX_PERMISSION_NAME_LENGTH)
         .lowercase()
     ),
 }).required();
 
 const validPolicyId = (id) => {
-  const { error } = policyIdShema.validate(id, { convert: false });
+  const { error } = policyIdSchema.validate(id, { convert: false });
 
   if (error) throw error;
 };
 
 const validPolicyItem = (policyItem) => {
-  const { error } = policyItemShema.validate(policyItem, { convert: false });
+  const { error } = policyItemSchema.validate(policyItem, { convert: false });
 
   if (error) throw error;
 };

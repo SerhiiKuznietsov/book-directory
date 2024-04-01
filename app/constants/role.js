@@ -1,4 +1,4 @@
 module.exports = {
-  MIN_NAME_LENGHT: 4,
-  MAX_NAME_LENGHT: 255,
+  MIN_NAME_LENGTH: 4,
+  MAX_NAME_LENGTH: 255,
 };
