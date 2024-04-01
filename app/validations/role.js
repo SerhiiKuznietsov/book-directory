@@ -1,20 +1,20 @@
 const Joi = require("joi");
 const { vld } = require("../utils/validator-wrapper");
-const { MIN_NAME_LENGHT, MAX_NAME_LENGHT } = require("../constants/role");
+const { MIN_NAME_LENGTH, MAX_NAME_LENGTH } = require("../constants/role");
 
-const roleIdShema = Joi.number().positive().required();
-const roleItemShema = Joi.object({
-  name: Joi.string().min(MIN_NAME_LENGHT).max(MAX_NAME_LENGHT),
+const roleIdSchema = Joi.number().positive().required();
+const roleItemSchema = Joi.object({
+  name: Joi.string().min(MIN_NAME_LENGTH).max(MAX_NAME_LENGTH),
 }).required();
 
 const validRoleId = (id) => {
-  const { error } = roleIdShema.validate(id, { convert: false });
+  const { error } = roleIdSchema.validate(id, { convert: false });
 
   if (error) throw error;
 };
 
 const validRoleItem = (roleItem) => {
-  const { error } = roleItemShema.validate(roleItem, { convert: false });
+  const { error } = roleItemSchema.validate(roleItem, { convert: false });
 
   if (error) throw error;
 };

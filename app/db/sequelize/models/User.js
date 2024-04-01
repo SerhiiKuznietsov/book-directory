@@ -1,11 +1,11 @@
-const { MAX_NAME_LENGHT, MAX_EMAIL_LENGTH } = require("../../../constants/user");
+const { MAX_NAME_LENGTH, MAX_EMAIL_LENGTH } = require("../../../constants/user");
 
 exports.init = (sequelize, DataTypes) => {
   const Model = sequelize.define(
     "User",
     {
       name: {
-        type: DataTypes.STRING(MAX_NAME_LENGHT),
+        type: DataTypes.STRING(MAX_NAME_LENGTH),
         allowNull: false,
       },
       email: {

@@ -1,11 +1,11 @@
-const { MAX_TITLE_LENGHT } = require("../../../constants/policy");
+const { MAX_TITLE_LENGTH } = require("../../../constants/policy");
 
 exports.init = (sequelize, DataTypes) => {
   const Model = sequelize.define(
     "Policy",
     {
       title: {
-        type: DataTypes.STRING(MAX_TITLE_LENGHT),
+        type: DataTypes.STRING(MAX_TITLE_LENGTH),
         allowNull: false,
         unique: true,
       },
