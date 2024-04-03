@@ -1,33 +1,33 @@
-const { capitalize, slugify } = require("../string-converter");
+const { capitalize, slugify } = require('../string-converter');
 
-describe("slugify", () => {
+describe('slugify', () => {
   test('should return "test-word"', () => {
-    expect(slugify("test word")).toEqual("test-word");
+    expect(slugify('test word')).toEqual('test-word');
   });
 
   test('should return "test-word"', () => {
-    expect(slugify(" test word ")).toEqual("test-word");
+    expect(slugify(' test word ')).toEqual('test-word');
   });
 
   test('should return "test-word"', () => {
-    expect(slugify("test_word")).toEqual("test-word");
+    expect(slugify('test_word')).toEqual('test-word');
   });
 
   test('should return "test-word"', () => {
-    expect(slugify(["test", "data_word"])).toEqual("test-data-word");
+    expect(slugify(['test', 'data_word'])).toEqual('test-data-word');
   });
 });
 
-describe("capitalize", () => {
+describe('capitalize', () => {
   test('should return "Test word"', () => {
-    expect(capitalize("test word")).toEqual("Test word");
+    expect(capitalize('test word')).toEqual('Test word');
   });
 
   test('should return " test word"', () => {
-    expect(capitalize(" test word")).toEqual(" test word");
+    expect(capitalize(' test word')).toEqual(' test word');
   });
 
   test('should return " test word "', () => {
-    expect(capitalize(" test word ")).toEqual(" test word ");
+    expect(capitalize(' test word ')).toEqual(' test word ');
   });
 });
