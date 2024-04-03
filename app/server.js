@@ -1,5 +1,5 @@
-const { app } = require("./app");
-const { PORT } = require("./config/server");
+const { app } = require('./app');
+const { PORT } = require('./config/server');
 
 exports.startServer = () => {
   app.listen(PORT, () => {

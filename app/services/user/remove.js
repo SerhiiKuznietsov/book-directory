@@ -1,7 +1,7 @@
-const { validUserRemove } = require("../../validations/user");
-const { CustomError } = require("../../utils/error");
-const { User } = require("../../db/sequelize");
-const { getUserById } = require("./single");
+const { validUserRemove } = require('../../validations/user');
+const { CustomError } = require('../../utils/error');
+const { User } = require('../../db/sequelize');
+const { getUserById } = require('./single');
 
 exports.removeUser = async (id) => {
   validUserRemove(id);

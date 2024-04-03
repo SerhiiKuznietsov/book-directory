@@ -1,4 +1,4 @@
-const { CustomError } = require("../utils/error");
+const { CustomError } = require('../utils/error');
 
 exports.rootErrorHandlers = (app) => {
   app
@@ -12,7 +12,7 @@ exports.rootErrorHandlers = (app) => {
     .use((err, req, res, next) => {
       console.error(err);
 
-      const { name = "error", message = "something wrong", status = 500 } = err;
+      const { name = 'error', message = 'something wrong', status = 500 } = err;
 
       res.status(status).json({ name, message, status });
     });

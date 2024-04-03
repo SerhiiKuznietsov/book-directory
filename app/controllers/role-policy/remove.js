@@ -1,5 +1,5 @@
-const { removeRolePolicy } = require("../../services/role-policy");
-const { ctrl } = require("../../utils/controller-wrapper");
+const { removeRolePolicy } = require('../../services/role-policy');
+const { ctrl } = require('../../utils/controller-wrapper');
 
 exports.remove = ctrl(async (req, res) => {
   const {

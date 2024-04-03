@@ -1,5 +1,5 @@
-const Joi = require("joi");
-const { vld } = require("../../utils/validator-wrapper");
+const Joi = require('joi');
+const { vld } = require('../../utils/validator-wrapper');
 
 const validDbConfig = (dbConfig) => {
   const { error } = Joi.object({
@@ -17,7 +17,6 @@ const validDbConfig = (dbConfig) => {
 exports.validDbConfig = vld((config) => {
   // TODO - fixed validator
   // const { development, test, production } = config;
-
   // validDbConfig(development);
   // validDbConfig(test);
   // validDbConfig(production);

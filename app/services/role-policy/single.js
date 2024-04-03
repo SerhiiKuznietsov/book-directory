@@ -1,5 +1,5 @@
-const { Role, Policy, RolePolicy } = require("../../db/sequelize");
-const { CustomError } = require("../../utils/error");
+const { Role, Policy, RolePolicy } = require('../../db/sequelize');
+const { CustomError } = require('../../utils/error');
 
 exports.getRolePolicyByUUID = async (uuid) => {
   const foundRolePolicy = await RolePolicy.findOne({
@@ -7,11 +7,11 @@ exports.getRolePolicyByUUID = async (uuid) => {
     include: [
       {
         model: Role,
-        as: "policyRoles",
+        as: 'policyRoles',
       },
       {
         model: Policy,
-        as: "policyPolicies",
+        as: 'policyPolicies',
       },
     ],
   });

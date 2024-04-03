@@ -1,5 +1,5 @@
-const { CustomError } = require("../../utils/error");
-const { User } = require("../../db/sequelize");
+const { CustomError } = require('../../utils/error');
+const { User } = require('../../db/sequelize');
 
 exports.getUserById = async (id) => {
   const foundUser = await User.findByPk(id, { raw: true });

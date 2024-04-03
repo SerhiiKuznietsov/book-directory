@@ -1,11 +1,11 @@
-const Joi = require("joi");
-const { vld } = require("../utils/validator-wrapper");
+const Joi = require('joi');
+const { vld } = require('../utils/validator-wrapper');
 const {
   MIN_TITLE_LENGTH,
   MAX_TITLE_LENGTH,
   MIN_PERMISSION_NAME_LENGTH,
   MAX_PERMISSION_NAME_LENGTH,
-} = require("../constants/policy");
+} = require('../constants/policy');
 
 const policyIdSchema = Joi.number().positive().required();
 const policyItemSchema = Joi.object({

@@ -1,6 +1,6 @@
-const { CustomError } = require("../../utils/error");
-const { Role } = require("../../db/sequelize");
-const { validRoleRemove } = require("../../validations/role");
+const { CustomError } = require('../../utils/error');
+const { Role } = require('../../db/sequelize');
+const { validRoleRemove } = require('../../validations/role');
 
 exports.removeRole = async (id) => {
   validRoleRemove(id);

@@ -1,5 +1,5 @@
-const { CustomError } = require("../../../utils/error");
-const { modelHasField, getModelName } = require("../sequelize-model-methods");
+const { CustomError } = require('../../../utils/error');
+const { modelHasField, getModelName } = require('../sequelize-model-methods');
 
 exports.enrichAttributes = (result, attrs, queryConfiguration) => {
   const { defaultAttrs, model } = queryConfiguration;

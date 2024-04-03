@@ -1,6 +1,6 @@
-const { validUserUpdate } = require("../../validations/user");
-const { CustomError } = require("../../utils/error");
-const { getUserById } = require("./single");
+const { validUserUpdate } = require('../../validations/user');
+const { CustomError } = require('../../utils/error');
+const { getUserById } = require('./single');
 
 exports.updateUser = async (id, userItem) => {
   validUserUpdate(id, userItem);

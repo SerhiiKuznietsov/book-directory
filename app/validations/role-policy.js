@@ -1,5 +1,5 @@
-const Joi = require("joi");
-const { vld } = require("../utils/validator-wrapper");
+const Joi = require('joi');
+const { vld } = require('../utils/validator-wrapper');
 
 const rolePolicyUuidSchema = Joi.string().guid().required();
 const accessPermissionSchema = Joi.object({

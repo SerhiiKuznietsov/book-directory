@@ -1,5 +1,5 @@
-const { CustomError } = require("../../utils/error");
-const { Role } = require("../../db/sequelize");
+const { CustomError } = require('../../utils/error');
+const { Role } = require('../../db/sequelize');
 
 exports.getRoleById = async (id) => {
   const foundRole = await Role.findByPk(id, { raw: true });

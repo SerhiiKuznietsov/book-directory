@@ -1,5 +1,5 @@
-const { getPolicyById } = require("../../services/policy");
-const { ctrl } = require("../../utils/controller-wrapper");
+const { getPolicyById } = require('../../services/policy');
+const { ctrl } = require('../../utils/controller-wrapper');
 
 exports.getSingle = ctrl(async (req, res) => {
   const {

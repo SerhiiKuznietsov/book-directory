@@ -1,5 +1,5 @@
-const { ctrl } = require("../../utils/controller-wrapper");
-const { removePolicy } = require("../../services/policy");
+const { ctrl } = require('../../utils/controller-wrapper');
+const { removePolicy } = require('../../services/policy');
 
 exports.remove = ctrl(async (req, res) => {
   const {

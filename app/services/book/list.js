@@ -1,8 +1,8 @@
-const { SequelizeFindInterface } = require("../db-query");
-const { Book } = require("../../db/sequelize");
+const { SequelizeFindInterface } = require('../db-query');
+const { Book } = require('../../db/sequelize');
 
 const bookInterface = new SequelizeFindInterface(Book)
-  .setDefaultAttrs("id", "title")
+  .setDefaultAttrs('id', 'title')
   .activateRaw();
 
 exports.getBooksList = async (query) => {

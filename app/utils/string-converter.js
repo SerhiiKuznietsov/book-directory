@@ -1,4 +1,4 @@
-const { slugify, capitalize } = require("underscore.string");
+const { slugify, capitalize } = require('underscore.string');
 
 exports.slugify = (val) => slugify(val);
 

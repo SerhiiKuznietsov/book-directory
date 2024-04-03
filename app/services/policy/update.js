@@ -1,7 +1,7 @@
-const { validPolicyUpdate } = require("../../validations/policy");
-const { CustomError } = require("../../utils/error");
-const { Policy } = require("../../db/sequelize");
-const { getPolicyById } = require("./single");
+const { validPolicyUpdate } = require('../../validations/policy');
+const { CustomError } = require('../../utils/error');
+const { Policy } = require('../../db/sequelize');
+const { getPolicyById } = require('./single');
 
 exports.updatePolicy = async (id, policyItem) => {
   validPolicyUpdate(id, policyItem);

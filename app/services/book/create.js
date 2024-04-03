@@ -1,6 +1,6 @@
-const { validBookCreate } = require("../../validations/book");
-const { CustomError } = require("../../utils/error");
-const { Book } = require("../../db/sequelize");
+const { validBookCreate } = require('../../validations/book');
+const { CustomError } = require('../../utils/error');
+const { Book } = require('../../db/sequelize');
 
 exports.createBook = async (bookItem) => {
   validBookCreate(bookItem);
@@ -8,7 +8,7 @@ exports.createBook = async (bookItem) => {
   const { id } = await Book.create(bookItem);
 
   if (!id) {
-    throw new CustomError("book not created");
+    throw new CustomError('book not created');
   }
 
   return id;

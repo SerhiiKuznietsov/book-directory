@@ -1,8 +1,8 @@
-const { SequelizeFindInterface } = require("../db-query");
-const { Role } = require("../../db/sequelize");
+const { SequelizeFindInterface } = require('../db-query');
+const { Role } = require('../../db/sequelize');
 
 const roleInterface = new SequelizeFindInterface(Role)
-  .setDefaultAttrs("id", "name")
+  .setDefaultAttrs('id', 'name')
   .activateRaw();
 
 exports.getRolesList = async (query) => {

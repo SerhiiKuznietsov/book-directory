@@ -1,25 +1,25 @@
-const router = require("express").Router();
+const router = require('express').Router();
 const {
   getList,
   create,
   getSingle,
   update,
   remove,
-} = require("../../../controllers/policy");
+} = require('../../../controllers/policy');
 const {
   readCheckMiddleware,
   createCheckMiddleware,
   updateCheckMiddleware,
   deleteCheckMiddleware,
-} = require("../../../middlewares/policy");
+} = require('../../../middlewares/policy');
 
 router
-  .route("/")
+  .route('/')
   .get(readCheckMiddleware, getList)
   .post(createCheckMiddleware, create);
 
 router
-  .route("/:id(\\d+)")
+  .route('/:id(\\d+)')
   .get(readCheckMiddleware, getSingle)
   .put(updateCheckMiddleware, update)
   .delete(deleteCheckMiddleware, remove);

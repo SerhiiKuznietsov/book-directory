@@ -1,9 +1,9 @@
-const { User, Role } = require("../../db/sequelize");
-const { SequelizeFindInterface } = require("../db-query");
+const { User, Role } = require('../../db/sequelize');
+const { SequelizeFindInterface } = require('../db-query');
 
 const userInterface = new SequelizeFindInterface(User)
-  .setDefaultAttrs("id", "email")
-  .setNestedModel(Role, "role", ["name"]);
+  .setDefaultAttrs('id', 'email')
+  .setNestedModel(Role, 'role', ['name']);
 
 exports.getUsersList = async (query) => {
   const q = userInterface.getFindQuery(query);

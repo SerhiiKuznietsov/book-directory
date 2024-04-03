@@ -1,4 +1,4 @@
-const { validStaticParams } = require("../../../validations/db-query");
+const { validStaticParams } = require('../../../validations/db-query');
 
 const parseJsonFiledOrRemove = (query, fieldName) => {
   try {
@@ -10,9 +10,9 @@ const parseJsonFiledOrRemove = (query, fieldName) => {
   }
 };
 
-const parseOrder = (query) => parseJsonFiledOrRemove(query, "order");
-const parseAttrs = (query) => parseJsonFiledOrRemove(query, "attrs");
-const parseNested = (query) => parseJsonFiledOrRemove(query, "nested");
+const parseOrder = (query) => parseJsonFiledOrRemove(query, 'order');
+const parseAttrs = (query) => parseJsonFiledOrRemove(query, 'attrs');
+const parseNested = (query) => parseJsonFiledOrRemove(query, 'nested');
 
 exports.parseQuery = (query) => {
   parseOrder(query);

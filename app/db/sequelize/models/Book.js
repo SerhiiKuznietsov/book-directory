@@ -1,8 +1,8 @@
-const { MAX_TITLE_LENGTH } = require("../../../constants/book");
+const { MAX_TITLE_LENGTH } = require('../../../constants/book');
 
 exports.init = (sequelize, DataTypes) => {
   const Model = sequelize.define(
-    "Book",
+    'Book',
     {
       title: {
         type: DataTypes.STRING(MAX_TITLE_LENGTH),
@@ -10,27 +10,27 @@ exports.init = (sequelize, DataTypes) => {
         unique: true,
       },
       createdAt: {
-        type: "TIMESTAMP WITHOUT TIME ZONE",
+        type: 'TIMESTAMP WITHOUT TIME ZONE',
         allowNull: false,
-        defaultValue: sequelize.fn("NOW"),
-        field: "created_at",
+        defaultValue: sequelize.fn('NOW'),
+        field: 'created_at',
       },
       updatedAt: {
-        type: "TIMESTAMP WITHOUT TIME ZONE",
+        type: 'TIMESTAMP WITHOUT TIME ZONE',
         allowNull: false,
-        defaultValue: sequelize.fn("NOW"),
-        field: "updated_at",
+        defaultValue: sequelize.fn('NOW'),
+        field: 'updated_at',
       },
     },
     {
-      tableName: "book",
+      tableName: 'book',
     }
   );
 
   Model.link = function ({ models }) {
     const { User } = models;
 
-    this.belongsToMany(User, { through: "UserBook", foreignKey: "bookId" });
+    this.belongsToMany(User, { through: 'UserBook', foreignKey: 'bookId' });
   };
 
   return Model;

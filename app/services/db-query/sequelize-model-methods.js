@@ -5,4 +5,5 @@ exports.getModelPrimaryKeyFieldName = (model) => model.primaryKeyAttribute;
 
 exports.getModelAttributes = (model) => model.rawAttributes;
 
-exports.modelHasField = (fieldName, model) => exports.getModelAttributes(model).hasOwnProperty(fieldName);
+exports.modelHasField = (fieldName, model) =>
+  exports.getModelAttributes(model).hasOwnProperty(fieldName);

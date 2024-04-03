@@ -1,9 +1,9 @@
-const { getModelPrimaryKeyFieldName } = require("../sequelize-model-methods");
-const { CustomError } = require("../../../utils/error");
+const { getModelPrimaryKeyFieldName } = require('../sequelize-model-methods');
+const { CustomError } = require('../../../utils/error');
 const {
   NORMAL_GROUPING_NAME,
   ALL_GROUPING_NAME,
-} = require("../../../constants/db-query");
+} = require('../../../constants/db-query');
 
 exports.enrichOrder = (result, order, model) => {
   let newOrder = [];

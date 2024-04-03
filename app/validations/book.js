@@ -1,6 +1,6 @@
-const Joi = require("joi");
-const { vld } = require("../utils/validator-wrapper");
-const { MIN_TITLE_LENGTH, MAX_TITLE_LENGTH } = require("../constants/book");
+const Joi = require('joi');
+const { vld } = require('../utils/validator-wrapper');
+const { MIN_TITLE_LENGTH, MAX_TITLE_LENGTH } = require('../constants/book');
 const bookIdSchema = Joi.number().positive().required();
 const bookItemSchema = Joi.object({
   title: Joi.string().min(MIN_TITLE_LENGTH).max(MAX_TITLE_LENGTH),

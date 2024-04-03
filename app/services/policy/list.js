@@ -1,8 +1,8 @@
-const { SequelizeFindInterface } = require("../db-query");
-const { Policy } = require("../../db/sequelize");
+const { SequelizeFindInterface } = require('../db-query');
+const { Policy } = require('../../db/sequelize');
 
 const policyInterface = new SequelizeFindInterface(Policy)
-  .setDefaultAttrs("id", "title")
+  .setDefaultAttrs('id', 'title')
   .activateRaw();
 
 exports.getPolicesList = async (query) => {

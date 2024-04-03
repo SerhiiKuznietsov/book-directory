@@ -1,5 +1,5 @@
-const { updatePolicy } = require("../../services/policy");
-const { ctrl } = require("../../utils/controller-wrapper");
+const { updatePolicy } = require('../../services/policy');
+const { ctrl } = require('../../utils/controller-wrapper');
 
 exports.update = ctrl(async (req, res) => {
   const {

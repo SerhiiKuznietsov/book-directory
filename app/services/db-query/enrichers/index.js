@@ -1,8 +1,8 @@
-const { enrichAttributes } = require("./attributes");
-const { enrichIncludes } = require("./includes");
-const { enrichOrder } = require("./order");
-const { enrichPagination } = require("./pagination");
-const { enrichRawOptions } = require("./raw");
+const { enrichAttributes } = require('./attributes');
+const { enrichIncludes } = require('./includes');
+const { enrichOrder } = require('./order');
+const { enrichPagination } = require('./pagination');
+const { enrichRawOptions } = require('./raw');
 
 exports.useDbQueryEnrichers = (result, parsedQuery, queryConfiguration) => {
   enrichPagination(result, parsedQuery);

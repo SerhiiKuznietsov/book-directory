@@ -1,8 +1,11 @@
-const { MAX_NAME_LENGTH, MAX_EMAIL_LENGTH } = require("../../../constants/user");
+const {
+  MAX_NAME_LENGTH,
+  MAX_EMAIL_LENGTH,
+} = require('../../../constants/user');
 
 exports.init = (sequelize, DataTypes) => {
   const Model = sequelize.define(
-    "User",
+    'User',
     {
       name: {
         type: DataTypes.STRING(MAX_NAME_LENGTH),
@@ -13,33 +16,33 @@ exports.init = (sequelize, DataTypes) => {
         unique: true,
       },
       roleId: {
-        field: "role_id",
+        field: 'role_id',
         type: DataTypes.SMALLINT,
       },
       createdAt: {
-        type: "TIMESTAMP WITHOUT TIME ZONE",
+        type: 'TIMESTAMP WITHOUT TIME ZONE',
         allowNull: false,
-        defaultValue: sequelize.fn("NOW"),
-        field: "created_at",
+        defaultValue: sequelize.fn('NOW'),
+        field: 'created_at',
       },
       updatedAt: {
-        type: "TIMESTAMP WITHOUT TIME ZONE",
+        type: 'TIMESTAMP WITHOUT TIME ZONE',
         allowNull: false,
-        defaultValue: sequelize.fn("NOW"),
-        field: "updated_at",
+        defaultValue: sequelize.fn('NOW'),
+        field: 'updated_at',
       },
     },
     {
-      tableName: "user",
+      tableName: 'user',
     }
   );
 
   Model.link = function ({ models }) {
     const { Role, Book } = models;
 
-    this.belongsTo(Role, { foreignKey: "roleId", as: "role" });
+    this.belongsTo(Role, { foreignKey: 'roleId', as: 'role' });
 
-    this.belongsToMany(Book, { through: "UserBook", foreignKey: "userId" });
+    this.belongsToMany(Book, { through: 'UserBook', foreignKey: 'userId' });
   };
 
   return Model;

@@ -4,7 +4,7 @@ const {
   createCheckMiddleware,
   updateCheckMiddleware,
   deleteCheckMiddleware,
-} = require("./auth");
+} = require('./auth');
 
 exports.checkMiddlewareFactory = (policyName) => {
   return {

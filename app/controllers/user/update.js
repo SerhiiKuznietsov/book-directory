@@ -1,5 +1,5 @@
-const { updateUser } = require("../../services/user");
-const { ctrl } = require("../../utils/controller-wrapper");
+const { updateUser } = require('../../services/user');
+const { ctrl } = require('../../utils/controller-wrapper');
 
 exports.update = ctrl(async (req, res) => {
   const {

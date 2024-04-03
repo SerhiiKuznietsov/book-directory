@@ -1,5 +1,5 @@
-const { ctrl } = require("../../utils/controller-wrapper");
-const { removeBook } = require("../../services/book");
+const { ctrl } = require('../../utils/controller-wrapper');
+const { removeBook } = require('../../services/book');
 
 exports.remove = ctrl(async (req, res) => {
   const {

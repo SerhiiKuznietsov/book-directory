@@ -1,11 +1,11 @@
-const Joi = require("joi");
-const { vld } = require("../utils/validator-wrapper");
+const Joi = require('joi');
+const { vld } = require('../utils/validator-wrapper');
 const {
   MIN_LIMIT_LENGTH,
   MAX_LIMIT_LENGTH,
   DEFAULT_LIMIT_LENGTH,
   DEFAULT_PAGE_LENGTH,
-} = require("../constants/db-query");
+} = require('../constants/db-query');
 
 const queryStaticParamsSchema = Joi.object({
   limit: Joi.number()

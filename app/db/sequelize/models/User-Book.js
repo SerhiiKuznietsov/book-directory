@@ -1,32 +1,32 @@
 exports.init = (sequelize, DataTypes) => {
   const Model = sequelize.define(
-    "UserBook",
+    'UserBook',
     {
       bookId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        field: "book_id",
+        field: 'book_id',
       },
       userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        field: "user_id",
+        field: 'user_id',
       },
       createdAt: {
-        type: "TIMESTAMP WITHOUT TIME ZONE",
+        type: 'TIMESTAMP WITHOUT TIME ZONE',
         allowNull: false,
-        defaultValue: sequelize.fn("NOW"),
-        field: "created_at",
+        defaultValue: sequelize.fn('NOW'),
+        field: 'created_at',
       },
       updatedAt: {
-        type: "TIMESTAMP WITHOUT TIME ZONE",
+        type: 'TIMESTAMP WITHOUT TIME ZONE',
         allowNull: false,
-        defaultValue: sequelize.fn("NOW"),
-        field: "updated_at",
+        defaultValue: sequelize.fn('NOW'),
+        field: 'updated_at',
       },
     },
     {
-      tableName: "user_book",
+      tableName: 'user_book',
     }
   );
 

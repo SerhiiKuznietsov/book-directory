@@ -1,5 +1,5 @@
-const { CustomError } = require("../../utils/error");
-const { Policy } = require("../../db/sequelize");
+const { CustomError } = require('../../utils/error');
+const { Policy } = require('../../db/sequelize');
 
 exports.getPolicyById = async (id) => {
   const foundPolicy = await Policy.findByPk(id, { raw: true });

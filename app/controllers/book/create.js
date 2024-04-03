@@ -1,5 +1,5 @@
-const { createBook } = require("../../services/book");
-const { ctrl } = require("../../utils/controller-wrapper");
+const { createBook } = require('../../services/book');
+const { ctrl } = require('../../utils/controller-wrapper');
 
 exports.create = ctrl(async (req, res) => {
   const { body } = req;

@@ -1,6 +1,6 @@
-const Joi = require("joi");
-const { vld } = require("../utils/validator-wrapper");
-const { MIN_NAME_LENGTH, MAX_NAME_LENGTH } = require("../constants/user");
+const Joi = require('joi');
+const { vld } = require('../utils/validator-wrapper');
+const { MIN_NAME_LENGTH, MAX_NAME_LENGTH } = require('../constants/user');
 
 const userIdSchema = Joi.number().positive().required();
 const userItemSchema = Joi.object({

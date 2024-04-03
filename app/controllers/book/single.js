@@ -1,5 +1,5 @@
-const { getBookById } = require("../../services/book");
-const { ctrl } = require("../../utils/controller-wrapper");
+const { getBookById } = require('../../services/book');
+const { ctrl } = require('../../utils/controller-wrapper');
 
 exports.getSingle = ctrl(async (req, res) => {
   const {

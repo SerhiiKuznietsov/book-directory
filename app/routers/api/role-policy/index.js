@@ -1,16 +1,16 @@
-const router = require("express").Router();
+const router = require('express').Router();
 const {
   getList,
   create,
   getSingle,
   update,
   remove,
-} = require("../../../controllers/role-policy");
-const roleMiddleware = require("../../../middlewares/role");
-const policyMiddleware = require("../../../middlewares/policy");
+} = require('../../../controllers/role-policy');
+const roleMiddleware = require('../../../middlewares/role');
+const policyMiddleware = require('../../../middlewares/policy');
 
 router
-  .route("/")
+  .route('/')
   .get(
     roleMiddleware.readCheckMiddleware,
     policyMiddleware.readCheckMiddleware,
@@ -23,7 +23,7 @@ router
   );
 
 router
-  .route("/:uuid")
+  .route('/:uuid')
   .get(
     roleMiddleware.readCheckMiddleware,
     policyMiddleware.readCheckMiddleware,

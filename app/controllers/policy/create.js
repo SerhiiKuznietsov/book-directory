@@ -1,5 +1,5 @@
-const { createPolicy } = require("../../services/policy");
-const { ctrl } = require("../../utils/controller-wrapper");
+const { createPolicy } = require('../../services/policy');
+const { ctrl } = require('../../utils/controller-wrapper');
 
 exports.create = ctrl(async (req, res) => {
   const { body } = req;

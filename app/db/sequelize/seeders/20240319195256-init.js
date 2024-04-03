@@ -1,32 +1,32 @@
-"use strict";
+'use strict';
 
-const { Policy, Role, RolePolicy, User, Book, UserBook } = require("../index");
-const { sequenceUpdateQuery } = require("../model-queries");
-const { transactionWrapper } = require("../sequelize-utils");
+const { Policy, Role, RolePolicy, User, Book, UserBook } = require('../index');
+const { sequenceUpdateQuery } = require('../model-queries');
+const { transactionWrapper } = require('../sequelize-utils');
 
-const permission = ["read", "create", "update", "delete"];
+const permission = ['read', 'create', 'update', 'delete'];
 
 const addPolicies = async (transaction, queryInterface) => {
   await Policy.bulkCreate(
     [
       {
         id: 1,
-        title: "POLICY",
+        title: 'POLICY',
         permission,
       },
       {
         id: 2,
-        title: "USER",
+        title: 'USER',
         permission,
       },
       {
         id: 3,
-        title: "ROLE",
+        title: 'ROLE',
         permission,
       },
       {
         id: 4,
-        title: "BOOK",
+        title: 'BOOK',
         permission,
       },
     ],
@@ -45,23 +45,23 @@ const addRoles = async (transaction, queryInterface) => {
     [
       {
         id: 1,
-        name: "owner",
+        name: 'owner',
       },
       {
         id: 2,
-        name: "admin",
+        name: 'admin',
       },
       {
         id: 3,
-        name: "moder",
+        name: 'moder',
       },
       {
         id: 4,
-        name: "author",
+        name: 'author',
       },
       {
         id: 5,
-        name: "user",
+        name: 'user',
       },
     ],
     {
@@ -105,7 +105,7 @@ const addRolesPolicies = async (transaction) => {
       {
         roleId: 4,
         policyId: 5,
-        accessPermission: ["read"],
+        accessPermission: ['read'],
       },
     ],
     {
@@ -119,38 +119,38 @@ const addUsers = async (transaction, queryInterface) => {
     [
       {
         id: 1,
-        name: "Owner",
-        email: "owner@gmail.com",
+        name: 'Owner',
+        email: 'owner@gmail.com',
         roleId: 1,
       },
       {
         id: 2,
-        name: "Admin",
-        email: "admin@gmail.com",
+        name: 'Admin',
+        email: 'admin@gmail.com',
         roleId: 2,
       },
       {
         id: 3,
-        name: "Moder",
-        email: "moder@gmail.com",
+        name: 'Moder',
+        email: 'moder@gmail.com',
         roleId: 3,
       },
       {
         id: 4,
-        name: "Dale Carnegie",
-        email: "dale_carnegie@gmail.com",
+        name: 'Dale Carnegie',
+        email: 'dale_carnegie@gmail.com',
         roleId: 4,
       },
       {
         id: 5,
-        name: "Tod",
-        email: "tod@gmail.com",
+        name: 'Tod',
+        email: 'tod@gmail.com',
         roleId: 5,
       },
       {
         id: 6,
-        name: "John",
-        email: "john@gmail.com",
+        name: 'John',
+        email: 'john@gmail.com',
         roleId: 5,
       },
     ],
@@ -169,15 +169,15 @@ const addBooks = async (transaction, queryInterface) => {
     [
       {
         id: 1,
-        title: "The Adventures of Tom Sawyer",
+        title: 'The Adventures of Tom Sawyer',
       },
       {
         id: 2,
-        title: "Test Book",
+        title: 'Test Book',
       },
       {
         id: 3,
-        title: "Clean Code",
+        title: 'Clean Code',
       },
     ],
     {

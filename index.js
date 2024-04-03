@@ -1,3 +1,3 @@
 (async () => {
-  await require("./app").start();
+  await require('./app').start();
 })();

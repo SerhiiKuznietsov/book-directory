@@ -1,4 +1,4 @@
-const { createRedisConnection } = require("./redis");
+const { createRedisConnection } = require('./redis');
 
 let connection;
 
@@ -8,7 +8,7 @@ exports.init = async () => {
 
 const makeKey = (sessionId) => {
   return `session:${sessionId}`;
-}
+};
 
 exports.getSession = async (sessionId) => {
   await connection.get(makeKey(sessionId));

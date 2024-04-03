@@ -1,7 +1,7 @@
-const { validRoleUpdate } = require("../../validations/role");
-const { CustomError } = require("../../utils/error");
-const { Role } = require("../../db/sequelize");
-const { getRoleById } = require("./single");
+const { validRoleUpdate } = require('../../validations/role');
+const { CustomError } = require('../../utils/error');
+const { Role } = require('../../db/sequelize');
+const { getRoleById } = require('./single');
 
 exports.updateRole = async (id, roleItem) => {
   validRoleUpdate(id, roleItem);

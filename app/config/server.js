@@ -1,6 +1,6 @@
-require("dotenv").config();
-const { validServerConfig } = require("../validations/config/server");
-const { DEV_MODE, PROD_MODE, TEST_MODE } = require("../constants/server-mode");
+require('dotenv').config();
+const { validServerConfig } = require('../validations/config/server');
+const { DEV_MODE, PROD_MODE, TEST_MODE } = require('../constants/server-mode');
 
 module.exports = {
   PORT: +process.env.PORT || 80,

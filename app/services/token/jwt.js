@@ -1,5 +1,5 @@
-const jwt = require("jsonwebtoken");
-const algorithm = "HS512";
+const jwt = require('jsonwebtoken');
+const algorithm = 'HS512';
 const expiresIn = 60 * 60 * 24;
 
 exports.tokenMethodsFactory = (privateKey, options = {}) => {

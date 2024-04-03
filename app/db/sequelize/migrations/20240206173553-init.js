@@ -1,6 +1,6 @@
-"use strict";
+'use strict';
 
-const schemaName = "public";
+const schemaName = 'public';
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {

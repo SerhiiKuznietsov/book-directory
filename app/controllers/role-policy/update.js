@@ -1,5 +1,5 @@
-const { updateRolePolicy } = require("../../services/role-policy");
-const { ctrl } = require("../../utils/controller-wrapper");
+const { updateRolePolicy } = require('../../services/role-policy');
+const { ctrl } = require('../../utils/controller-wrapper');
 
 exports.update = ctrl(async (req, res) => {
   const {

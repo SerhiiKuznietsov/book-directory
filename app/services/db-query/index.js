@@ -1,7 +1,7 @@
-const { CustomError } = require("../../utils/error");
-const { isArray, isString, isEmpty } = require("../../utils/validator");
-const { useDbQueryEnrichers } = require("./enrichers");
-const { parseQuery } = require("./parsers");
+const { CustomError } = require('../../utils/error');
+const { isArray, isString, isEmpty } = require('../../utils/validator');
+const { useDbQueryEnrichers } = require('./enrichers');
+const { parseQuery } = require('./parsers');
 
 const createDbQuery = (parsedQuery, queryConfiguration) => {
   const result = {};
@@ -27,7 +27,7 @@ class SequelizeFindInterface {
 
   #setModel(model) {
     if (!model) {
-      throw new CustomError("model value is empty");
+      throw new CustomError('model value is empty');
     }
 
     this.#config.model = model;
@@ -44,7 +44,7 @@ class SequelizeFindInterface {
   setNestedModel(model, as, attributes) {
     // TODO - move validation to another location
     if (!model) {
-      throw new CustomError("nested model is undefined");
+      throw new CustomError('nested model is undefined');
     }
 
     // TODO - move validation to another location
@@ -74,7 +74,7 @@ class SequelizeFindInterface {
     defaultAttrs.forEach((fieldName) => {
       if (!rawAttributes.hasOwnProperty(fieldName)) {
         throw new CustomError(
-          "the model does not have the requested field"
+          'the model does not have the requested field'
         ).setCause(
           new CustomError(
             `the "${name}" model does not have a "${fieldName}" field`

@@ -1,5 +1,5 @@
-const rootRouter = require("express").Router();
-const { rootAuthenticate } = require("../middlewares/auth");
+const rootRouter = require('express').Router();
+const { rootAuthenticate } = require('../middlewares/auth');
 const apiRouter = require('./api');
 
 // TODO - add authorization logic before authentication middleware

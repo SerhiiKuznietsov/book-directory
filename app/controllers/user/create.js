@@ -1,5 +1,5 @@
-const { createUser } = require("../../services/user");
-const { ctrl } = require("../../utils/controller-wrapper");
+const { createUser } = require('../../services/user');
+const { ctrl } = require('../../utils/controller-wrapper');
 
 exports.create = ctrl(async (req, res) => {
   const { body } = req;

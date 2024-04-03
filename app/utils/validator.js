@@ -18,24 +18,28 @@ const isUndefined = (val) => val === undefined;
 
 const isNull = (val) => val === null;
 
-const isBoolean = (val) => typeof val === "boolean";
+const isBoolean = (val) => typeof val === 'boolean';
 
-const isString = (val) => typeof val === "string";
+const isString = (val) => typeof val === 'string';
 
 const isInteger = (val) => Number.isInteger(val);
 
-const isNumber = (val) =>  !isInteger(val) && !isInfinity(val) && !Number.isNaN(val) && typeof val === "number";
+const isNumber = (val) =>
+  !isInteger(val) &&
+  !isInfinity(val) &&
+  !Number.isNaN(val) &&
+  typeof val === 'number';
 
-const isBigint = (val) => typeof val === "bigint";
+const isBigint = (val) => typeof val === 'bigint';
 
 const isInfinity = (val) => val === Infinity;
 
 const isArray = (val) => Array.isArray(val);
 
-const isObject = (val) => !isNull(val) && !isArray(val) && typeof val === "object";
+const isObject = (val) =>
+  !isNull(val) && !isArray(val) && typeof val === 'object';
 
-const isFunction = (val) => typeof val === "function";
-
+const isFunction = (val) => typeof val === 'function';
 
 module.exports = {
   isEmpty,

@@ -1,11 +1,11 @@
-const { capitalize } = require("./string-converter");
+const { capitalize } = require('./string-converter');
 
 class CustomError extends Error {
   constructor(message) {
     super(message);
 
-    this.setName("Error");
-    this.setMassage(message || "Undefined error");
+    this.setName('Error');
+    this.setMassage(message || 'Undefined error');
     this.setStatus(500);
   }
 

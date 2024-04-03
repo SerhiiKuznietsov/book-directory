@@ -1,14 +1,14 @@
-const { Sequelize } = require("sequelize");
+const { Sequelize } = require('sequelize');
 const {
   db: { development: dbConfig },
-} = require("../../config");
-const { IS_DEV } = require("../../config/server");
-const { CustomError } = require("../../utils/error");
+} = require('../../config');
+const { IS_DEV } = require('../../config/server');
+const { CustomError } = require('../../utils/error');
 
 exports.authenticate = async (sequelizeInstance) => {
   try {
     await sequelizeInstance.authenticate();
-    console.log("Database connection has been established successfully.");
+    console.log('Database connection has been established successfully.');
   } catch (e) {
     throw new CustomError(
       `Unable to connect to the database: ${sequelizeInstance.config.database}`
@@ -25,7 +25,7 @@ exports.createSequelizeInstance = () => {
       host: dbConfig.host,
       port: dbConfig.port,
       dialect: dbConfig.dialect,
-      schema: "public",
+      schema: 'public',
       logging: IS_DEV,
       pool: {
         min: 0,
@@ -35,7 +35,7 @@ exports.createSequelizeInstance = () => {
         underscored: false,
         freezeTableName: false,
         syncOnAssociation: true,
-        charset: "utf8",
+        charset: 'utf8',
         timestamps: false,
       },
     }

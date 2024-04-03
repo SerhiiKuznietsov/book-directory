@@ -3,7 +3,7 @@ const {
   CREATE_PERMISSION_NAME,
   UPDATE_PERMISSION_NAME,
   DELETE_PERMISSION_NAME,
-} = require("../constants/permission");
+} = require('../constants/permission');
 // const {
 //   ACCESS_TOKEN_COOKIE_NAME,
 //   REFRESH_TOKEN_COOKIE_NAME,

@@ -1,5 +1,5 @@
-const { updateBook } = require("../../services/book");
-const { ctrl } = require("../../utils/controller-wrapper");
+const { updateBook } = require('../../services/book');
+const { ctrl } = require('../../utils/controller-wrapper');
 
 exports.update = ctrl(async (req, res) => {
   const {

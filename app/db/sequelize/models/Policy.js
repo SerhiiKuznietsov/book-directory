@@ -1,8 +1,8 @@
-const { MAX_TITLE_LENGTH } = require("../../../constants/policy");
+const { MAX_TITLE_LENGTH } = require('../../../constants/policy');
 
 exports.init = (sequelize, DataTypes) => {
   const Model = sequelize.define(
-    "Policy",
+    'Policy',
     {
       title: {
         type: DataTypes.STRING(MAX_TITLE_LENGTH),
@@ -14,27 +14,27 @@ exports.init = (sequelize, DataTypes) => {
         allowNull: false,
       },
       createdAt: {
-        type: "TIMESTAMP WITHOUT TIME ZONE",
+        type: 'TIMESTAMP WITHOUT TIME ZONE',
         allowNull: false,
-        defaultValue: sequelize.fn("NOW"),
-        field: "created_at",
+        defaultValue: sequelize.fn('NOW'),
+        field: 'created_at',
       },
       updatedAt: {
-        type: "TIMESTAMP WITHOUT TIME ZONE",
+        type: 'TIMESTAMP WITHOUT TIME ZONE',
         allowNull: false,
-        defaultValue: sequelize.fn("NOW"),
-        field: "updated_at",
+        defaultValue: sequelize.fn('NOW'),
+        field: 'updated_at',
       },
     },
     {
-      tableName: "policy",
+      tableName: 'policy',
     }
   );
 
   Model.link = function ({ models }) {
     const { Role, RolePolicy } = models;
 
-    this.belongsToMany(Role, { through: RolePolicy, foreignKey: "policyId" });
+    this.belongsToMany(Role, { through: RolePolicy, foreignKey: 'policyId' });
   };
 
   return Model;

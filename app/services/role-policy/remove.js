@@ -1,7 +1,7 @@
-const { validRolePolicyRemove } = require("../../validations/role-policy");
-const { CustomError } = require("../../utils/error");
-const { RolePolicy } = require("../../db/sequelize");
-const { getRolePolicyByUUID } = require("./single");
+const { validRolePolicyRemove } = require('../../validations/role-policy');
+const { CustomError } = require('../../utils/error');
+const { RolePolicy } = require('../../db/sequelize');
+const { getRolePolicyByUUID } = require('./single');
 
 exports.removeRolePolicy = async (uuid) => {
   validRolePolicyRemove(uuid);
