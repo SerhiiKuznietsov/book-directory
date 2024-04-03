@@ -21,7 +21,9 @@
         "wix.vscode-import-cost",
         "Gruntfuggly.todo-tree",
         "pflannery.vscode-versionlens",
-        "fractalbrew.backticks"
+        "fractalbrew.backticks",
+        "GitHub.vscode-pull-request-github",
+        "cweijan.vscode-redis-client"
       ]
     }
   },
