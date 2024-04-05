@@ -1,4 +1,5 @@
 const { CustomError } = require('../utils/error');
+const { logger } = require('../utils/logger/');
 
 exports.rootErrorHandlers = (app) => {
   app
@@ -10,7 +11,7 @@ exports.rootErrorHandlers = (app) => {
       next(err);
     })
     .use((err, req, res, next) => {
-      console.error(err);
+      logger.error(err);
 
       const { name = 'error', message = 'something wrong', status = 500 } = err;
 
