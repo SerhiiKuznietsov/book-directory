@@ -11,10 +11,7 @@ const rolePolicyIdsSchema = Joi.object({
   policyId: Joi.number().positive(),
 }).required();
 
-const itemSchema = Joi.alternatives().try(
-  rolePolicyIdsSchema,
-  accessPermissionSchema
-);
+const itemSchema = rolePolicyIdsSchema.concat(accessPermissionSchema);
 
 const validRolePolicyUuid = (uuid) => {
   const { error } = rolePolicyUuidSchema.validate(uuid, {
