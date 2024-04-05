@@ -1,3 +1,5 @@
+const { logger } = require("../../utils/logger");
+
 exports.transactionWrapper = (cb) => {
   return async (queryInterface) => {
     const transaction = await queryInterface.sequelize.transaction();
@@ -6,7 +8,7 @@ exports.transactionWrapper = (cb) => {
       await transaction.commit();
     } catch (e) {
       await transaction.rollback();
-      console.error(e);
+      logger.error(e)
       throw e;
     }
   };

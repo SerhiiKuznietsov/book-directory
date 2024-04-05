@@ -8,6 +8,7 @@ const dbConfig = {
   host: process.env.DB_HOST || 'localhost',
   port: +process.env.DB_PORT || 5432,
   dialect: process.env.DB_DIALECT || 'postgres',
+  logMode: process.env.DB_QUERY_LOG === 'true',
   migrationStorageTableSchema: '_migration',
   migrationStorageTableName: '_migration_meta',
   seederStorage: 'sequelize',
@@ -16,9 +17,10 @@ const dbConfig = {
 };
 
 module.exports = {
-  development: dbConfig,
-  test: dbConfig,
-  production: dbConfig,
+  development: dbConfig,  // this code is needed for sequilize-cli
+  test: dbConfig, // this code is needed for sequilize-cli
+  production: dbConfig, // this code is needed for sequilize-cli
+  ...dbConfig,
 };
 
 validDbConfig(module.exports);
