@@ -6,6 +6,8 @@ const {
 // const { createFolderSyncIfNotExsist } = require('./logger-file-util');
 // const { IS_PROD } = require('../../config/server');
 
+// TODO - add write to file for message logger
+
 const targets = [
   {
     level,
