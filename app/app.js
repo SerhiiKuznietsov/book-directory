@@ -11,8 +11,8 @@ const app = express();
 // TODO - add swagger
 
 app.set('port', PORT);
-app.use(appLogger)
 app.disable('x-powered-by');
+app.use(appLogger);
 app.use(cookieParser());
 app.use(express.json());
 app.use(rootRouter);
