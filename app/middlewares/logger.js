@@ -1,4 +1,8 @@
-const expressPino = require('express-pino-logger');
+const expressLogger = require('pino-http');
 const { logger } = require('../utils/logger/');
+const { level } = require('../config/logger');
 
-module.exports = expressPino({ logger });
+module.exports = expressLogger({
+  logger,
+  useLevel: level,
+});
