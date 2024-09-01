@@ -1,31 +1,14 @@
 const fastify = require('fastify')
-
-
-
-
+const fastifyCookie = require('fastify-cookie');
 const { logger } = require('./utils/logger');
+const { rootErrorHandlers } = require('./middlewares/rootErrorHandler');
+const { rootRouter } = require('./routers');
 
 const app = fastify({ logger });
 
-const cookieParser = require('cookie-parser');
-const { rootErrorHandlers } = require('./middlewares/rootErrorHandler');
-const appLogger = require('./middlewares/logger');
-const { rootRouter } = require('./routers');
-const { PORT } = require('./config/server');
-
-
-// TODO - add security logic (helmet, cors)
-// TODO - add swagger
-
-// app.set('port', PORT);
-// app.disable('x-powered-by');
-// app.use(appLogger);
-// app.use(cookieParser());
-// app.use(express.send());
-// app.use(rootRouter);
+app.register(fastifyCookie);
 app.register(rootRouter);
-
-// rootErrorHandlers(app);
+app.setErrorHandler(rootErrorHandlers);
 
 module.exports = {
   app,
