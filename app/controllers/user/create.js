@@ -1,10 +1,9 @@
 const { createUser } = require('../../services/user');
-const { ctrl } = require('../../utils/controller-wrapper');
 
-exports.create = ctrl(async (req, res) => {
+exports.create = async (req, reply) => {
   const { body } = req;
 
   const userId = await createUser(body);
 
-  res.status(201).json(userId);
-});
+  reply.code(201).send(userId);
+};

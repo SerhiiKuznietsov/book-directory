@@ -1,11 +1,8 @@
-const { validBookRemove } = require('../../validations/book');
 const { CustomError } = require('../../utils/error');
 const { Book } = require('../../db/sequelize');
 const { getBookById } = require('./single');
 
 exports.removeBook = async (id) => {
-  validBookRemove(id);
-
   await getBookById(id);
 
   const isBookRemoved = await Book.destroy({

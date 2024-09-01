@@ -1,7 +1,6 @@
 const { updateRolePolicy } = require('../../services/role-policy');
-const { ctrl } = require('../../utils/controller-wrapper');
 
-exports.update = ctrl(async (req, res) => {
+exports.update = async (req) => {
   const {
     body,
     params: { uuid },
@@ -9,5 +8,5 @@ exports.update = ctrl(async (req, res) => {
 
   const rolePolicyUuid = await updateRolePolicy(uuid, body);
 
-  res.json(rolePolicyUuid);
-});
+  return rolePolicyUuid;
+};

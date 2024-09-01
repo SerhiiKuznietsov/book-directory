@@ -1,4 +1,3 @@
-const router = require('express').Router();
 const {
   getList,
   create,
@@ -12,16 +11,45 @@ const {
   updateCheckMiddleware,
   deleteCheckMiddleware,
 } = require('../../../middlewares/role');
+const { createRoleSchema, getRoleSchema, updateRoleSchema, removeRoleSchema } = require('./schema');
 
-router
-  .route('/')
-  .get(readCheckMiddleware, getList)
-  .post(createCheckMiddleware, create);
+module.exports = async (app) => {
+  app.route({
+    method: 'GET',
+    url: '/',
+    onRequest: [readCheckMiddleware],
+    handler: getList,
+  });
 
-router
-  .route('/:id(\\d+)')
-  .get(readCheckMiddleware, getSingle)
-  .put(updateCheckMiddleware, update)
-  .delete(deleteCheckMiddleware, remove);
+  app.route({
+    method: 'POST',
+    url: '/',
+    schema: createRoleSchema,
+    onRequest: [createCheckMiddleware],
+    handler: create,
+  });
 
-module.exports = router;
+  app.route({
+    method: 'GET',
+    url: '/:id',
+    schema: getRoleSchema,
+    onRequest: [readCheckMiddleware],
+    handler: getSingle,
+  });
+
+  app.route({
+    method: 'PUT',
+    url: '/:id',
+    schema: updateRoleSchema,
+    onRequest: [updateCheckMiddleware],
+    handler: update,
+  });
+
+  app.route({
+    method: 'DELETE',
+    url: '/:id',
+    schema: removeRoleSchema,
+    onRequest: [deleteCheckMiddleware],
+    handler: remove,
+  });
+};

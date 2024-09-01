@@ -1,7 +1,6 @@
 const { updatePolicy } = require('../../services/policy');
-const { ctrl } = require('../../utils/controller-wrapper');
 
-exports.update = ctrl(async (req, res) => {
+exports.update = async (req) => {
   const {
     body,
     params: { id },
@@ -9,5 +8,5 @@ exports.update = ctrl(async (req, res) => {
 
   const policyId = await updatePolicy(id, body);
 
-  res.json(policyId);
-});
+  return policyId;
+};

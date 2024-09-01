@@ -1,13 +1,9 @@
-const { validUserUpdate } = require('../../validations/user');
 const { CustomError } = require('../../utils/error');
 const { getUserById } = require('./single');
+const { Book } = require('../../db/sequelize');
 
 exports.updateUser = async (id, userItem) => {
-  validUserUpdate(id, userItem);
-
   await getUserById(id);
-
-  const { Book } = getDbModels();
 
   const [isUserUpdated] = await Book.update(userItem, {
     where: {

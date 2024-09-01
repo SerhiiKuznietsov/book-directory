@@ -1,12 +1,11 @@
 const { getBookById } = require('../../services/book');
-const { ctrl } = require('../../utils/controller-wrapper');
 
-exports.getSingle = ctrl(async (req, res) => {
+exports.getSingle = async (req) => {
   const {
     params: { id },
   } = req;
 
   const bookItem = await getBookById(id);
 
-  res.json(bookItem);
-});
+  return bookItem;
+};

@@ -1,5 +1,3 @@
-const { ctrl } = require('../../utils/controller-wrapper');
-
-exports.signIn = ctrl(async (req) => {
+exports.signIn = async (req) => {
   const { body } = req;
-});
+};

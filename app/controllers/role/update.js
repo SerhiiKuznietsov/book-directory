@@ -1,7 +1,6 @@
 const { updateRole } = require('../../services/role');
-const { ctrl } = require('../../utils/controller-wrapper');
 
-exports.update = ctrl(async (req, res) => {
+exports.update = async (req) => {
   const {
     body,
     params: { id },
@@ -9,5 +8,5 @@ exports.update = ctrl(async (req, res) => {
 
   const roleId = await updateRole(id, body);
 
-  res.json(roleId);
-});
+  return roleId;
+};

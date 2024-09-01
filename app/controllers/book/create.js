@@ -1,10 +1,9 @@
 const { createBook } = require('../../services/book');
-const { ctrl } = require('../../utils/controller-wrapper');
 
-exports.create = ctrl(async (req, res) => {
+exports.create = async (req, reply) => {
   const { body } = req;
 
   const bookId = await createBook(body);
 
-  res.status(201).json(bookId);
-});
+  reply.code(201).send(bookId);
+};

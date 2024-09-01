@@ -1,10 +1,9 @@
 const { createRolePolicy } = require('../../services/role-policy');
-const { ctrl } = require('../../utils/controller-wrapper');
 
-exports.create = ctrl(async (req, res) => {
+exports.create = async (req, reply) => {
   const { body } = req;
 
   const rolePolicyUuid = await createRolePolicy(body);
 
-  res.status(201).json(rolePolicyUuid);
-});
+  reply.code(201).send(rolePolicyUuid);
+};

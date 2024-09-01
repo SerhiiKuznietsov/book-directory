@@ -1,10 +1,9 @@
 const { createRole } = require('../../services/role');
-const { ctrl } = require('../../utils/controller-wrapper');
 
-exports.create = ctrl(async (req, res) => {
+exports.create = async (req, reply) => {
   const { body } = req;
 
   const roleId = await createRole(body);
 
-  res.status(201).json(roleId);
-});
+  reply.code(201).send(roleId);
+};

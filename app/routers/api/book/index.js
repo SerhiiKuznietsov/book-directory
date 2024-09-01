@@ -1,4 +1,3 @@
-const router = require('express').Router();
 const {
   getList,
   create,
@@ -12,16 +11,50 @@ const {
   updateCheckMiddleware,
   deleteCheckMiddleware,
 } = require('../../../middlewares/book');
+const {
+  createBookSchema,
+  getBookSchema,
+  updateBookSchema,
+  removeBookSchema,
+} = require('./schema');
 
-router
-  .route('/')
-  .get(readCheckMiddleware, getList)
-  .post(createCheckMiddleware, create);
+module.exports = async (app) => {
+  app.route({
+    method: 'GET',
+    url: '/',
+    onRequest: [readCheckMiddleware],
+    handler: getList,
+  });
 
-router
-  .route('/:id(\\d+)')
-  .get(readCheckMiddleware, getSingle)
-  .put(updateCheckMiddleware, update)
-  .delete(deleteCheckMiddleware, remove);
+  app.route({
+    method: 'POST',
+    url: '/',
+    schema: createBookSchema,
+    onRequest: [createCheckMiddleware],
+    handler: create,
+  });
 
-module.exports = router;
+  app.route({
+    method: 'GET',
+    url: '/:id',
+    schema: getBookSchema,
+    onRequest: [readCheckMiddleware],
+    handler: getSingle,
+  });
+
+  app.route({
+    method: 'PUT',
+    url: '/:id',
+    schema: updateBookSchema,
+    onRequest: [updateCheckMiddleware],
+    handler: update,
+  });
+
+  app.route({
+    method: 'DELETE',
+    url: '/:id',
+    schema: removeBookSchema,
+    onRequest: [deleteCheckMiddleware],
+    handler: remove,
+  });
+};

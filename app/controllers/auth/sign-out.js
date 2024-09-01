@@ -1,3 +1,1 @@
-const { ctrl } = require('../../utils/controller-wrapper');
-
-exports.signOut = ctrl(async () => {});
+exports.signOut = async () => {};

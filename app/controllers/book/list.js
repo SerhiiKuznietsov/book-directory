@@ -1,8 +1,7 @@
 const { getBooksList } = require('../../services/book');
-const { ctrl } = require('../../utils/controller-wrapper');
 
-exports.getList = ctrl(async (req, res) => {
+exports.getList = async (req) => {
   const booksList = await getBooksList(req.query);
 
-  res.json(booksList);
-});
+  return booksList;
+};
