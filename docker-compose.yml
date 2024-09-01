@@ -14,7 +14,8 @@ services:
     ports:
       - 80:80
     networks:
-      - my_network
+      - db_network
+      - cache_network
 
   db:
     image: postgres:15.5
@@ -27,7 +28,7 @@ services:
     ports:
       - 5432:5432
     networks:
-      - my_network
+      - db_network
 
   redis:
     image: redis:7.2.4-alpine
@@ -36,6 +37,9 @@ services:
       - REDIS_PORT=6379
     ports:
       - 6379:6379
+    networks:
+      - cache_network
 
 networks:
-  my_network:
+  db_network:
+  cache_network:
