@@ -1,5 +1,4 @@
 const { getModelPrimaryKeyFieldName } = require('../sequelize-model-methods');
-const { CustomError } = require('../../../utils/error');
 const {
   NORMAL_GROUPING_NAME,
   ALL_GROUPING_NAME,
