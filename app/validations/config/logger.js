@@ -1,13 +1,15 @@
-const Joi = require('joi');
-const { vld } = require('../../utils/validator-wrapper');
 const { LOG_LEVELS_LIST } = require('../../constants/logger');
+const { validAndCompileSchema } = require('../../utils/ajv-validator');
 
-exports.validLoggerConfig = vld((config) => {
-  const { error } = Joi.object({
-    level: Joi.string().valid(...LOG_LEVELS_LIST),
-  })
-    .required()
-    .validate(config);
+exports.validLoggerConfig = (config) => {
+  const schema = {
+    type: 'object',
+    additionalProperties: false,
+    required: ['level'],
+    properties: {
+      level: { type: 'string', enum: LOG_LEVELS_LIST },
+    },
+  };
 
-  if (error) throw error;
-});
+  validAndCompileSchema(schema, config);
+};
