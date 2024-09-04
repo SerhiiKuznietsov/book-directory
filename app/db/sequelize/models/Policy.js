@@ -4,6 +4,12 @@ exports.init = (sequelize, DataTypes) => {
   const Model = sequelize.define(
     'Policy',
     {
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+        allowNull: false,
+      },
       title: {
         type: DataTypes.STRING(MAX_TITLE_LENGTH),
         allowNull: false,

@@ -4,8 +4,8 @@ const {
 } = require('../../../constants/policy');
 
 const idProperty = {
-  type: 'integer',
-  minimum: 1,
+  type: 'string',
+  format: 'uuid-v4',
 };
 
 const titleProperty = {

@@ -1,8 +1,8 @@
 const { MIN_NAME_LENGTH, MAX_NAME_LENGTH } = require('../../../constants/role');
 
 const idProperty = {
-  type: 'integer',
-  minimum: 1,
+  type: 'string',
+  format: 'uuid-v4',
 };
 
 const roleProperties = {

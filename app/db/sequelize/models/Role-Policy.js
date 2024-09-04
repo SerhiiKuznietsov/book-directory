@@ -2,10 +2,11 @@ exports.init = (sequelize, DataTypes) => {
   const Model = sequelize.define(
     'RolePolicy',
     {
-      uuid: {
+      id: {
         type: DataTypes.UUID,
-        defaultValue: sequelize.UUIDV4,
+        defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
+        allowNull: false,
       },
       roleId: {
         type: DataTypes.INTEGER,

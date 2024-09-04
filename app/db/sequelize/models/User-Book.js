@@ -2,6 +2,12 @@ exports.init = (sequelize, DataTypes) => {
   const Model = sequelize.define(
     'UserBook',
     {
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+        allowNull: false,
+      },
       bookId: {
         type: DataTypes.INTEGER,
         allowNull: false,

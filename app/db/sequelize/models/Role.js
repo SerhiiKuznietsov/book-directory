@@ -4,6 +4,12 @@ exports.init = (sequelize, DataTypes) => {
   const Model = sequelize.define(
     'Role',
     {
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        primaryKey: true,
+        allowNull: false,
+      },
       name: {
         type: DataTypes.STRING(MAX_NAME_LENGTH),
         allowNull: false,
