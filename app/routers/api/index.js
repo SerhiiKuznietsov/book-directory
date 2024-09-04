@@ -5,11 +5,11 @@ const userRouter = require('./user');
 const authRouter = require('./auth');
 // const rolePolicyRouter = require('./role-policy');
 
-module.exports = async (app) => {
-  app.register(authRouter, { prefix: '/auth' });
-  // .register(rolePolicyRouter, { prefix: '/role-policy' })
-  app.register(bookRouter, { prefix: '/book' });
-  // app.register(policyRouter, { prefix: '/policy' })
-  app.register(roleRouter, { prefix: '/role' });
-  app.register(userRouter, { prefix: '/user' });
+module.exports = async (fastify) => {
+  fastify.register(authRouter, { prefix: '/auth' });
+  // fastify.register(rolePolicyRouter, { prefix: '/role-policy' })
+  fastify.register(bookRouter, { prefix: '/book' });
+  // fastify.register(policyRouter, { prefix: '/policy' })
+  fastify.register(roleRouter, { prefix: '/role' });
+  fastify.register(userRouter, { prefix: '/user' });
 };

@@ -1,15 +1,15 @@
-const fastify = require('fastify')
+const fastifyConstructor = require('fastify');
 const fastifyCookie = require('fastify-cookie');
-const { logger } = require('./utils/logger');
 const { rootErrorHandlers } = require('./middlewares/rootErrorHandler');
 const { rootRouter } = require('./routers');
+const { logger } = require('./utils/logger');
 
-const app = fastify({ logger });
+const fastify = fastifyConstructor({ logger });
 
-app.register(fastifyCookie);
-app.register(rootRouter);
-app.setErrorHandler(rootErrorHandlers);
+fastify.register(fastifyCookie);
+fastify.register(rootRouter);
+fastify.setErrorHandler(rootErrorHandlers);
 
 module.exports = {
-  app,
+  fastify,
 };

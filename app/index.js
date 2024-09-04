@@ -1,6 +1,6 @@
 const { startServer, stopServer } = require('./server');
 const { logger } = require('./utils/logger');
-const { initAllCache, closeAllCache } = require('./services/cache');
+// const { initAllCache, closeAllCache } = require('./services/cache');
 
 exports.start = async () => {
   // await initAllCache();
@@ -10,7 +10,7 @@ exports.start = async () => {
 };
 
 exports.stop = async () => {
-  await closeAllCache();
+  // await closeAllCache();
   await stopServer();
 
   logger.info('App stopped...');

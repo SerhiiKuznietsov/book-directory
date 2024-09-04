@@ -13,15 +13,15 @@ const {
 } = require('../../../middlewares/role');
 const { createRoleSchema, getRoleSchema, updateRoleSchema, removeRoleSchema } = require('./schema');
 
-module.exports = async (app) => {
-  app.route({
+module.exports = async (fastify) => {
+  fastify.route({
     method: 'GET',
     url: '/',
     onRequest: [readCheckMiddleware],
     handler: getList,
   });
 
-  app.route({
+  fastify.route({
     method: 'POST',
     url: '/',
     schema: createRoleSchema,
@@ -29,7 +29,7 @@ module.exports = async (app) => {
     handler: create,
   });
 
-  app.route({
+  fastify.route({
     method: 'GET',
     url: '/:id',
     schema: getRoleSchema,
@@ -37,7 +37,7 @@ module.exports = async (app) => {
     handler: getSingle,
   });
 
-  app.route({
+  fastify.route({
     method: 'PUT',
     url: '/:id',
     schema: updateRoleSchema,
@@ -45,7 +45,7 @@ module.exports = async (app) => {
     handler: update,
   });
 
-  app.route({
+  fastify.route({
     method: 'DELETE',
     url: '/:id',
     schema: removeRoleSchema,

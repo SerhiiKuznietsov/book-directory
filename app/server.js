@@ -1,4 +1,4 @@
-const { app } = require('./app');
+const { fastify } = require('./app');
 const { logger } = require('./utils/logger/');
 const { server: { port } } = require('./config')
 
@@ -6,9 +6,9 @@ let server;
 
 exports.startServer = () => {
   return new Promise((resolve) => {
-    server = app.listen({ port }, (err) => {
+    server = fastify.listen({ port }, (err) => {
       if (err) {
-        app.log.error(err);
+        fastify.log.error(err);
         process.exit(1);
       }
 
