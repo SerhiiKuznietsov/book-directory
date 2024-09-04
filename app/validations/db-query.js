@@ -17,7 +17,7 @@ const validateQuery = compileSchema({
     },
     page: {
       type: 'integer',
-      minimum: 1,
+      minimum: 0,
       default: DEFAULT_PAGE_LENGTH,
     },
     order: {
