@@ -23,7 +23,7 @@ exports.init = (sequelize, DataTypes) => {
       },
       roleId: {
         field: 'role_id',
-        type: DataTypes.SMALLINT,
+        type: DataTypes.UUID,
       },
       createdAt: {
         type: 'TIMESTAMP WITHOUT TIME ZONE',
