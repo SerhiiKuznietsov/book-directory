@@ -1,11 +1,8 @@
-const { validPolicyRemove } = require('../../validations/policy');
 const { CustomError } = require('../../utils/error');
 const { Policy } = require('../../db/sequelize');
 const { getPolicyById } = require('./single');
 
 exports.removePolicy = async (id) => {
-  validPolicyRemove(id);
-
   await getPolicyById(id);
 
   const isPolicyRemoved = await Policy.destroy({
