@@ -1,7 +1,7 @@
 const fastifyConstructor = require('fastify');
 const fastifyCookie = require('fastify-cookie');
 const fastifySwagger = require('@fastify/swagger');
-const fastifySwaggerUI = require('@fastify/swagger-ui')
+const fastifySwaggerUI = require('@fastify/swagger-ui');
 const { rootErrorHandlers } = require('./middlewares/rootErrorHandler');
 const { rootRouter } = require('./routers');
 const { logger } = require('./utils/logger');
