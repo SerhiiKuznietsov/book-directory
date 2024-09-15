@@ -1,4 +1,3 @@
-
 # Book Directory
 
 ## Project Description
@@ -80,6 +79,7 @@
 5. Ensure the `.env` file is configured correctly (see the configuration step above).
 
 6. Proceed with installing dependencies:
+
    ```bash
    npm install
    ```
@@ -87,6 +87,8 @@
 7. The app will be available at: `http://localhost:3000`.
 
 ## Migration & Seeding Commands
+
+### Seeding Commands
 
 - Run migrations:
   ```bash
@@ -100,6 +102,8 @@
   ```bash
   npx sequelize-cli migration:generate --name [your_migration_name]
   ```
+
+### Migration Commands
 
 - Run seeds:
   ```bash
@@ -117,6 +121,7 @@
 ## Usage
 
 API documentation is available at:
+
 ```
 http://localhost:3000/docs
 ```
