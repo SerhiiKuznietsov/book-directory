@@ -5,5 +5,5 @@ exports.create = async (req, reply) => {
 
   const bookId = await createBook(body);
 
-  reply.code(201).send(bookId);
+  reply.code(201).send({ id: bookId });
 };

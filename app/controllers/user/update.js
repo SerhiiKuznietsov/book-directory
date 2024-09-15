@@ -8,5 +8,5 @@ exports.update = async (req) => {
 
   const userId = await updateUser(id, body);
 
-  return userId;
+  return { id: userId };
 };

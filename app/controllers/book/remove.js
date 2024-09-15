@@ -7,5 +7,5 @@ exports.remove = async (req) => {
 
   const bookId = await removeBook(id);
 
-  return bookId;
+  return { id: bookId };
 };

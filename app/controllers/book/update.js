@@ -8,5 +8,5 @@ exports.update = async (req) => {
 
   const bookId = await updateBook(id, body);
 
-  return bookId;
+  return { id: bookId };
 };

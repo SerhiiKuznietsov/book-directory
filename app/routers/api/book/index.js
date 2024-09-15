@@ -12,40 +12,42 @@ const {
   deleteCheckMiddleware,
 } = require('../../../middlewares/book');
 const {
-  createBookSchema,
-  getBookSchema,
-  updateBookSchema,
-  removeBookSchema,
-} = require('./schema');
+  getListSchema,
+  getSchema,
+  createSchema,
+  removeSchema,
+  updateSchema,
+} = require('../../../schemas/book/routes');
 
 module.exports = async (fastify) => {
   fastify.route({
     method: 'GET',
     url: '/',
+    schema: getListSchema,
     onRequest: [readCheckMiddleware],
     handler: getList,
   });
 
   fastify.route({
-    method: 'POST',
-    url: '/',
-    schema: createBookSchema,
-    onRequest: [createCheckMiddleware],
-    handler: create,
-  });
-
-  fastify.route({
     method: 'GET',
     url: '/:id',
-    schema: getBookSchema,
+    schema: getSchema,
     onRequest: [readCheckMiddleware],
     handler: getSingle,
   });
 
   fastify.route({
+    method: 'POST',
+    url: '/',
+    schema: createSchema,
+    onRequest: [createCheckMiddleware],
+    handler: create,
+  });
+
+  fastify.route({
     method: 'PUT',
     url: '/:id',
-    schema: updateBookSchema,
+    schema: updateSchema,
     onRequest: [updateCheckMiddleware],
     handler: update,
   });
@@ -53,7 +55,7 @@ module.exports = async (fastify) => {
   fastify.route({
     method: 'DELETE',
     url: '/:id',
-    schema: removeBookSchema,
+    schema: removeSchema,
     onRequest: [deleteCheckMiddleware],
     handler: remove,
   });

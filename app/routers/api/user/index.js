@@ -5,56 +5,48 @@ const {
   update,
   remove,
 } = require('../../../controllers/user');
+
 const {
-  readCheckMiddleware,
-  createCheckMiddleware,
-  updateCheckMiddleware,
-  deleteCheckMiddleware,
-} = require('../../../middlewares/user');
-const {
-  createUserSchema,
-  getUserSchema,
-  updateUserSchema,
-  removeUserSchema,
-} = require('./schema');
+  getListSchema,
+  getSchema,
+  createSchema,
+  removeSchema,
+  updateSchema,
+} = require('../../../schemas/user/routes');
 
 module.exports = async (fastify) => {
-  fastify.route({
+  fastify. route({
     method: 'GET',
     url: '/',
-    onRequest: [readCheckMiddleware],
+    schema: getListSchema,
     handler: getList,
+  });
+
+  fastify.route({
+    method: 'GET',
+    url: '/:id',
+    schema: getSchema,
+    handler: getSingle,
   });
 
   fastify.route({
     method: 'POST',
     url: '/',
-    schema: createUserSchema,
-    onRequest: [createCheckMiddleware],
+    schema: createSchema,
     handler: create,
-  });
-
-  fastify.route({
-    method: 'GET',
-    url: '/:id',
-    schema: getUserSchema,
-    onRequest: [readCheckMiddleware],
-    handler: getSingle,
   });
 
   fastify.route({
     method: 'PUT',
     url: '/:id',
-    schema: updateUserSchema,
-    onRequest: [updateCheckMiddleware],
+    schema: updateSchema,
     handler: update,
   });
 
   fastify.route({
     method: 'DELETE',
     url: '/:id',
-    schema: removeUserSchema,
-    onRequest: [deleteCheckMiddleware],
+    schema: removeSchema,
     handler: remove,
   });
 };

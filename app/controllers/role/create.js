@@ -5,5 +5,5 @@ exports.create = async (req, reply) => {
 
   const roleId = await createRole(body);
 
-  reply.code(201).send(roleId);
+  reply.code(201).send({ id: roleId });
 };

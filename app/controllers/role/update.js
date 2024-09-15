@@ -8,5 +8,5 @@ exports.update = async (req) => {
 
   const roleId = await updateRole(id, body);
 
-  return roleId;
+  return { id: roleId };
 };

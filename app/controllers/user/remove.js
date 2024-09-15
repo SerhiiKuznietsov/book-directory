@@ -7,5 +7,5 @@ exports.remove = async (req) => {
 
   const userId = await removeUser(id);
 
-  return userId;
+  return { id: userId };
 };

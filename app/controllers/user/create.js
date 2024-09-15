@@ -5,5 +5,5 @@ exports.create = async (req, reply) => {
 
   const userId = await createUser(body);
 
-  reply.code(201).send(userId);
+  reply.code(201).send({ id: userId });
 };

@@ -7,5 +7,5 @@ exports.remove = async (req) => {
 
   const roleId = await removeRole(id);
 
-  return roleId;
+  return { id: roleId };
 };
