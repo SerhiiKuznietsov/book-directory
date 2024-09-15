@@ -1,3 +1,4 @@
+
 # Book Directory
 
 ## Project Description
@@ -16,6 +17,14 @@
 
 ## Setup Instructions
 
+### Configuration
+
+1. Copy the provided `.env.example` file to `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+2. Fill in the necessary environment variables (for database connections, Redis, etc.) in the `.env` file. Both Docker and native setups will use this configuration.
+
 ### Docker Setup
 
 1. Clone the repository:
@@ -23,26 +32,28 @@
    git clone https://github.com/SerhiiKuznietsov/book-directory.git
    cd book-directory
    ```
-2. Start the Docker container:
+2. Ensure the `.env` file is configured correctly (see the configuration step above).
+3. Start the Docker container:
    ```bash
    docker-compose up --build
    ```
-3. The app will be available at: `http://localhost:3000`.
+   Docker will use environment variables from the `.env` file for container configuration.
+4. The app will be available at: `http://localhost:3000`.
 
 ### Native Setup
 
-1. Ensure you have [Node.js](https://nodejs.org/), [PostgreSQL](https://www.postgresql.org/), and [Redis](https://redis.io/) installed.
+1. Ensure you have [Node.js](https://nodejs.org/), [PostgreSQL](https://www.postgresql.org/) and [Redis](https://redis.io/) installed.
 2. Clone the repository:
    ```bash
    git clone https://github.com/SerhiiKuznietsov/book-directory.git
    cd book-directory
    ```
-3. Install dependencies:
+3. Ensure the `.env` file is configured correctly (see the configuration step above).
+4. Install dependencies:
    ```bash
    npm install
    ```
-4. Start PostgreSQL and Redis services.
-5. Configure PostgreSQL and Redis connections in the `.env` file.
+5. Start PostgreSQL and Redis services.
 6. Run migrations:
    ```bash
    npm run migrate:up
@@ -52,6 +63,28 @@
    npm start
    ```
 8. The app will be available at: `http://localhost:3000`.
+
+### Setup with NVM
+
+1. Install [NVM](https://github.com/nvm-sh/nvm) if you don't have it installed.
+2. Ensure you have [PostgreSQL](https://www.postgresql.org/) and [Redis](https://redis.io/) installed.
+3. Install the required Node.js version:
+   ```bash
+   nvm install
+   ```
+   This will automatically install the version specified in the `.nvmrc` file.
+4. Use the installed version:
+   ```bash
+   nvm use
+   ```
+5. Ensure the `.env` file is configured correctly (see the configuration step above).
+
+6. Proceed with installing dependencies:
+   ```bash
+   npm install
+   ```
+
+7. The app will be available at: `http://localhost:3000`.
 
 ## Migration & Seeding Commands
 
@@ -64,7 +97,7 @@
   npm run migrate:undo
   ```
 - Create migration:
-  ```conbashsole
+  ```bash
   npx sequelize-cli migration:generate --name [your_migration_name]
   ```
 
@@ -76,7 +109,7 @@
   ```bash
   npm run seed:undo
   ```
-- Create seed
+- Create seed:
   ```bash
   npx sequelize-cli seed:generate --name [your_seed_name]
   ```
@@ -84,9 +117,6 @@
 ## Usage
 
 API documentation is available at:
-
 ```
-
 http://localhost:3000/docs
-
 ```
