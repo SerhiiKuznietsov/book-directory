@@ -1,8 +1,9 @@
+const { USER_API_TAG } = require('../../../constants/user');
 const userProperties = require('../properties');
 const { id } = userProperties;
 
 module.exports = {
-  tags: ['user'],
+  tags: [USER_API_TAG],
   params: {
     type: 'object',
     required: ['id'],

@@ -1,7 +1,8 @@
+const { ROLE_API_TAG } = require('../../../constants/role');
 const { id } = require('../properties');
 
 module.exports = {
-  tags: ['role'],
+  tags: [ROLE_API_TAG],
   params: {
     type: 'object',
     required: ['id'],

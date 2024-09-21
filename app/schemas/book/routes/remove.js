@@ -1,7 +1,8 @@
+const { BOOK_API_TAG } = require('../../../constants/book');
 const { id } = require('../properties');
 
 module.exports = {
-  tags: ['book'],
+  tags: [BOOK_API_TAG],
   params: {
     type: 'object',
     required: ['id'],

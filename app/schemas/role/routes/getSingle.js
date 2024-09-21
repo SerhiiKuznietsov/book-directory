@@ -1,8 +1,9 @@
+const { ROLE_API_TAG } = require('../../../constants/role');
 const roleProperties = require('../properties');
 const { id } = roleProperties;
 
 module.exports = {
-  tags: ['role'],
+  tags: [ROLE_API_TAG],
   description: 'Get role by ID',
   summary: 'Fetch role data',
   params: {
