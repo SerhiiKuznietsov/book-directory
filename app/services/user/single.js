@@ -10,3 +10,13 @@ exports.getUserById = async (id) => {
 
   return foundUser;
 };
+
+exports.getUserByEmail = async (email) => {
+  const foundUser = await User.findOne({ email, raw: true });
+
+  if (!foundUser) {
+    throw new CustomError(`user with email: "${email}" not found`).setStatus(404);
+  }
+
+  return foundUser;
+};

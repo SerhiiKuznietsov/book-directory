@@ -8,6 +8,7 @@ const { logger } = require('./utils/logger');
 const { BOOK_API_TAG } = require('./constants/book');
 const { ROLE_API_TAG } = require('./constants/role');
 const { USER_API_TAG } = require('./constants/user');
+const { AUTH_API_TAG } = require('./constants/auth');
 
 const ajv = {
   customOptions: {
@@ -36,6 +37,7 @@ const registerSwagger = (fastify) => {  // TODO
       consumes: ['application/json'],
       produces: ['application/json'],
       tags: [
+        { name: AUTH_API_TAG, description: 'Auth related end-points' },
         { name: USER_API_TAG, description: 'User related end-points' },
         { name: ROLE_API_TAG, description: 'Role related end-points' },
         { name: BOOK_API_TAG, description: 'Book related end-points' },
