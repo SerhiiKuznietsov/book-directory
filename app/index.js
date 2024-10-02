@@ -1,16 +1,21 @@
 const { startServer, stopServer } = require('./server');
 const { logger } = require('./utils/logger');
-// const { initAllCache, closeAllCache } = require('./services/cache');
+const { initStorages, closeStorages } = require('./services/storage');
 
 exports.start = async () => {
-  // await initAllCache();
-  await startServer();
+  try {
+    await initStorages();
+    await startServer();
 
-  logger.info('App started...');
+    logger.info('App started...');
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
 };
 
 exports.stop = async () => {
-  // await closeAllCache();
+  await closeStorages();
   await stopServer();
 
   logger.info('App stopped...');

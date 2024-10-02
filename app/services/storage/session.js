@@ -1,18 +1,14 @@
-const { createRedisConnection } = require('./redis');
+const { getStorage } = require('./index');
 
-let connection;
+const defaultStorage = getStorage();
 
-exports.init = async () => {
-  connection = await createRedisConnection();
-};
-
-const makeKey = (sessionId) => {
-  return `session:${sessionId}`;
-};
+const makeKey = (sessionId) => `session:${sessionId}`;
 
 exports.getSession = async (sessionId) => {
-  await connection.get(makeKey(sessionId));
+  const storageData = await defaultStorage.get(makeKey(sessionId));
+
+  return JSON.parse(storageData);
 };
-exports.addSession = async (sessionId, value) => {
-  await connection.set(makeKey(sessionId), value);
+exports.addSession = (sessionId, value) => {
+  return defaultStorage.set(makeKey(sessionId), JSON.stringify(value));
 };
