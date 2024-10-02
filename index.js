@@ -4,7 +4,14 @@ const { start, stop } = require('./app');
   await start();
 })();
 
+// SIGTERM
+
 process
+  .on('SIGTERM', async () => {
+    logger.info('Received SIGTERM. Shutting down gracefully.');
+
+    await stop();
+  })
   .on('SIGINT', async () => {
     logger.info('Received SIGINT. Shutting down gracefully.');
 
