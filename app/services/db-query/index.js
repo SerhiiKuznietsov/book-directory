@@ -12,16 +12,16 @@ const createDbQuery = (parsedQuery, queryConfiguration) => {
 };
 
 class SequelizeFindInterface {
-  #config = {
-    accessFields: [],
-    model: undefined,
-    raw: false,
-    nestedModel: {},
-  };
-
+  #config;
   #parsedQuery;
 
   constructor(model) {
+    this.#config = {
+      accessFields: [],
+      model: undefined,
+      raw: false,
+      nestedModel: {},
+    };
     this.#setModel(model);
   }
 

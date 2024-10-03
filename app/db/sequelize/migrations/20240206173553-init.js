@@ -89,7 +89,7 @@ module.exports = {
     `);
   },
 
-  async down(queryInterface, Sequelize) {
+  async down(queryInterface) {
     await queryInterface.sequelize.query(`
       DROP TABLE IF EXISTS ${schemaName}.${roleTableName} CASCADE;
       DROP TABLE IF EXISTS ${schemaName}.${policyTableName} CASCADE;

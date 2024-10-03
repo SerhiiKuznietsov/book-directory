@@ -18,7 +18,7 @@ exports.startServer = () => {
 };
 
 exports.stopServer = () => {
-  return new Promise(async (resolve) => {
+  return new Promise((resolve) => {
     if (!server) {
       logger.info(`The server has not been started`);
       return resolve();

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 const {
   READ_PERMISSION_NAME,
   CREATE_PERMISSION_NAME,
@@ -8,6 +9,7 @@ const {
 //   ACCESS_TOKEN_COOKIE_NAME,
 //   REFRESH_TOKEN_COOKIE_NAME,
 // } = require("../constants/token-cookie");
+
 
 const customCheckMiddleware = (policyName, permissionName) => (request, reply, done) => {
   // TODO - fill logic
