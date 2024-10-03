@@ -5,7 +5,7 @@ const parseJsonFiledOrRemove = (query, fieldName) => {
     if (query[fieldName]) {
       query[fieldName] = JSON.parse(query[fieldName]);
     }
-  } catch (e) {
+  } catch {
     delete query[fieldName];
   }
 };
