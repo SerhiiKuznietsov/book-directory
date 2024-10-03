@@ -20,7 +20,7 @@ const ajv = {
 }; // TODO
 
 const fastify = fastifyConstructor({
-  logger,
+  loggerInstance: logger,
   ajv,
 });
 
