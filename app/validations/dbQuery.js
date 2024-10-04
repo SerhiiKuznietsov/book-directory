@@ -3,8 +3,8 @@ const {
   MAX_LIMIT_LENGTH,
   DEFAULT_LIMIT_LENGTH,
   DEFAULT_PAGE_LENGTH,
-} = require('../constants/db-query');
-const { compileSchema, valid } = require('../utils/ajv-validator');
+} = require('../constants/dbQuery');
+const { compileSchema, valid } = require('../utils/ajvValidator');
 
 const validateQuery = compileSchema({
   type: 'object',

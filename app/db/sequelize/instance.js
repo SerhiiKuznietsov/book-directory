@@ -4,7 +4,7 @@ const {
 } = require('../../config');
 const { IS_DEV } = require('../../config/server');
 const { CustomError } = require('../../utils/error');
-const { logger } = require('../../utils/logger/');
+const { logger } = require('../../utils/logger');
 
 exports.authenticate = async (sequelizeInstance) => {
   try {

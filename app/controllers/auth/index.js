@@ -1,7 +1,9 @@
-const { signIn } = require('./sign-in');
-const { signOut } = require('./sign-out');
+const { signInCtrl } = require('./signIn');
+const { signOutCtrl } = require('./signOut');
+const { refreshTokenCtrl } = require('./refreshToken');
 
 module.exports = {
-  signIn,
-  signOut,
+  signInCtrl,
+  signOutCtrl,
+  refreshTokenCtrl,
 };

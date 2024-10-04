@@ -1,7 +1,7 @@
 const {
   authenticate,
   createSequelizeInstance,
-} = require('./sequelize-instance');
+} = require('./instance');
 const { initModels } = require('./models');
 
 const sequelizeInstance = createSequelizeInstance();

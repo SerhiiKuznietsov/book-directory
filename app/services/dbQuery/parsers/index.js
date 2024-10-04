@@ -1,4 +1,4 @@
-const { validStaticParams } = require('../../../validations/db-query');
+const { validStaticParams } = require('../../../validations/dbQuery');
 
 const parseJsonFiledOrRemove = (query, fieldName) => {
   try {

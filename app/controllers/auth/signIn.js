@@ -4,7 +4,7 @@ const {
 } = require('../../constants/auth');
 const { signIn } = require('../../services/auth');
 
-exports.signIn = async (request, reply) => {
+exports.signInCtrl = async (request, reply) => {
   if (
     request.cookies[ACCESS_TOKEN_COOKIE_NAME] ||
     request.cookies[REFRESH_TOKEN_COOKIE_NAME]
@@ -19,11 +19,13 @@ exports.signIn = async (request, reply) => {
   reply
     .setCookie(ACCESS_TOKEN_COOKIE_NAME, accessToken, {
       path: '/',
+      sameSite: 'strict',
       httpOnly: true,
       secure: true,
     })
     .setCookie(REFRESH_TOKEN_COOKIE_NAME, refreshToken, {
       path: '/',
+      sameSite: 'strict',
       httpOnly: true,
       secure: true,
     })

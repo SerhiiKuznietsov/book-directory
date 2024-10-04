@@ -1,18 +1,25 @@
-const { signIn, signOut } = require('../../../controllers/auth');
-const { signInSchema, signOutSchema } = require('../../../schemas/auth/routes');
+const { signInCtrl, signOutCtrl, refreshTokenCtrl } = require('../../../controllers/auth');
+const { signInSchema, signOutSchema, refreshTokenSchema } = require('../../../schemas/auth/routes');
 
 module.exports = async (fastify) => {
   fastify.route({
     method: 'POST',
     url: '/sign-in',
     schema: signInSchema,
-    handler: signIn,
+    handler: signInCtrl,
   });
 
   fastify.route({
     method: 'GET',
     url: '/sign-out',
     schema: signOutSchema,
-    handler: signOut,
+    handler: signOutCtrl,
+  });
+
+  fastify.route({
+    method: 'GET',
+    url: '/refresh-token',
+    schema: refreshTokenSchema,
+    handler: refreshTokenCtrl,
   });
 };

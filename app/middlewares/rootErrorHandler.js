@@ -7,13 +7,3 @@ exports.rootErrorHandlers = (err, request, reply) => {
 
   reply.code(status).send({ name, message, status });
 };
-
-
-// TODO - check needed
-    // .use((req, reply, next) => {
-    //   const err = new CustomError(
-    //     `url: "${req.originalUrl}" not found`
-    //   ).setStatus(404);
-
-    //   next(err);
-    // })

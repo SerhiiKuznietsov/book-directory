@@ -1,5 +1,5 @@
 const { User, Role } = require('../../db/sequelize');
-const { SequelizeFindInterface } = require('../db-query');
+const { SequelizeFindInterface } = require('../dbQuery');
 
 const userInterface = new SequelizeFindInterface(User)
   .setDefaultAttrs('id', 'email')

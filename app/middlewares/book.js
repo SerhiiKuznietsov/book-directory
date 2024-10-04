@@ -1,4 +1,4 @@
-const { checkMiddlewareFactory } = require('./check-middleware-factory');
-const { BOOK_POLICY_NAME } = require('../constants/police-name');
+const { checkMiddlewareFactory } = require('./checkMiddlewareFactory');
+const { BOOK_POLICY_NAME } = require('../constants/policeName');
 
 module.exports = checkMiddlewareFactory(BOOK_POLICY_NAME);

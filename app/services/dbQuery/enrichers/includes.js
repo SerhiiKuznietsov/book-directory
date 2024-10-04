@@ -1,4 +1,4 @@
-const { capitalize } = require('../../../utils/string-converter');
+const { capitalize } = require('../../../utils/stringConverter');
 
 exports.enrichIncludes = (result, nested, nestedModel) => {
   if (!nested || !nestedModel || !Object.keys(nestedModel).length) return;

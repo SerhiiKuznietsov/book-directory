@@ -5,7 +5,7 @@ const modelsBootstrap = [
   require('./Policy'),
   require('./Role-Policy'),
   require('./Role'),
-  require('./User-Book'),
+  require('./UserBook'),
   require('./User'),
 ];
 

@@ -1,4 +1,4 @@
-const { SequelizeFindInterface } = require('../db-query');
+const { SequelizeFindInterface } = require('../dbQuery');
 const { Book } = require('../../db/sequelize');
 
 const bookInterface = new SequelizeFindInterface(Book)

@@ -1,4 +1,4 @@
-const { capitalize } = require('./string-converter');
+const { capitalize } = require('./stringConverter');
 
 class CustomError extends Error {
   constructor(message) {
