@@ -1,4 +1,4 @@
-const { AUTH_API_TAG } = require('../../../constants/auth');
+const { AUTH_API_TAG } = require('../../../../constants/auth');
 
 module.exports = {
   tags: [AUTH_API_TAG],

@@ -17,7 +17,7 @@ const {
   createSchema,
   removeSchema,
   updateSchema,
-} = require('../../../schemas/book/routes');
+} = require('./schemas');
 
 module.exports = async (fastify) => {
   fastify.route({

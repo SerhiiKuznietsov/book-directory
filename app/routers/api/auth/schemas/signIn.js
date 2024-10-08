@@ -1,5 +1,5 @@
-const { AUTH_API_TAG } = require('../../../constants/auth');
-const { email } = require('../properties');
+const { AUTH_API_TAG } = require('../../../../constants/auth');
+const { email } = require('../../../../schemas/auth/properties');
 
 module.exports = {
   tags: [AUTH_API_TAG],

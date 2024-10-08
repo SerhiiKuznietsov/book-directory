@@ -1,5 +1,13 @@
-const { signInCtrl, signOutCtrl, refreshTokenCtrl } = require('../../../controllers/auth');
-const { signInSchema, signOutSchema, refreshTokenSchema } = require('../../../schemas/auth/routes');
+const {
+  signInCtrl,
+  signOutCtrl,
+  refreshTokenCtrl,
+} = require('../../../controllers/auth');
+const {
+  signInSchema,
+  signOutSchema,
+  refreshTokenSchema,
+} = require('./schemas');
 
 module.exports = async (fastify) => {
   fastify.route({

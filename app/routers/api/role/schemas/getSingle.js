@@ -1,5 +1,5 @@
-const { ROLE_API_TAG } = require('../../../constants/role');
-const roleProperties = require('../properties');
+const { ROLE_API_TAG } = require('../../../../constants/role');
+const roleProperties = require('../../../../schemas/role/properties');
 const { id } = roleProperties;
 
 module.exports = {

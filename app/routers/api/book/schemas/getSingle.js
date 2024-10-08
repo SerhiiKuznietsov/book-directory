@@ -1,5 +1,5 @@
-const { BOOK_API_TAG } = require('../../../constants/book');
-const bookProperties = require('../properties');
+const { BOOK_API_TAG } = require('../../../../constants/book');
+const bookProperties = require('../../../../schemas/book/properties');
 const { id } = bookProperties;
 
 module.exports = {

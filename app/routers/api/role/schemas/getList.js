@@ -1,8 +1,8 @@
-const { BOOK_API_TAG } = require('../../../constants/book');
-const { id, title } = require('../properties');
+const { ROLE_API_TAG } = require('../../../../constants/role');
+const { id, name } = require('../../../../schemas/role/properties');
 
 module.exports = {
-  tags: [BOOK_API_TAG],
+  tags: [ROLE_API_TAG],
   response: {
     200: {
       type: 'array',
@@ -11,7 +11,7 @@ module.exports = {
         type: 'object',
         properties: {
           id,
-          title,
+          name,
         },
       },
     },

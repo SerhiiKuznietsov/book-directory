@@ -1,5 +1,5 @@
-const { USER_API_TAG } = require('../../../constants/user');
-const { id, name, email, roleId } = require('../properties');
+const { USER_API_TAG } = require('../../../../constants/user');
+const { id, name, email, roleId } = require('../../../../schemas/user/properties');
 
 module.exports = {
   tags: [USER_API_TAG],

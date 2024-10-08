@@ -1,12 +1,12 @@
-const { ROLE_API_TAG } = require('../../../constants/role');
-const { id, name } = require('../properties');
+const { USER_API_TAG } = require('../../../../constants/user');
+const { id, name } = require('../../../../schemas/user/properties');
 
 module.exports = {
-  tags: [ROLE_API_TAG],
+  tags: [USER_API_TAG],
   response: {
     200: {
-      type: 'array',
       description: 'Successful response',
+      type: 'array',
       items: {
         type: 'object',
         properties: {
