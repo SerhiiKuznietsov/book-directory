@@ -1,5 +1,5 @@
 const { fastify } = require('./app');
-const { logger } = require('./utils/logger/');
+const { logger } = require('./utils/logger');
 const { server: { port } } = require('./config')
 
 let server;

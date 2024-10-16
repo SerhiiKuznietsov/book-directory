@@ -1,4 +1,4 @@
-const { logger } = require('../utils/logger/');
+const { logger } = require('../utils/logger');
 
 exports.rootErrorHandlers = (err, request, reply) => {
   logger.error(err);
