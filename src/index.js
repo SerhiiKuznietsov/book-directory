@@ -1,6 +1,6 @@
 const { startServer, stopServer } = require('./server');
 const { logger } = require('./utils/logger');
-const { initStorages, closeStorages } = require('./services/storage');
+const { initStorages, closeStorages } = require('./infrastructure/common/storage');
 
 exports.start = async () => {
   try {

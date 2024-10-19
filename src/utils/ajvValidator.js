@@ -1,6 +1,7 @@
 const Ajv = require('ajv');
 const { CustomError } = require('./error');
 const { IS_DEV } = require('../config/server');
+const { ERROR_TYPES } = require('../constants/error');
 
 const ajv = new Ajv({
   allErrors: IS_DEV,
@@ -23,9 +24,16 @@ const valid = (validate, data) => {
   validate(data);
 
   if (validate.errors) {
-    const message = JSON.stringify(validate.errors, null, 2);
+    const e = new CustomError('Validation error', ERROR_TYPES.BAD_REQUEST);
 
-    throw new CustomError(message);
+    validate.errors.forEach(item => {
+      e.addSuggestion({
+        field: item.instancePath,
+        message: item.message,
+      });
+    });
+
+    throw e;
   }
 
   return data;

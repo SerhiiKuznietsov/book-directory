@@ -1,8 +1,10 @@
-const { start, stop } = require('./app');
+const { start, stop } = require('./src');
 
 (async () => {
   await start();
 })();
+
+
 
 process
   .on('SIGTERM', async () => {

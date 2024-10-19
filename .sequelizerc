@@ -1,9 +1,9 @@
 const path = require("node:path");
-const appFolder = path.join(".", "app");
-const sequelizeFolder = path.resolve(appFolder, "db", "sequelize");
+const srcFolder = path.join(".", "src");
+const sequelizeFolder = path.join(srcFolder, "infrastructure", "common", "db", "sequelize");
 
 module.exports = {
-  config: path.resolve(appFolder, "config", "db.js"),
+  config: path.resolve(srcFolder, "config", "db.js"),
   "models-path": path.resolve(sequelizeFolder, "models"),
   "seeders-path": path.join(sequelizeFolder, "seeders"),
   "migrations-path": path.resolve(sequelizeFolder, "migrations"),
