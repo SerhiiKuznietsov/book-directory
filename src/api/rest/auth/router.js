@@ -1,7 +1,6 @@
-const controllers = require('./controllers');
 const schemas = require('./schemas');
 
-module.exports = async (fastify) => {
+module.exports = async (fastify, { controllers }) => {
   fastify.route({
     method: 'POST',
     url: '/sign-in',

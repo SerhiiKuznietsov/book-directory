@@ -1,8 +1,7 @@
-const controllers = require('./controllers');
 const hooks = require('../common/hooks/book');
 const schemas = require('./schemas');
 
-module.exports = async (fastify) => {
+module.exports = async (fastify, { controllers }) => {
   fastify.route({
     method: 'GET',
     url: '/',

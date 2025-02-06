@@ -4,8 +4,6 @@ const { start, stop } = require('./src');
   await start();
 })();
 
-
-
 process
   .on('SIGTERM', async () => {
     logger.info('Received SIGTERM. Shutting down gracefully.');

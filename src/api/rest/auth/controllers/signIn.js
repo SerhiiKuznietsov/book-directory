@@ -1,7 +1,7 @@
 const {
   ACCESS_TOKEN_COOKIE_NAME,
   REFRESH_TOKEN_COOKIE_NAME,
-} = require('../../../..//constants/auth');
+} = require('../../../../constants/auth');
 const { signIn } = require('../../../../domain/auth/useCases/signIn');
 
 exports.signInCtrl = async (request, reply) => {
