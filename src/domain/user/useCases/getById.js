@@ -1,12 +1,24 @@
-const { CustomError } = require('../../../utils/error');
-const userRepositories = require('../../../infrastructure/user/repositories');
 const { ERROR_TYPES } = require('../../../constants/error');
+const { CustomError } = require('../../../utils/error');
 
-exports.getUserById = async (id) => {
-  const foundUser = await userRepositories.getById(id);
-  if (!foundUser) {
-    throw new CustomError(`user with id: "${id}" not found`, ERROR_TYPES.NOT_FOUND);
+class GetUserByIdUseCase {
+  constructor(userRepositories) {
+    this._userRepositories = userRepositories;
   }
 
-  return foundUser;
+  async execute(id) {
+    const foundUser = await this._userRepositories.getById(id);
+    if (!foundUser) {
+      throw new CustomError(
+        `user with id: "${id}" not found`,
+        ERROR_TYPES.NOT_FOUND
+      );
+    }
+
+    return foundUser;
+  }
+}
+
+module.exports = {
+  GetUserByIdUseCase,
 };

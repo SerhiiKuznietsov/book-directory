@@ -2,10 +2,10 @@ version: '3.4'
 
 services:
   app:
+    container_name: book-directory
     build:
       context: .
       dockerfile: ./Dockerfile
-    container_name: app
     env_file: .env
     command: bash -c "npm run migrate:up && npm run seed:up && npm run start:dev"
     depends_on:
@@ -20,6 +20,7 @@ services:
       - cache_network
 
   db:
+    container_name: book-directory-db
     image: postgres:15.5
     restart: always
     environment:
@@ -38,6 +39,7 @@ services:
       - db_network
 
   redis:
+    container_name: book-directory-redis
     image: redis:7.2.4-alpine
     restart: always
     environment:

@@ -1,17 +1,32 @@
 const { ERROR_TYPES } = require('../../../constants/error');
-const bookRepositories = require('../../../infrastructure/book/repositories');
 const { CustomError } = require('../../../utils/error');
 
-exports.removeBook = async (id) => {
-  const foundBook = await bookRepositories.getById(id);
-  if (!foundBook) {
-    throw new CustomError(`book with id: "${id}" not found`, ERROR_TYPES.NOT_FOUND);
+class RemoveBookUseCase {
+  constructor(bookRepositories) {
+    this._bookRepositories = bookRepositories;
   }
 
-  const isBookRemoved = await bookRepositories.remove(id);
-  if (!isBookRemoved) {
-    throw new CustomError(`book with id: "${id}" not removed`, ERROR_TYPES.UNKNOWN_ERROR);
-  }
+  async execute(id) {
+    const foundBook = await this._bookRepositories.getById(id);
+    if (!foundBook) {
+      throw new CustomError(
+        `book with id: "${id}" not found`,
+        ERROR_TYPES.NOT_FOUND
+      );
+    }
 
-  return id;
+    const isBookRemoved = await this._bookRepositories.remove(id);
+    if (!isBookRemoved) {
+      throw new CustomError(
+        `book with id: "${id}" not removed`,
+        ERROR_TYPES.UNKNOWN_ERROR
+      );
+    }
+
+    return id;
+  }
+}
+
+module.exports = {
+  RemoveBookUseCase,
 };

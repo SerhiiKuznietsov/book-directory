@@ -1,15 +1,21 @@
 const { ERROR_TYPES } = require('../../../constants/error');
-const userRepositories = require('../../../infrastructure/user/repositories');
 const { CustomError } = require('../../../utils/error');
-const { CreateUserDTO } = require('../DTO/CreateUserDTO');
 
-exports.createUser = async (userItem) => {
-  const createUserDTO = new CreateUserDTO(userItem);
-
-  const createdUser = await userRepositories.create(createUserDTO);
-  if (!createdUser) {
-    throw new CustomError('user not created', ERROR_TYPES.UNKNOWN_ERROR);
+class CreateUserUseCase {
+  constructor(userRepositories) {
+    this._userRepositories = userRepositories;
   }
 
-  return createdUser.id;
+  async execute(createUserDTO) {
+    const createdUser = await this._userRepositories.create(createUserDTO);
+    if (!createdUser) {
+      throw new CustomError('user not created', ERROR_TYPES.UNKNOWN_ERROR);
+    }
+
+    return createdUser.id;
+  }
+}
+
+module.exports = {
+  CreateUserUseCase,
 };

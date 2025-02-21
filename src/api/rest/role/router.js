@@ -1,13 +1,27 @@
 const schemas = require('./schemas');
 const hooks = require('../common/hooks/role');
+const { RoleControllers } = require('./controllers');
+const { GetRoleListCtrl } = require('./controllers/list');
+const { GetSingleRoleCtrl } = require('./controllers/single');
+const { CreateRoleCtrl } = require('./controllers/create');
+const { UpdateRoleCtrl } = require('./controllers/update');
+const { RemoveRoleCtrl } = require('./controllers/remove');
 
-module.exports = async (fastify, { controllers }) => {
+module.exports = async (fastify, { roleContainer }) => {
+  const roleControllers = new RoleControllers(
+    new GetRoleListCtrl(roleContainer.getRoleListUseCase),
+    new GetSingleRoleCtrl(roleContainer.getRoleByIdUseCase),
+    new CreateRoleCtrl(roleContainer.createRoleUseCase),
+    new UpdateRoleCtrl(roleContainer.updateRoleUseCase),
+    new RemoveRoleCtrl(roleContainer.removeRoleUseCase)
+  );
+
   fastify.route({
     method: 'GET',
     url: '/',
     schema: schemas.getListSchema,
     onRequest: [hooks.readCheckMiddleware],
-    handler: controllers.getList,
+    handler: roleControllers.getList,
   });
 
   fastify.route({
@@ -15,7 +29,7 @@ module.exports = async (fastify, { controllers }) => {
     url: '/:id',
     schema: schemas.getSchema,
     onRequest: [hooks.readCheckMiddleware],
-    handler: controllers.getSingle,
+    handler: roleControllers.getSingle,
   });
 
   fastify.route({
@@ -23,7 +37,7 @@ module.exports = async (fastify, { controllers }) => {
     url: '/',
     schema: schemas.createSchema,
     onRequest: [hooks.createCheckMiddleware],
-    handler: controllers.create,
+    handler: roleControllers.create,
   });
 
   fastify.route({
@@ -31,7 +45,7 @@ module.exports = async (fastify, { controllers }) => {
     url: '/:id',
     schema: schemas.removeSchema,
     onRequest: [hooks.updateCheckMiddleware],
-    handler: controllers.update,
+    handler: roleControllers.update,
   });
 
   fastify.route({
@@ -39,6 +53,6 @@ module.exports = async (fastify, { controllers }) => {
     url: '/:id',
     schema: schemas.updateSchema,
     onRequest: [hooks.deleteCheckMiddleware],
-    handler: controllers.remove,
+    handler: roleControllers.remove,
   });
 };

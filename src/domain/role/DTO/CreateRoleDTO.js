@@ -1,8 +1,6 @@
 class CreateRoleDTO {
   constructor({ name }) {
     this.name = name;
-    this.updatedAt = new Date();
-    this.createdAt = new Date();
   }
 }
 

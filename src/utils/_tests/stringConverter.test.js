@@ -1,4 +1,4 @@
-const { capitalize, slugify } = require('../string-converter');
+const { capitalize, slugify } = require('../stringConverter');
 
 describe('slugify', () => {
   test('should return "test-word"', () => {

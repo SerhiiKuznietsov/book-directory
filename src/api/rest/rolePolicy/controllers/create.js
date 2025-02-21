@@ -1,3 +1,4 @@
+const { HTTP_CODE } = require('../../../../constants/httpStatus');
 const { createRolePolicy } = require('../../../../domain/rolePolicy/useCases/create');
 
 exports.create = async (req, reply) => {
@@ -5,5 +6,5 @@ exports.create = async (req, reply) => {
 
   const rolePolicyUuid = await createRolePolicy(body);
 
-  reply.code(201).send(rolePolicyUuid);
+  reply.code(HTTP_CODE.CREATED).send(rolePolicyUuid);
 };

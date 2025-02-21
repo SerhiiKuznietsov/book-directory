@@ -1,5 +1,5 @@
 const { initRest } = require('./rest');
 
-exports.initApi = (app) => {
-  initRest(app);
+exports.initApi = async (app, controllers) => {
+  await initRest(app, controllers);
 };

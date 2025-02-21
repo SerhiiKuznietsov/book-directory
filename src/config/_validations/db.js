@@ -36,6 +36,8 @@ exports.validDbConfig = (config) => {
       seederStorage: { type: 'string' },
       seederStorageTableName: lowerStrType,
       seederStorageTableSchema: lowerStrType,
+      minPoolConnection: { type: 'integer', minimum: 0 },
+      maxPoolConnection: { type: 'integer', minimum: 1 },
     },
   };
 

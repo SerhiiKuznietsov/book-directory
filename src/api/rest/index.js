@@ -1,30 +1,33 @@
-const authRouter = require('./auth/router');
+const fastifyCookie = require('@fastify/cookie');
+const { registerSwagger } = require('./swagger');
+// const authRouter = require('./auth/router');
 const bookRouter = require('./book/router');
 const roleRouter = require('./role/router');
 const userRouter = require('./user/router');
 // const rolePolicyRouter = require('./rolePolicy/router');
-const authController = require('./auth/controllers');
-const bookController = require('./book/controllers');
-const roleController = require('./role/controllers');
-const userController = require('./user/controllers');
 const { rootErrorHandlers } = require('./common/hooks/rootErrorHandler');
 
-exports.initRest = (app) => {
-  app.register(authRouter, {
-    prefix: '/api/auth',
-    controllers: authController,
-  });
+exports.initRest = async (app, data) => {
+  const { bookContainer, roleContainer, userContainer } = data;
+
+  registerSwagger(app);
+  app.register(fastifyCookie);
+
+  // app.register(authRouter, {
+  //   prefix: '/api/auth',
+  //   authController,
+  // });
   app.register(bookRouter, {
     prefix: '/api/book',
-    controllers: bookController,
+    bookContainer,
   });
   app.register(roleRouter, {
     prefix: '/api/role',
-    controllers: roleController,
+    roleContainer,
   });
   app.register(userRouter, {
     prefix: '/api/user',
-    controllers: userController,
+    userContainer,
   });
   // app.register(rolePolicyRouter, { prefix: '/api/role-policy' });
 

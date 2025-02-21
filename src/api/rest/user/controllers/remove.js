@@ -1,11 +1,20 @@
-const { removeUser } = require('../../../../domain/user/useCases/remove');
+const { HTTP_CODE } = require('../../../../constants/httpStatus');
+const { Ctrl } = require('../../common/controller/defaultCtrl');
 
-exports.remove = async (req) => {
-  const {
-    params: { id },
-  } = req;
+class RemoveUserCtrl extends Ctrl {
+  handle = async (req, reply) => {
+    const {
+      params: { id },
+    } = req;
 
-  const userId = await removeUser(id);
+    const userId = await this.useCase.execute(id);
 
-  return { id: userId };
+    reply.code(HTTP_CODE.OK);
+
+    return { id: userId };
+  };
+}
+
+module.exports = {
+  RemoveUserCtrl,
 };

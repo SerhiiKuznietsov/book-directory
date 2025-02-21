@@ -1,24 +1,25 @@
-const { start, stop } = require('./src');
+const { App } = require('./src/app');
+const { FastifyServer } = require('./src/server');
+const { logger } = require('./src/utils/logger');
+const config = require('./src/config');
+
+const server = new FastifyServer(config.server.port, logger);
+const app = new App(server, logger);
 
 (async () => {
-  await start();
+  await app.start();
 })();
 
 process
   .on('SIGTERM', async () => {
     logger.info('Received SIGTERM. Shutting down gracefully.');
-
-    await stop();
+    await app.stop();
   })
   .on('SIGINT', async () => {
     logger.info('Received SIGINT. Shutting down gracefully.');
-
-    await stop();
+    await app.stop();
   })
   .on('uncaughtException', async (err) => {
     logger.fatal(err, 'Uncaught exception detected');
-
-    await stop();
-
-    process.exit(1);
+    await app.stop();
   });

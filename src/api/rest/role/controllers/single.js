@@ -1,11 +1,20 @@
-const { getRoleById } = require('../../../../domain/role/useCases/getById');
+const { HTTP_CODE } = require('../../../../constants/httpStatus');
+const { Ctrl } = require('../../common/controller/defaultCtrl');
 
-exports.getSingle = async (req) => {
-  const {
-    params: { id },
-  } = req;
+class GetSingleRoleCtrl extends Ctrl {
+  handle = async (req, reply) => {
+    const {
+      params: { id },
+    } = req;
 
-  const roleItem = await getRoleById(id);
+    const roleItem = await this.useCase.execute(id);
 
-  return roleItem;
+    reply.code(HTTP_CODE.OK);
+
+    return roleItem;
+  };
+}
+
+module.exports = {
+  GetSingleRoleCtrl,
 };

@@ -1,7 +1,15 @@
-const roleRepositories = require('../../../infrastructure/role/repositories');
+class GetRoleListUseCase {
+  constructor(roleRepositories) {
+    this._roleRepositories = roleRepositories;
+  }
 
-exports.getRolesList = async (q) => {
-  const rolesList = await roleRepositories.getList(q);
+  async execute(q) {
+    const rolesList = await this._roleRepositories.getList(q);
 
-  return rolesList;
+    return rolesList;
+  }
+}
+
+module.exports = {
+  GetRoleListUseCase,
 };

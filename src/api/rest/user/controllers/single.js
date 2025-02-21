@@ -1,11 +1,20 @@
-const { getUserById } = require('../../../../domain/user/useCases/getById');
+const { HTTP_CODE } = require('../../../../constants/httpStatus');
+const { Ctrl } = require('../../common/controller/defaultCtrl');
 
-exports.getSingle = async (req) => {
-  const {
-    params: { id },
-  } = req;
+class GetSingleUserCtrl extends Ctrl {
+  handle = async (req, reply) => {
+    const {
+      params: { id },
+    } = req;
 
-  const userItem = await getUserById(id);
+    const userItem = await this.useCase.execute(id);
 
-  return userItem;
+    reply.code(HTTP_CODE.OK);
+
+    return userItem;
+  };
+}
+
+module.exports = {
+  GetSingleUserCtrl,
 };

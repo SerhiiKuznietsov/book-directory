@@ -1,12 +1,24 @@
-const { updateBook } = require('../../../../domain/book/useCases/update');
+const { HTTP_CODE } = require('../../../../constants/httpStatus');
+const { UpdateBookDTO } = require('../../../../domain/book/DTO/UpdateBookDTO');
+const { Ctrl } = require('../../common/controller/defaultCtrl');
 
-exports.update = async (req) => {
-  const {
-    body,
-    params: { id },
-  } = req;
+class UpdateBookCtrl extends Ctrl {
+  handle = async (req, reply) => {
+    const {
+      body,
+      params: { id },
+    } = req;
 
-  const bookId = await updateBook(id, body);
+    const updateBookDTO = new UpdateBookDTO(body);
 
-  return { id: bookId };
+    const bookId = await this.useCase.execute(id, updateBookDTO);
+
+    reply.code(HTTP_CODE.OK);
+
+    return { id: bookId };
+  };
+}
+
+module.exports = {
+  UpdateBookCtrl,
 };

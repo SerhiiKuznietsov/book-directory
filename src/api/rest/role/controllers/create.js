@@ -1,9 +1,21 @@
-const { createRole } = require('../../../../domain/role/useCases/create');
+const { HTTP_CODE } = require('../../../../constants/httpStatus');
+const { CreateRoleDTO } = require('../../../../domain/role/DTO/CreateRoleDTO');
+const { Ctrl } = require('../../common/controller/defaultCtrl');
 
-exports.create = async (req, reply) => {
-  const { body } = req;
+class CreateRoleCtrl extends Ctrl {
+  handle = async (req, reply) => {
+    const { body } = req;
 
-  const roleId = await createRole(body);
+    const createRoleDTO = new CreateRoleDTO(body);
 
-  reply.code(201).send({ id: roleId });
+    const roleId = await this.useCase.execute(createRoleDTO);
+
+    reply.code(HTTP_CODE.CREATED);
+
+    return { id: roleId };
+  };
+}
+
+module.exports = {
+  CreateRoleCtrl,
 };

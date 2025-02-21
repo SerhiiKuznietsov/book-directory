@@ -1,11 +1,20 @@
-const { getBookById } = require('../../../../domain/book/useCases/getById');
+const { HTTP_CODE } = require('../../../../constants/httpStatus');
+const { Ctrl } = require('../../common/controller/defaultCtrl');
 
-exports.getSingle = async (req) => {
-  const {
-    params: { id },
-  } = req;
+class GetSingleBookCtrl extends Ctrl {
+  handle = async (req, reply) => {
+    const {
+      params: { id },
+    } = req;
 
-  const bookItem = await getBookById(id);
+    const bookItem = await this.useCase.execute(id);
 
-  return bookItem;
+    reply.code(HTTP_CODE.OK);
+
+    return bookItem;
+  };
+}
+
+module.exports = {
+  GetSingleBookCtrl,
 };

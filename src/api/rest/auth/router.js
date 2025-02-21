@@ -1,24 +1,24 @@
 const schemas = require('./schemas');
 
-module.exports = async (fastify, { controllers }) => {
+module.exports = async (fastify, { authController }) => {
   fastify.route({
     method: 'POST',
     url: '/sign-in',
     schema: schemas.signInSchema,
-    handler: controllers.signInCtrl,
+    handler: authController.signInCtrl.handle,
   });
 
   fastify.route({
     method: 'GET',
     url: '/sign-out',
     schema: schemas.signOutSchema,
-    handler: controllers.signOutCtrl,
+    handler: authController.signOutCtrl.handle,
   });
 
   fastify.route({
     method: 'GET',
     url: '/refresh-token',
     schema: schemas.refreshTokenSchema,
-    handler: controllers.refreshTokenCtrl,
+    handler: authController.refreshTokenCtrl.handle,
   });
 };

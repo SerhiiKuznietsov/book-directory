@@ -1,13 +1,13 @@
-const { create } = require('./create');
-const { getList } = require('./list');
-const { remove } = require('./remove');
-const { getSingle } = require('./single');
-const { update } = require('./update');
+class BookControllers {
+  constructor(getList, getSingle, create, update, remove) {
+    this.getList = getList.handle;
+    this.getSingle = getSingle.handle;
+    this.create = create.handle;
+    this.update = update.handle;
+    this.remove = remove.handle;
+  }
+}
 
 module.exports = {
-  getList,
-  getSingle,
-  create,
-  update,
-  remove,
+  BookControllers,
 };

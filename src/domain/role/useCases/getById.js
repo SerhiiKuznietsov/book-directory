@@ -1,12 +1,21 @@
 const { CustomError } = require('../../../utils/error');
-const roleRepositories = require('../../../infrastructure/role/repositories');
 const { ERROR_TYPES } = require('../../../constants/error');
 
-exports.getRoleById = async (id) => {
-  const foundRole = await roleRepositories.getById(id);
-  if (!foundRole) {
-    throw new CustomError(`role with id: "${id}" not found`, ERROR_TYPES.NOT_FOUND);
+class GetRoleByIdUseCase {
+  constructor(roleRepositories) {
+    this._roleRepositories = roleRepositories;
   }
 
-  return foundRole;
+  async execute(id) {
+    const foundRole = await this._roleRepositories.getById(id);
+    if (!foundRole) {
+      throw new CustomError(`role with id: "${id}" not found`, ERROR_TYPES.NOT_FOUND);
+    }
+
+    return foundRole;
+  }
+}
+
+module.exports = {
+  GetRoleByIdUseCase,
 };

@@ -1,13 +1,25 @@
 const { CustomError } = require('../../../utils/error');
-const bookRepositories = require('../../../infrastructure/book/repositories');
 const { ERROR_TYPES } = require('../../../constants/error');
 
-exports.getBookById = async (id) => {
-  const foundBook = await bookRepositories.getById(id);
-
-  if (!foundBook) {
-    throw new CustomError(`book with id: "${id}" not found`, ERROR_TYPES.NOT_FOUND);
+class GetBookByIdUseCase {
+  constructor(bookRepositories) {
+    this._bookRepositories = bookRepositories;
   }
 
-  return foundBook;
+  async execute(id) {
+    const foundBook = await this._bookRepositories.getById(id);
+
+    if (!foundBook) {
+      throw new CustomError(
+        `book with id: "${id}" not found`,
+        ERROR_TYPES.NOT_FOUND
+      );
+    }
+
+    return foundBook;
+  }
+}
+
+module.exports = {
+  GetBookByIdUseCase,
 };

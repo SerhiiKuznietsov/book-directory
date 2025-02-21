@@ -1,11 +1,20 @@
-const { removeBook } = require('../../../../domain/book/useCases/remove');
+const { HTTP_CODE } = require('../../../../constants/httpStatus');
+const { Ctrl } = require('../../common/controller/defaultCtrl');
 
-exports.remove = async (req) => {
-  const {
-    params: { id },
-  } = req;
+class RemoveBookCtrl extends Ctrl {
+  handle = async (req, reply) => {
+    const {
+      params: { id },
+    } = req;
 
-  const bookId = await removeBook(id);
+    const bookId = await this.useCase.execute(id);
 
-  return { id: bookId };
+    reply.code(HTTP_CODE.OK);
+
+    return { id: bookId };
+  };
+}
+
+module.exports = {
+  RemoveBookCtrl,
 };

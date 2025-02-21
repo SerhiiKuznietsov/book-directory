@@ -1,9 +1,21 @@
-const { createBook } = require('../../../../domain/book/useCases/create')
+const { HTTP_CODE } = require('../../../../constants/httpStatus');
+const { CreateBookDTO } = require('../../../../domain/book/DTO/CreateBookDTO');
+const { Ctrl } = require('../../common/controller/defaultCtrl');
 
-exports.create = async (req, reply) => {
-  const { body } = req;
+class CreateBookCtrl extends Ctrl {
+  handle = async (req, reply) => {
+    const { body } = req;
 
-  const bookId = await createBook(body);
+    const createBookDTO = new CreateBookDTO(body);
 
-  reply.code(201).send({ id: bookId });
+    const bookId = await this.useCase.execute(createBookDTO);
+
+    reply.code(HTTP_CODE.CREATED);
+
+    return { id: bookId };
+  };
+}
+
+module.exports = {
+  CreateBookCtrl,
 };

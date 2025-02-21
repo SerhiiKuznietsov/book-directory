@@ -1,9 +1,21 @@
-const { createUser } = require('../../../../domain/user/useCases/create');
+const { HTTP_CODE } = require('../../../../constants/httpStatus');
+const { CreateUserDTO } = require('../../../../domain/user/DTO/CreateUserDTO');
+const { Ctrl } = require('../../common/controller/defaultCtrl');
 
-exports.create = async (req, reply) => {
-  const { body } = req;
+class CreateUserCtrl extends Ctrl {
+  handle = async (req, reply) => {
+    const { body } = req;
 
-  const userId = await createUser(body);
+    const createUserDTO = new CreateUserDTO(body);
 
-  reply.code(201).send({ id: userId });
+    const userId = await this.useCase.execute(createUserDTO);
+
+    reply.code(HTTP_CODE.CREATED);
+
+    return { id: userId };
+  };
+}
+
+module.exports = {
+  CreateUserCtrl,
 };

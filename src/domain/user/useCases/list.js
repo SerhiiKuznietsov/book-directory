@@ -1,7 +1,15 @@
-const userRepositories = require('../../../infrastructure/user/repositories');
+class GetUserListUseCase {
+  constructor(userRepositories) {
+    this._userRepositories = userRepositories;
+  }
 
-exports.getUsersList = async (q) => {
-  const usersList = await userRepositories.getList(q);
+  async execute(q) {
+    const usersList = await this._userRepositories.getList(q);
 
-  return usersList;
+    return usersList;
+  }
+}
+
+module.exports = {
+  GetUserListUseCase,
 };

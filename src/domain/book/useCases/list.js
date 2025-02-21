@@ -1,7 +1,15 @@
-const bookRepositories = require('../../../infrastructure/book/repositories');
+class GetBookListUseCase {
+  constructor(bookRepositories) {
+    this._bookRepositories = bookRepositories;
+  }
 
-exports.getBooksList = async (q) => {
-  const booksList = await bookRepositories.getList(q);
+  async execute(q) {
+    const booksList = await this._bookRepositories.getList(q);
 
-  return booksList;
+    return booksList;
+  }
+}
+
+module.exports = {
+  GetBookListUseCase,
 };

@@ -1,11 +1,20 @@
-const { removeRole } = require('../../../../domain/role/useCases/remove');
+const { HTTP_CODE } = require('../../../../constants/httpStatus');
+const { Ctrl } = require('../../common/controller/defaultCtrl');
 
-exports.remove = async (req) => {
-  const {
-    params: { id },
-  } = req;
+class RemoveRoleCtrl extends Ctrl {
+  handle = async (req, reply) => {
+    const {
+      params: { id },
+    } = req;
 
-  const roleId = await removeRole(id);
+    const roleId = await this.useCase.execute(id);
 
-  return { id: roleId };
+    reply.code(HTTP_CODE.OK);
+
+    return { id: roleId };
+  };
+}
+
+module.exports = {
+  RemoveRoleCtrl,
 };

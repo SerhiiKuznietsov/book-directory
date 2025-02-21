@@ -1,12 +1,24 @@
-const { updateUser } = require('../../../../domain/user/useCases/update');
+const { HTTP_CODE } = require('../../../../constants/httpStatus');
+const { UpdateUserDTO } = require('../../../../domain/user/DTO/UpdateUserDTO');
+const { Ctrl } = require('../../common/controller/defaultCtrl');
 
-exports.update = async (req) => {
-  const {
-    body,
-    params: { id },
-  } = req;
+class UpdateUserCtrl extends Ctrl {
+  handle = async (req, reply) => {
+    const {
+      body,
+      params: { id },
+    } = req;
 
-  const userId = await updateUser(id, body);
+    const updateUserDTO = new UpdateUserDTO(body);
 
-  return { id: userId };
+    const userId = await this.useCase.execute(id, updateUserDTO);
+
+    reply.code(HTTP_CODE.OK);
+
+    return { id: userId };
+  };
+}
+
+module.exports = {
+  UpdateUserCtrl,
 };

@@ -1,17 +1,32 @@
 const { ERROR_TYPES } = require('../../../constants/error');
-const userRepositories = require('../../../infrastructure/user/repositories');
 const { CustomError } = require('../../../utils/error');
 
-exports.removeUser = async (id) => {
-  const foundUser = await userRepositories.getById(id);
-  if (!foundUser) {
-    throw new CustomError(`user with id: "${id}" not found`, ERROR_TYPES.NOT_FOUND);
+class RemoveUserUseCase {
+  constructor(userRepositories) {
+    this._userRepositories = userRepositories;
   }
 
-  const isUserRemoved = await userRepositories.remove(id);
-  if (!isUserRemoved) {
-    throw new CustomError(`user with id: "${id}" not removed`, ERROR_TYPES.UNKNOWN_ERROR);
-  }
+  async execute(id) {
+    const foundUser = await this._userRepositories.getById(id);
+    if (!foundUser) {
+      throw new CustomError(
+        `user with id: "${id}" not found`,
+        ERROR_TYPES.NOT_FOUND
+      );
+    }
 
-  return id;
+    const isUserRemoved = await this._userRepositories.remove(id);
+    if (!isUserRemoved) {
+      throw new CustomError(
+        `user with id: "${id}" not removed`,
+        ERROR_TYPES.UNKNOWN_ERROR
+      );
+    }
+
+    return id;
+  }
+}
+
+module.exports = {
+  RemoveUserUseCase,
 };

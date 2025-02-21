@@ -1,10 +1,19 @@
-const { getBooksList } = require('../../../../domain/book/useCases/list');
+const { HTTP_CODE } = require('../../../../constants/httpStatus');
+const { Ctrl } = require('../../common/controller/defaultCtrl');
 const { parseQueryParams } = require('../../common/queryParser');
 
-exports.getList = async (req) => {
-  const queryParams = parseQueryParams(req.query);
+class GetBookListCtrl extends Ctrl {
+  handle = async (req, reply) => {
+    const queryParams = parseQueryParams(req.query);
 
-  const booksList = await getBooksList(queryParams);
+    const booksList = await this.useCase.execute(queryParams);
 
-  return booksList;
+    reply.code(HTTP_CODE.OK);
+
+    return booksList;
+  };
+}
+
+module.exports = {
+  GetBookListCtrl,
 };
