@@ -13,6 +13,10 @@ exports.initRest = async (app, data) => {
   registerSwagger(app);
   app.register(fastifyCookie);
 
+  app.get('/health', async () => {
+    return { status: 'ok' };
+  });
+
   // app.register(authRouter, {
   //   prefix: '/api/auth',
   //   authController,
