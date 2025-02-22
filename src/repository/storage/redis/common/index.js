@@ -1,9 +1,9 @@
-const { createClient } = require('redis');
 const { CustomError } = require('../../../../utils/error');
+const { createRedisInstance } = require('./instance');
 
 class Storage {
   constructor(config, logger) {
-    this.instance = createClient(config);
+    this.instance = createRedisInstance(config);
     this.logger = logger;
   }
 
@@ -23,6 +23,7 @@ class Storage {
   async connect() {
     try {
       await this.instance.connect();
+
       this.logger.info('Redis connected');
     } catch (e) {
       throw new CustomError(
