@@ -9,9 +9,12 @@ class App {
   constructor(server, logger) {
     this._server = server;
     this._logger = logger;
+    this._isActive = false;
   }
 
   async start() {
+    if (this._isActive) return;
+
     try {
       this._db = new SequelizeDB(dbConfig, this._logger);
       await this._db.connect();
@@ -36,6 +39,7 @@ class App {
       await this._server.init(data);
       await this._server.listen();
 
+      this._isActive = true;
       this._logger.info('App started...');
     } catch (e) {
       this._logger.error(`Failed to start app: ${e.message}`);
@@ -45,14 +49,18 @@ class App {
   }
 
   async stop() {
+    if (!this._isActive) return;
+
     try {
       await this._db.disconnect();
       await this._storage.disconnect();
       await this._server.close();
 
+      this._isActive = false;
       this._logger.info('App stopped...');
     } catch (e) {
-      this._logger.error('Error while stopping app:', e);
+      this._logger.error('Error while stopping app');
+      this._logger.error(e);
       process.exit(1);
     }
   }
