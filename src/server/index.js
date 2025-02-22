@@ -5,8 +5,9 @@ const ajv = require('./ajv');
 const { initApi } = require('../api');
 
 class FastifyServer extends ServerAdapter {
-  constructor(port, logger) {
+  constructor(host, port, logger) {
     super();
+    this._host = host;
     this._port = port;
     this._logger = logger;
     this._instance = fastify({
@@ -27,7 +28,7 @@ class FastifyServer extends ServerAdapter {
 
   async listen() {
     try {
-      await this._instance.listen({ port: this._port });
+      await this._instance.listen({ port: this._port, host: this._host });
     } catch (e) {
       this._logger.error('server listening start error', e);
       throw e;
