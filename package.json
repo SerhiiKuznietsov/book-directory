@@ -38,6 +38,7 @@
     "seed:undo": "npx sequelize-cli db:seed:undo",
 
     "test": "jest",
+    "test:coverage": "jest --coverage",
 
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
