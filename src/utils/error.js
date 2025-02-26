@@ -1,7 +1,8 @@
+const { ERROR_TYPES } = require('../constants/error');
 const { capitalize } = require('./stringConverter');
 
 class CustomError extends Error {
-  constructor(message, type = 'UNKNOWN_ERROR') {
+  constructor(message, type = ERROR_TYPES.INTERNAL_ERROR) {
     super(message);
     this.setName('Error');
     this.setMessage(message || 'Undefined error');
