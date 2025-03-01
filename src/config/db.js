@@ -1,19 +1,23 @@
 require('dotenv').config();
 const { validDbConfig } = require('./_validations/db');
 
+
 const dbConfig = {
   username: process.env.DB_USER || 'postgres',
-  password: process.env.DB_PASSWORD || '',
+  password: process.env.DB_PASSWORD || 'your_db_password',
   database: process.env.DB_NAME || 'book-directory',
-  schema: 'public',
+  schema: process.env.DB_SCHEMA || 'public',
   host: process.env.DB_HOST || 'localhost',
   port: +process.env.DB_PORT || 5432,
+
   dialect: process.env.DB_DIALECT || 'postgres',
-  minPoolConnection: 0,
-  maxPoolConnection: 10,
   logMode: process.env.DB_QUERY_LOG === 'true',
+  minPoolConnection: 0, // TODO - to env
+  maxPoolConnection: 10, // TODO - to env
+
   migrationStorageTableSchema: '_migration',
   migrationStorageTableName: '_migration_meta',
+
   seederStorage: 'sequelize',
   seederStorageTableName: '_seeder_meta',
   seederStorageTableSchema: '_migration',

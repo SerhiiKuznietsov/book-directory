@@ -27,6 +27,7 @@ exports.validDbConfig = (config) => {
       username: lowerStrType,
       password: { type: 'string' },
       database: { type: 'string' },
+      schema: { type: 'string' },
       host: { type: 'string' },
       port: { type: 'integer' },
       dialect: { type: 'string' },
