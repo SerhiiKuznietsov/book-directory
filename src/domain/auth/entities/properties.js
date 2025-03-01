@@ -1,4 +1,4 @@
-const { email } = require('../../../domain/user/entities/properties')
+const { email } = require('../../../domain/user/entities/properties');
 
 module.exports = {
   email,

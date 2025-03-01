@@ -15,9 +15,10 @@ const ajv = new Ajv({
 ajv.addFormat('uuid', {
   type: 'string',
   validate: (str) => {
-    const uuidV4Pattern = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+    const uuidV4Pattern =
+      /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
     return uuidV4Pattern.test(str);
-  }
+  },
 });
 
 const valid = (validate, data) => {
@@ -26,7 +27,7 @@ const valid = (validate, data) => {
   if (validate.errors) {
     const e = new CustomError('Validation error', ERROR_TYPES.BAD_REQUEST);
 
-    validate.errors.forEach(item => {
+    validate.errors.forEach((item) => {
       e.addSuggestion({
         field: item.instancePath,
         message: item.message,

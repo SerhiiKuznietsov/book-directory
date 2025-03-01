@@ -9,7 +9,10 @@ class GetRoleByIdUseCase {
   async execute(id) {
     const foundRole = await this._roleRepositories.getById(id);
     if (!foundRole) {
-      throw new CustomError(`role with id: "${id}" not found`, ERROR_TYPES.NOT_FOUND);
+      throw new CustomError(
+        `role with id: "${id}" not found`,
+        ERROR_TYPES.NOT_FOUND
+      );
     }
 
     return foundRole;

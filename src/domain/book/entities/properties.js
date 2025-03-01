@@ -1,4 +1,7 @@
-const { MIN_TITLE_LENGTH, MAX_TITLE_LENGTH } = require('../../../constants/book');
+const {
+  MIN_TITLE_LENGTH,
+  MAX_TITLE_LENGTH,
+} = require('../../../constants/book');
 
 module.exports = {
   id: {

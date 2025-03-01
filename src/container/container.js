@@ -7,7 +7,6 @@ class Container {
 
   async initUseCases() {}
 
-
   async init() {
     await this.initRepositories();
     await this.initUseCases();

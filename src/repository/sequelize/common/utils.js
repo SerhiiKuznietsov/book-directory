@@ -1,4 +1,4 @@
-const { logger } = require("../../../utils/logger");
+const { logger } = require('../../../utils/logger');
 
 exports.transactionWrapper = (cb) => {
   return async (queryInterface) => {
@@ -8,7 +8,7 @@ exports.transactionWrapper = (cb) => {
       await transaction.commit();
     } catch (e) {
       await transaction.rollback();
-      logger.error(e)
+      logger.error(e);
       throw e;
     }
   };

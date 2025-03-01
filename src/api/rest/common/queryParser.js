@@ -6,6 +6,7 @@ const {
 } = require('../../../constants/dbQuery');
 const { validQueryParams } = require('./_schemas/queryParserShema');
 
+// TODO - needs to be encapsulated for the domain business code
 exports.parseQueryParams = (query) => {
   validQueryParams(query);
   const {
