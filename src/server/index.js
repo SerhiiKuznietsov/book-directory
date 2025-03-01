@@ -3,6 +3,7 @@ const { randomUUID } = require('node:crypto');
 const { ServerAdapter } = require('./serverAdapter');
 const ajv = require('./ajv');
 const { initApi } = require('../api');
+const { CustomError } = require('../utils/error');
 
 class FastifyServer extends ServerAdapter {
   constructor(host, port, logger) {
@@ -21,7 +22,9 @@ class FastifyServer extends ServerAdapter {
     try {
       await initApi(this._instance, initData);
     } catch (e) {
-      this._logger.error('server initialization error', e);
+      this._logger.error(
+        new CustomError('server initialization error').setCause(e)
+      );
       throw e;
     }
   }
@@ -30,7 +33,9 @@ class FastifyServer extends ServerAdapter {
     try {
       await this._instance.listen({ port: this._port, host: this._host });
     } catch (e) {
-      this._logger.error('server listening start error', e);
+      this._logger.error(
+        new CustomError('server listening start error').setCause(e)
+      );
       throw e;
     }
   }
@@ -39,7 +44,9 @@ class FastifyServer extends ServerAdapter {
     try {
       await this._instance.close();
     } catch (e) {
-      this._logger.error('server listening closure error', e);
+      this._logger.error(
+        new CustomError('server listening closure error').setCause(e)
+      );
       throw e;
     }
   }
