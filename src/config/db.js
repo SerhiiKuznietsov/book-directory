@@ -1,7 +1,6 @@
 require('dotenv').config();
 const { validDbConfig } = require('./_validations/db');
 
-
 const dbConfig = {
   username: process.env.DB_USER || 'postgres',
   password: process.env.DB_PASSWORD || 'your_db_password',
