@@ -43,7 +43,7 @@ module.exports = async (fastify, { roleContainer }) => {
   fastify.route({
     method: 'PUT',
     url: '/:id',
-    schema: schemas.removeSchema,
+    schema: schemas.updateSchema,
     onRequest: [hooks.updateCheckMiddleware],
     handler: roleControllers.update,
   });
@@ -51,7 +51,7 @@ module.exports = async (fastify, { roleContainer }) => {
   fastify.route({
     method: 'DELETE',
     url: '/:id',
-    schema: schemas.updateSchema,
+    schema: schemas.removeSchema,
     onRequest: [hooks.deleteCheckMiddleware],
     handler: roleControllers.remove,
   });

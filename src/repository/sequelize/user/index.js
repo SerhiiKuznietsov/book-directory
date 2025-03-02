@@ -27,13 +27,13 @@ class UserRepository {
   }
 
   async create(userItem) {
-    const { id } = await this._model.create({
+    const newUser = await this._model.create({
       ...userItem,
       updatedAt: new Date(),
       createdAt: new Date(),
     });
 
-    return id;
+    return newUser;
   }
 
   async update(id, userItem) {

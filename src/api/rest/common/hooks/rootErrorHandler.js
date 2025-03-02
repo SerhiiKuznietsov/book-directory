@@ -6,7 +6,7 @@ exports.rootErrorHandlers = (err, request, reply) => {
   logger.error(err);
   const { name = 'error', message = 'something wrong', type = ERROR_TYPES.INTERNAL_ERROR } = err;
 
-  const statusCode = mapErrorTypeToHttpCode(type);
+  const statusCode = err.statusCode || mapErrorTypeToHttpCode(type); // TODO - Take AJV validations to a lower level
 
   reply.code(statusCode).send({ name, message });
 };

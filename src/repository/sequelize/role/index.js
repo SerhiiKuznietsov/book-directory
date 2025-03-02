@@ -21,13 +21,13 @@ class RoleRepository {
   }
 
   async create(roleItem) {
-    const { id } = await this._model.create({
+    const newRole = await this._model.create({
       ...roleItem,
       updatedAt: new Date(),
       createdAt: new Date(),
     });
 
-    return id;
+    return newRole;
   }
 
   async update(id, roleItem) {
