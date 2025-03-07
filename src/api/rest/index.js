@@ -7,9 +7,7 @@ const userRouter = require('./user/router');
 // const rolePolicyRouter = require('./rolePolicy/router');
 const { rootErrorHandlers } = require('./common/hooks/rootErrorHandler');
 
-exports.initRest = async (app, data) => {
-  const { bookContainer, roleContainer, userContainer } = data;
-
+exports.initRest = async (app, container) => {
   registerSwagger(app);
   app.register(fastifyCookie);
 
@@ -19,19 +17,19 @@ exports.initRest = async (app, data) => {
 
   // app.register(authRouter, {
   //   prefix: '/api/auth',
-  //   authController,
+  //   container,
   // });
   app.register(bookRouter, {
     prefix: '/api/book',
-    bookContainer,
+    container,
   });
   app.register(roleRouter, {
     prefix: '/api/role',
-    roleContainer,
+    container,
   });
   app.register(userRouter, {
     prefix: '/api/user',
-    userContainer,
+    container,
   });
   // app.register(rolePolicyRouter, { prefix: '/api/role-policy' });
 

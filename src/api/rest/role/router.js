@@ -7,13 +7,13 @@ const { CreateRoleCtrl } = require('./controllers/create');
 const { UpdateRoleCtrl } = require('./controllers/update');
 const { RemoveRoleCtrl } = require('./controllers/remove');
 
-module.exports = async (fastify, { roleContainer }) => {
+module.exports = async (fastify, { container }) => {
   const roleControllers = new RoleControllers(
-    new GetRoleListCtrl(roleContainer.getRoleListUseCase),
-    new GetSingleRoleCtrl(roleContainer.getRoleByIdUseCase),
-    new CreateRoleCtrl(roleContainer.createRoleUseCase),
-    new UpdateRoleCtrl(roleContainer.updateRoleUseCase),
-    new RemoveRoleCtrl(roleContainer.removeRoleUseCase)
+    new GetRoleListCtrl(container.get('uc.getRoleList')),
+    new GetSingleRoleCtrl(container.get('uc.getRoleById')),
+    new CreateRoleCtrl(container.get('uc.createRole')),
+    new UpdateRoleCtrl(container.get('uc.updateRole')),
+    new RemoveRoleCtrl(container.get('uc.removeRole'))
   );
 
   fastify.route({

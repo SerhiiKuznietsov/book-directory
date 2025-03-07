@@ -7,13 +7,13 @@ const { RemoveBookCtrl } = require('./controllers/remove');
 const { GetSingleBookCtrl } = require('./controllers/single');
 const { UpdateBookCtrl } = require('./controllers/update');
 
-module.exports = async (fastify, { bookContainer }) => {
+module.exports = async (fastify, { container }) => {
   const bookControllers = new BookControllers(
-    new GetBookListCtrl(bookContainer.getBookListUseCase),
-    new GetSingleBookCtrl(bookContainer.getBookByIdUseCase),
-    new CreateBookCtrl(bookContainer.createBookUseCase),
-    new UpdateBookCtrl(bookContainer.updateBookUseCase),
-    new RemoveBookCtrl(bookContainer.removeBookUseCase)
+    new GetBookListCtrl(container.get('uc.getBookList')),
+    new GetSingleBookCtrl(container.get('uc.getBookById')),
+    new CreateBookCtrl(container.get('uc.createBook')),
+    new UpdateBookCtrl(container.get('uc.updateBook')),
+    new RemoveBookCtrl(container.get('uc.removeBook'))
   );
 
   fastify.route({

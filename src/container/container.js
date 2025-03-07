@@ -1,28 +1,32 @@
-class Container {
+class DIContainer {
   constructor() {
-    this.data = {};
+    this.dependencies = {};
   }
 
-  async initRepositories() {}
-
-  async initUseCases() {}
-
-  async init() {
-    await this.initRepositories();
-    await this.initUseCases();
-  }
-
-  set(key, dependency) {
-    if (this.data[key]) {
-      throw new Error('The dependency key is already occupied');
-    }
-
-    this.data[key] = dependency;
+  has(key) {
+    return this.dependencies.hasOwnProperty(key);
   }
 
   get(key) {
-    return this.data[key];
+    if (!this.has(key)) {
+      throw new Error(`Dependency "${key}" not found`);
+    }
+    return this.dependencies[key];
+  }
+
+  getFactory(key) {
+    this.get(key);
+    return () => this.get(key);
+  }
+
+  register(key, dependency) {
+    this.dependencies[key] = dependency;
+  }
+
+  remove(key) {
+    this.get(key);
+    delete this.dependencies[key];
   }
 }
 
-module.exports = { Container };
+module.exports = { DIContainer };

@@ -18,9 +18,9 @@ class FastifyServer extends ServerAdapter {
     });
   }
 
-  async init(initData) {
+  async init(container) {
     try {
-      await initApi(this._instance, initData);
+      await initApi(this._instance, container);
     } catch (e) {
       this._logger.error(
         new CustomError('server initialization error').setCause(e)

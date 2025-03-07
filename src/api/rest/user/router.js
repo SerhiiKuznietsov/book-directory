@@ -6,13 +6,13 @@ const { RemoveUserCtrl } = require('./controllers/remove');
 const { GetSingleUserCtrl } = require('./controllers/single');
 const { UpdateUserCtrl } = require('./controllers/update');
 
-module.exports = async (fastify, { userContainer }) => {
+module.exports = async (fastify, { container }) => {
   const userControllers = new UserControllers(
-    new GetUserListCtrl(userContainer.getUserListUseCase),
-    new GetSingleUserCtrl(userContainer.getUserByIdUseCase),
-    new CreateUserCtrl(userContainer.createUserUseCase),
-    new UpdateUserCtrl(userContainer.updateUserUseCase),
-    new RemoveUserCtrl(userContainer.removeUserUseCase)
+    new GetUserListCtrl(container.get('uc.getUserList')),
+    new GetSingleUserCtrl(container.get('uc.getUserById')),
+    new CreateUserCtrl(container.get('uc.createUser')),
+    new UpdateUserCtrl(container.get('uc.updateUser')),
+    new RemoveUserCtrl(container.get('uc.removeUser'))
   );
 
   fastify.route({
