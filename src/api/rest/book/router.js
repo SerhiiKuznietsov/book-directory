@@ -12,8 +12,8 @@ module.exports = async (fastify, { bookContainer }) => {
     new GetBookListCtrl(bookContainer.getBookListUseCase),
     new GetSingleBookCtrl(bookContainer.getBookByIdUseCase),
     new CreateBookCtrl(bookContainer.createBookUseCase),
-    new UpdateBookCtrl(bookContainer.updateBookListUseCase),
-    new RemoveBookCtrl(bookContainer.removeBookListUseCase)
+    new UpdateBookCtrl(bookContainer.updateBookUseCase),
+    new RemoveBookCtrl(bookContainer.removeBookUseCase)
   );
 
   fastify.route({

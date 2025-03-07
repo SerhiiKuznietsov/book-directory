@@ -24,8 +24,8 @@ class BookContainer extends Container {
     this.getBookListUseCase = new GetBookListUseCase(bookRepository);
     this.getBookByIdUseCase = new GetBookByIdUseCase(bookRepository);
     this.createBookUseCase = new CreateBookUseCase(bookRepository);
-    this.updateBookListUseCase = new UpdateBookUseCase(bookRepository);
-    this.removeBookListUseCase = new RemoveBookUseCase(bookRepository);
+    this.updateBookUseCase = new UpdateBookUseCase(bookRepository);
+    this.removeBookUseCase = new RemoveBookUseCase(bookRepository);
   }
 }
 
