@@ -1,5 +1,6 @@
 'use strict';
 
+const bcrypt = require('bcryptjs');
 const { transactionWrapper } = require('../utils');
 
 const roleTableName = '"role"';
@@ -8,8 +9,16 @@ const policyTableName = '"policy"';
 const rolePolicyTableName = '"role_policy"';
 const bookTableName = '"book"';
 const userBookTableName = '"user_book"';
-
 const permission = ['read', 'create', 'update', 'delete'];
+const saltRounds = 10;
+
+const makeHashPassword = async (password) => {
+  const salt = await bcrypt.genSalt(saltRounds);
+  const hash = await bcrypt.hash(password, salt);
+
+  return hash;
+};
+
 const policiesList = [
   {
     id: '68f8a8cf-331c-4325-a74d-f36d178bd10d',
@@ -94,36 +103,42 @@ const usersList = [
     id: '5548359e-13e6-4ca2-a1ed-49ef4991ee73',
     name: 'Owner',
     email: 'owner@gmail.com',
+    hash: 'Password123!',
     roleId: '4dd9f6f2-ec0f-4359-85de-1333ac905144',
   },
   {
     id: 'e9b090ac-8651-45ff-a4e2-1632a17dd572',
     name: 'Admin',
     email: 'admin@gmail.com',
+    hash: 'Password123!',
     roleId: '9531935b-82f1-45e3-96de-c56826de06c5',
   },
   {
     id: '1a4b889b-f817-44ff-8c16-623481fc3d30',
     name: 'Moder',
     email: 'moder@gmail.com',
+    hash: 'Password123!',
     roleId: '5f8d14fb-30ae-48ca-8f56-cdce9ad64c28',
   },
   {
     id: '5678b957-656c-464b-a0b0-6228d61f0d0d',
     name: 'Dale Carnegie',
     email: 'dale_carnegie@gmail.com',
+    hash: 'Password123!',
     roleId: '02a2c5ea-7830-405f-afd3-cb77ec6473c6',
   },
   {
     id: '3758111b-97d2-4995-b13a-e8156f932c5e',
     name: 'Tod',
     email: 'tod@gmail.com',
+    hash: 'Password123!',
     roleId: '0bb21fcd-185a-4500-a37d-cd478ef9023b',
   },
   {
     id: 'c05f1d2a-d8b2-42ea-9519-b87680812408',
     name: 'John',
     email: 'john@gmail.com',
+    hash: 'Password123!',
     roleId: '0bb21fcd-185a-4500-a37d-cd478ef9023b',
   },
 ];
@@ -211,14 +226,16 @@ const addRolesPolicies = async (queryInterface, transaction) => {
 
 const addUsers = async (queryInterface, transaction) => {
   const query = `
-    INSERT INTO ${userTableName} (id, name, email, role_id)
-    VALUES ($1, $2, $3, $4)
+    INSERT INTO ${userTableName} (id, name, email, hash, role_id)
+    VALUES ($1, $2, $3, $4, $5)
   `;
 
   for (const user of usersList) {
+    user.hash = await makeHashPassword(user.hash);
+
     await queryInterface.sequelize.query(query, {
       transaction,
-      bind: [user.id, user.name, user.email, user.roleId],
+      bind: [user.id, user.name, user.email, user.hash, user.roleId],
     });
   }
 };

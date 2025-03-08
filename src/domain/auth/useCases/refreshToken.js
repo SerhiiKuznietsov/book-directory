@@ -1,7 +1,7 @@
 const { ERROR_TYPES } = require('../../../constants/error');
 const { CustomError } = require('../../../utils/error');
 
-class SignOutUseCase {
+class RefreshTokenUseCase {
   constructor(userRepositories) {
     this._userRepositories = userRepositories;
   }
@@ -12,5 +12,5 @@ class SignOutUseCase {
 }
 
 module.exports = {
-  SignOutUseCase,
+  RefreshTokenUseCase,
 };

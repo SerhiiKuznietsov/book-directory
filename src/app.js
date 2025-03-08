@@ -35,6 +35,7 @@ class App {
     try {
       await this._container.get('db.postgres').disconnect();
       await this._container.get('db.redis').disconnect();
+
       await this._server.close();
 
       this._isActive = false;

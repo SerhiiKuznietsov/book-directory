@@ -1,24 +1,43 @@
 const schemas = require('./schemas');
+const { AuthControllers } = require('./controllers');
+const { RefreshTokenCtrl } = require('./controllers/refreshToken');
+const { RegisterCtrl } = require('./controllers/register');
+const { SignInCtrl } = require('./controllers/signIn');
+const { SignOutCtrl } = require('./controllers/signOut');
 
-module.exports = async (fastify, { authController }) => {
-  fastify.route({
+module.exports = async (app, { container }) => {
+  const authControllers = new AuthControllers(
+    new SignInCtrl(container.get('uc.signIn')),
+    new SignOutCtrl(container.get('uc.signOut')),
+    new RegisterCtrl(container.get('uc.registerUser')),
+    new RefreshTokenCtrl(container.get('uc.refreshToken'))
+  );
+
+  app.route({
     method: 'POST',
     url: '/sign-in',
     schema: schemas.signInSchema,
-    handler: authController.signInCtrl.handle,
+    handler: authControllers.signIn,
   });
 
-  fastify.route({
+  app.route({
     method: 'GET',
     url: '/sign-out',
     schema: schemas.signOutSchema,
-    handler: authController.signOutCtrl.handle,
+    handler: authControllers.signOut,
   });
 
-  fastify.route({
+  app.route({
+    method: 'POST',
+    url: '/register',
+    schema: schemas.registerSchema,
+    handler: authControllers.register,
+  });
+
+  app.route({
     method: 'GET',
     url: '/refresh-token',
     schema: schemas.refreshTokenSchema,
-    handler: authController.refreshTokenCtrl.handle,
+    handler: authControllers.refreshToken,
   });
 };

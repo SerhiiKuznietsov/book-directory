@@ -1,33 +1,46 @@
+const { HTTP_CODE } = require('../../../../constants/httpStatus');
+const { Ctrl } = require('../../common/controller/defaultCtrl');
 const {
   ACCESS_TOKEN_COOKIE_NAME,
   REFRESH_TOKEN_COOKIE_NAME,
 } = require('../../../../constants/auth');
-const { signIn } = require('../../../../domain/auth/useCases/signIn');
+const { SignInDTO } = require('../../../../domain/auth/DTO/SignInDTO');
+class SignInCtrl extends Ctrl {
+  handle = async (req, reply) => {
+    const {
+      body,
+      cookies: {
+        [ACCESS_TOKEN_COOKIE_NAME]: accessTokenValue,
+        [REFRESH_TOKEN_COOKIE_NAME]: refreshTokenValue,
+      },
+    } = req;
 
-exports.signInCtrl = async (request, reply) => {
-  if (
-    request.cookies[ACCESS_TOKEN_COOKIE_NAME] ||
-    request.cookies[REFRESH_TOKEN_COOKIE_NAME]
-  ) {
-    throw new Error('user already sign in');
-  }
+    if (accessTokenValue || refreshTokenValue) {
+      throw new Error('user already sign in');
+    }
 
-  const { email } = request.body;
+    const signInDTO = new SignInDTO(body);
 
-  const { accessToken, refreshToken } = await signIn(email);
+    const { accessToken, refreshToken } = await this.useCase.execute(signInDTO);
 
-  reply
-    .setCookie(ACCESS_TOKEN_COOKIE_NAME, accessToken, {
-      path: '/',
-      sameSite: 'strict',
-      httpOnly: true,
-      secure: true,
-    })
-    .setCookie(REFRESH_TOKEN_COOKIE_NAME, refreshToken, {
-      path: '/',
-      sameSite: 'strict',
-      httpOnly: true,
-      secure: true,
-    })
-    .send({ accessToken, refreshToken });
+    reply
+      .code(HTTP_CODE.OK)
+      .setCookie(ACCESS_TOKEN_COOKIE_NAME, accessToken, {
+        path: '/',
+        sameSite: 'strict',
+        httpOnly: true,
+        secure: true,
+      })
+      .setCookie(REFRESH_TOKEN_COOKIE_NAME, refreshToken, {
+        path: '/',
+        sameSite: 'strict',
+        httpOnly: true,
+        secure: true,
+      })
+      .send({ accessToken, refreshToken });
+  };
+}
+
+module.exports = {
+  SignInCtrl,
 };

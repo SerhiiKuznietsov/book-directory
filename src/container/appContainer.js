@@ -22,6 +22,10 @@ const { GetUserByIdUseCase } = require('../domain/user/useCases/getById');
 const { CreateUserUseCase } = require('../domain/user/useCases/create');
 const { UpdateUserUseCase } = require('../domain/user/useCases/update');
 const { RemoveUserUseCase } = require('../domain/user/useCases/remove');
+const { SignInUseCase } = require('../domain/auth/useCases/signIn');
+const { SignOutUseCase } = require('../domain/auth/useCases/signOut');
+const { RegisterUseCase } = require('../domain/auth/useCases/register');
+const { RefreshTokenUseCase } = require('../domain/auth/useCases/refreshToken');
 
 exports.initAppContainer = (logger, dbConfig, storageConfig) => {
   const c = new DIContainer();
@@ -50,6 +54,14 @@ exports.initAppContainer = (logger, dbConfig, storageConfig) => {
   c.register('uc.createUser', new CreateUserUseCase(c.get('repo.user')));
   c.register('uc.updateUser', new UpdateUserUseCase(c.get('repo.user')));
   c.register('uc.removeUser', new RemoveUserUseCase(c.get('repo.user')));
+
+  c.register('uc.signIn', new SignInUseCase(c.get('repo.user')));
+  c.register('uc.signOut', new SignOutUseCase(c.get('repo.user')));
+  c.register(
+    'uc.registerUser',
+    new RegisterUseCase(c.get('repo.user'), c.get('repo.role'))
+  );
+  c.register('uc.refreshToken', new RefreshTokenUseCase(c.get('repo.user')));
 
   return c;
 };

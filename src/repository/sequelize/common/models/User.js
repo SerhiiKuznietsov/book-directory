@@ -1,6 +1,7 @@
 const {
   MAX_NAME_LENGTH,
   MAX_EMAIL_LENGTH,
+  MAX_HASH_LENGTH,
 } = require('../../../../constants/user');
 
 exports.init = (sequelize, DataTypes) => {
@@ -19,11 +20,20 @@ exports.init = (sequelize, DataTypes) => {
       },
       email: {
         type: DataTypes.STRING(MAX_EMAIL_LENGTH),
+        allowNull: false,
         unique: true,
+        validate: {
+          isEmail: true,
+        },
+      },
+      hash: {
+        type: DataTypes.STRING(MAX_HASH_LENGTH),
+        allowNull: false,
       },
       roleId: {
         field: 'role_id',
         type: DataTypes.UUID,
+        allowNull: false,
       },
       createdAt: {
         type: 'TIMESTAMP WITHOUT TIME ZONE',

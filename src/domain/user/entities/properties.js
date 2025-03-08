@@ -18,6 +18,10 @@ module.exports = {
     type: 'string',
     format: 'uuid-v4',
   },
+  password: {
+    type: 'string',
+    minLength: 8,
+  },
   createdAt: { type: 'string', format: 'date-time' },
   updatedAt: { type: 'string', format: 'date-time' },
 };

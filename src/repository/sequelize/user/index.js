@@ -21,7 +21,10 @@ class UserRepository {
   }
 
   async getByEmail(email) {
-    const foundUser = await this._model.findOne({ email, raw: true });
+    const foundUser = await this._model.findOne({
+      where: { email },
+      raw: true,
+    });
 
     return foundUser;
   }

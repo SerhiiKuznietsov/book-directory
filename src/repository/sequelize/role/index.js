@@ -20,6 +20,12 @@ class RoleRepository {
     return foundRole;
   }
 
+  async findByName(name) {
+    const foundRole = await this._model.findOne({ where: { name }, raw: true });
+
+    return foundRole;
+  }
+
   async create(roleItem) {
     const newRole = await this._model.create({
       ...roleItem,

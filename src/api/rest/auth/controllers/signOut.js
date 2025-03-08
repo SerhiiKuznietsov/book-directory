@@ -1,25 +1,40 @@
+const { HTTP_CODE } = require('../../../../constants/httpStatus');
+const { Ctrl } = require('../../common/controller/defaultCtrl');
 const {
   ACCESS_TOKEN_COOKIE_NAME,
   REFRESH_TOKEN_COOKIE_NAME,
 } = require('../../../../constants/auth');
+class SignOutCtrl extends Ctrl {
+  handle = async (req, reply) => {
+    const {
+      cookies: {
+        [ACCESS_TOKEN_COOKIE_NAME]: accessTokenValue,
+        [REFRESH_TOKEN_COOKIE_NAME]: refreshTokenValue,
+      },
+    } = req;
 
-exports.signOutCtrl = async (request, reply) => {
-  if (
-    request.cookies[ACCESS_TOKEN_COOKIE_NAME] ||
-    request.cookies[REFRESH_TOKEN_COOKIE_NAME]
-  ) {
-    reply
-      .setCookie(ACCESS_TOKEN_COOKIE_NAME, '', {
-        path: '/',
-        httpOnly: true,
-        expires: new Date(0),
-      })
-      .setCookie(REFRESH_TOKEN_COOKIE_NAME, '', {
+    await this.useCase.execute(accessTokenValue, refreshTokenValue);
+
+    if (accessTokenValue) {
+      reply.setCookie(ACCESS_TOKEN_COOKIE_NAME, '', {
         path: '/',
         httpOnly: true,
         expires: new Date(0),
       });
-  }
+    }
 
-  reply.send({ ok: true });
+    if (refreshTokenValue) {
+      reply.setCookie(REFRESH_TOKEN_COOKIE_NAME, '', {
+        path: '/',
+        httpOnly: true,
+        expires: new Date(0),
+      });
+    }
+
+    reply.code(HTTP_CODE.OK).send({ ok: true });
+  };
+}
+
+module.exports = {
+  SignOutCtrl,
 };

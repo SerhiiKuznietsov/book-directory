@@ -1,6 +1,6 @@
 const fastifyCookie = require('@fastify/cookie');
 const { registerSwagger } = require('./swagger');
-// const authRouter = require('./auth/router');
+const authRouter = require('./auth/router');
 const bookRouter = require('./book/router');
 const roleRouter = require('./role/router');
 const userRouter = require('./user/router');
@@ -11,14 +11,16 @@ exports.initRest = async (app, container) => {
   registerSwagger(app);
   app.register(fastifyCookie);
 
-  app.get('/health', async () => {
-    return { status: 'ok' };
+  app.route({
+    method: 'GET',
+    url: '/health',
+    handler: async () => ({ status: 'ok' }),
   });
 
-  // app.register(authRouter, {
-  //   prefix: '/api/auth',
-  //   container,
-  // });
+  app.register(authRouter, {
+    prefix: '/api/auth',
+    container,
+  });
   app.register(bookRouter, {
     prefix: '/api/book',
     container,

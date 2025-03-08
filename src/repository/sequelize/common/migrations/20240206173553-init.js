@@ -61,8 +61,9 @@ module.exports = {
       CREATE TABLE IF NOT EXISTS ${schemaName}.${userTableName}
       (
         id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
-        name character varying(123) NOT NULL,
-        email character varying(256),
+        name VARCHAR(128) NOT NULL,
+        email VARCHAR(256) UNIQUE NOT NULL,
+        hash VARCHAR(60) NOT NULL,
         role_id uuid NOT NULL,
         ${getSystemsFields()}
       );
