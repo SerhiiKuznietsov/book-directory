@@ -2,12 +2,12 @@ const { ERROR_TYPES } = require('../../../constants/error');
 const { CustomError } = require('../../../utils/error');
 
 class UpdateRoleUseCase {
-  constructor(roleRepositories) {
-    this._roleRepositories = roleRepositories;
+  constructor(roleRepo) {
+    this._roleRepo = roleRepo;
   }
 
   async execute(id, updateRoleDTO) {
-    const foundRole = await this._roleRepositories.getById(id);
+    const foundRole = await this._roleRepo.getById(id);
     if (!foundRole) {
       throw new CustomError(
         `role with id: "${id}" not found`,
@@ -15,7 +15,7 @@ class UpdateRoleUseCase {
       );
     }
 
-    const isRoleUpdated = await this._roleRepositories.update(
+    const isRoleUpdated = await this._roleRepo.update(
       id,
       updateRoleDTO
     );

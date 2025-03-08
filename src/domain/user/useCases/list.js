@@ -1,10 +1,10 @@
 class GetUserListUseCase {
-  constructor(userRepositories) {
-    this._userRepositories = userRepositories;
+  constructor(userRepo) {
+    this._userRepo = userRepo;
   }
 
   async execute(q) {
-    const usersList = await this._userRepositories.getList(q);
+    const usersList = await this._userRepo.getList(q);
 
     return usersList;
   }

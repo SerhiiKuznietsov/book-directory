@@ -4,24 +4,24 @@ const { CustomError } = require('../../../utils/error');
 const { makeHashPassword } = require('../../../utils/hashPassword');
 
 class RegisterUseCase {
-  constructor(userRepositories, roleRepositories) {
-    this._userRepositories = userRepositories;
-    this._roleRepositories = roleRepositories;
+  constructor(userRepo, roleRepo) {
+    this._userRepo = userRepo;
+    this._roleRepo = roleRepo;
   }
 
   async execute(registerDTO) {
-    const duplicateUser = await this._userRepositories.getByEmail(registerDTO.email);
+    const duplicateUser = await this._userRepo.getByEmail(registerDTO.email);
     if (duplicateUser) {
       throw new CustomError('user with this email address already exists', ERROR_TYPES.BAD_REQUEST);
     }
 
-    const role = await this._roleRepositories.findByName(DEFAULT_ROLE_NAME);
+    const role = await this._roleRepo.findByName(DEFAULT_ROLE_NAME);
     if (!role) {
       throw new CustomError('default role not found');
     }
 
     const hash = await makeHashPassword(registerDTO.password);
-    const newUser = await this._userRepositories.create({
+    const newUser = await this._userRepo.create({
       ...registerDTO,
       hash,
       roleId: role.id

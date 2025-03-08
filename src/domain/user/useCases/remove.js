@@ -2,12 +2,12 @@ const { ERROR_TYPES } = require('../../../constants/error');
 const { CustomError } = require('../../../utils/error');
 
 class RemoveUserUseCase {
-  constructor(userRepositories) {
-    this._userRepositories = userRepositories;
+  constructor(userRepo) {
+    this._userRepo = userRepo;
   }
 
   async execute(id) {
-    const foundUser = await this._userRepositories.getById(id);
+    const foundUser = await this._userRepo.getById(id);
     if (!foundUser) {
       throw new CustomError(
         `user with id: "${id}" not found`,
@@ -15,7 +15,7 @@ class RemoveUserUseCase {
       );
     }
 
-    const isUserRemoved = await this._userRepositories.remove(id);
+    const isUserRemoved = await this._userRepo.remove(id);
     if (!isUserRemoved) {
       throw new CustomError(
         `user with id: "${id}" not removed`,

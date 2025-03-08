@@ -2,12 +2,12 @@ const { ERROR_TYPES } = require('../../../constants/error');
 const { CustomError } = require('../../../utils/error');
 
 class RemoveBookUseCase {
-  constructor(bookRepositories) {
-    this._bookRepositories = bookRepositories;
+  constructor(bookRepo) {
+    this._bookRepo = bookRepo;
   }
 
   async execute(id) {
-    const foundBook = await this._bookRepositories.getById(id);
+    const foundBook = await this._bookRepo.getById(id);
     if (!foundBook) {
       throw new CustomError(
         `book with id: "${id}" not found`,
@@ -15,7 +15,7 @@ class RemoveBookUseCase {
       );
     }
 
-    const isBookRemoved = await this._bookRepositories.remove(id);
+    const isBookRemoved = await this._bookRepo.remove(id);
     if (!isBookRemoved) {
       throw new CustomError(
         `book with id: "${id}" not removed`,

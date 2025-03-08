@@ -5,12 +5,12 @@ const { createAccessToken } = require('../../../utils/token/access-token');
 const { createRefreshToken } = require('../../../utils/token/refresh-token');
 
 class SignInUseCase {
-  constructor(userRepositories) {
-    this._userRepositories = userRepositories;
+  constructor(userRepo) {
+    this._userRepo = userRepo;
   }
 
   async execute(signInDTO) {
-    const user = await this._userRepositories.getByEmail(signInDTO.email);
+    const user = await this._userRepo.getByEmail(signInDTO.email);
     if (!user) {
       throw new CustomError('invalid user credential', ERROR_TYPES.BAD_REQUEST);
     }

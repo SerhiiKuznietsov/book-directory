@@ -2,12 +2,12 @@ const { ERROR_TYPES } = require('../../../constants/error');
 const { CustomError } = require('../../../utils/error');
 
 class CreateRoleUseCase {
-  constructor(roleRepositories) {
-    this._roleRepositories = roleRepositories;
+  constructor(roleRepo) {
+    this._roleRepo = roleRepo;
   }
 
   async execute(createRoleDTO) {
-    const createdRole = await this._roleRepositories.create(createRoleDTO);
+    const createdRole = await this._roleRepo.create(createRoleDTO);
     if (!createdRole) {
       throw new CustomError('role not created', ERROR_TYPES.UNKNOWN_ERROR);
     }

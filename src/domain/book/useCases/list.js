@@ -1,10 +1,10 @@
 class GetBookListUseCase {
-  constructor(bookRepositories) {
-    this._bookRepositories = bookRepositories;
+  constructor(bookRepo) {
+    this._bookRepo = bookRepo;
   }
 
   async execute(q) {
-    const booksList = await this._bookRepositories.getList(q);
+    const booksList = await this._bookRepo.getList(q);
 
     return booksList;
   }
