@@ -1,6 +1,6 @@
 const { HTTP_CODE } = require('../../../../constants/httpStatus');
-const { RegisterDTO } = require('../../../../domain/auth/DTO/RegisterDTO');
 const { Ctrl } = require('../../common/controller/defaultCtrl');
+const { RegisterDTO } = require('../../../../domain/auth/DTO/RegisterDTO');
 
 class RegisterCtrl extends Ctrl {
   handle = async (req, reply) => {

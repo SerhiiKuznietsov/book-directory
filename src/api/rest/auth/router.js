@@ -35,7 +35,7 @@ module.exports = async (app, { container }) => {
   });
 
   app.route({
-    method: 'GET',
+    method: 'POST',
     url: '/refresh-token',
     schema: schemas.refreshTokenSchema,
     handler: authControllers.refreshToken,
