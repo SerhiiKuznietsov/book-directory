@@ -7,16 +7,15 @@ class SessionRepository {
 
   async add(sessionId, value) {
     const key = makeKey(sessionId);
-    const data = JSON.stringify(value);
+    const storageData = JSON.stringify(value);
 
-    const result = await this._storage.instance.set(key, data);
+    const result = await this._storage.instance.set(key, storageData);
 
     return result;
   }
 
   async get(sessionId) {
     const key = makeKey(sessionId);
-
     const storageData = await this._storage.instance.get(key);
 
     const result = JSON.parse(storageData);
