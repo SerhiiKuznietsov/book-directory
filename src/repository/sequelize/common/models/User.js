@@ -30,6 +30,11 @@ exports.init = (sequelize, DataTypes) => {
         type: DataTypes.STRING(MAX_HASH_LENGTH),
         allowNull: false,
       },
+      refreshToken: {
+        field: 'refresh_token',
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
       roleId: {
         field: 'role_id',
         type: DataTypes.UUID,

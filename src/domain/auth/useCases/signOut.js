@@ -42,6 +42,7 @@ class SignOutUseCase {
     }
 
     await this._sessionRepo.remove(user.id);
+    await this._userRepo.updateRefreshToken(user.id, null);
 
     this._logger.info(`user with id "${user.id}" logged out of the system`);
 

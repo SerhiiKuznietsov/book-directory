@@ -64,6 +64,7 @@ module.exports = {
         name VARCHAR(128) NOT NULL,
         email VARCHAR(256) UNIQUE NOT NULL,
         hash VARCHAR(60) NOT NULL,
+        refresh_token TEXT DEFAULT NULL,
         role_id uuid NOT NULL,
         ${getSystemsFields()}
       );

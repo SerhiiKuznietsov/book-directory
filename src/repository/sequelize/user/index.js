@@ -29,6 +29,15 @@ class UserRepository {
     return foundUser;
   }
 
+  async getByRefreshToken(refreshToken) {
+    const foundUser = await this._model.findOne({
+      where: { refreshToken },
+      raw: true,
+    });
+
+    return foundUser;
+  }
+
   async create(userItem) {
     const newUser = await this._model.create({
       ...userItem,
@@ -53,6 +62,12 @@ class UserRepository {
     );
 
     return isUserUpdated > 0;
+  }
+
+  async updateRefreshToken(id, refreshToken) {
+    const isUserUpdated = await this.update(id, { refreshToken });
+
+    return isUserUpdated;
   }
 
   async remove(id) {

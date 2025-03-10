@@ -32,7 +32,12 @@ class SignInUseCase {
     };
 
     const accessToken = createAccessToken(userData);
-    const refreshToken = createRefreshToken(userData); // TODO - added token to db
+    const refreshToken = createRefreshToken(userData);
+
+    const isUpdated = await this._userRepo.updateRefreshToken(user.id, refreshToken);
+    if (!isUpdated) {
+      throw new CustomError('updated session error', ERROR_TYPES.BAD_REQUEST);
+    }
 
     this._logger.info(`user with id "${user.id}" has logged in`);
 
