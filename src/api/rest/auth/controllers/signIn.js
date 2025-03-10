@@ -3,8 +3,11 @@ const { Ctrl } = require('../../common/controller/defaultCtrl');
 const {
   ACCESS_TOKEN_COOKIE_NAME,
   REFRESH_TOKEN_COOKIE_NAME,
+  ACCESS_TOKEN_AGE,
+  REFRESH_TOKEN_AGE,
 } = require('../../../../constants/auth');
 const { SignInDTO } = require('../../../../domain/auth/DTO/SignInDTO');
+
 class SignInCtrl extends Ctrl {
   handle = async (req, reply) => {
     const {
@@ -20,7 +23,6 @@ class SignInCtrl extends Ctrl {
     }
 
     const signInDTO = new SignInDTO(body);
-
     const { accessToken, refreshToken } = await this.useCase.execute(signInDTO);
 
     reply
@@ -30,12 +32,14 @@ class SignInCtrl extends Ctrl {
         sameSite: 'strict',
         httpOnly: true,
         secure: true,
+        maxAge: ACCESS_TOKEN_AGE,
       })
       .setCookie(REFRESH_TOKEN_COOKIE_NAME, refreshToken, {
         path: '/',
         sameSite: 'strict',
         httpOnly: true,
         secure: true,
+        maxAge: REFRESH_TOKEN_AGE,
       })
       .send({ accessToken, refreshToken });
   };

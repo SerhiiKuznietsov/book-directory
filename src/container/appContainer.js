@@ -6,6 +6,7 @@ const { Storage } = require('../repository/storage/redis/common');
 const { BookRepository } = require('../repository/sequelize/book');
 const { RoleRepository } = require('../repository/sequelize/role');
 const { UserRepository } = require('../repository/sequelize/user');
+const { SessionRepository } = require('../repository/storage/redis/session');
 // USE_CASE
 const { CreateBookUseCase } = require('../domain/book/useCases/create');
 const { GetBookByIdUseCase } = require('../domain/book/useCases/getById');
@@ -36,6 +37,7 @@ exports.initAppContainer = (logger, dbConfig, storageConfig) => {
   c.register('repo.book', new BookRepository(c.get('db.postgres')));
   c.register('repo.role', new RoleRepository(c.get('db.postgres')));
   c.register('repo.user', new UserRepository(c.get('db.postgres')));
+  c.register('repo.session', new SessionRepository(c.get('db.redis')));
 
   c.register('uc.getBookList', new GetBookListUseCase(c.get('repo.book')));
   c.register('uc.getBookById', new GetBookByIdUseCase(c.get('repo.book')));
@@ -55,8 +57,11 @@ exports.initAppContainer = (logger, dbConfig, storageConfig) => {
   c.register('uc.updateUser', new UpdateUserUseCase(c.get('repo.user')));
   c.register('uc.removeUser', new RemoveUserUseCase(c.get('repo.user')));
 
-  c.register('uc.signIn', new SignInUseCase(c.get('repo.user')));
-  c.register('uc.signOut', new SignOutUseCase(c.get('repo.user')));
+  c.register(
+    'uc.signIn',
+    new SignInUseCase(logger, c.get('repo.user'), c.get('repo.session'))
+  );
+  c.register('uc.signOut', new SignOutUseCase(logger, c.get('repo.user')));
   c.register(
     'uc.registerUser',
     new RegisterUseCase(c.get('repo.user'), c.get('repo.role'))

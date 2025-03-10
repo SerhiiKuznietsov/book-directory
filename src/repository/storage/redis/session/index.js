@@ -1,4 +1,5 @@
 const makeKey = (sessionId) => `session:${sessionId}`;
+const SESSION_TTL = 7 * 24 * 60 * 60;
 
 class SessionRepository {
   constructor(storage) {
@@ -9,7 +10,7 @@ class SessionRepository {
     const key = makeKey(sessionId);
     const storageData = await this._storage.instance.get(key);
 
-    const result = JSON.parse(storageData);
+    const result = storageData ? JSON.parse(storageData) : undefined;
 
     return result;
   }
@@ -18,9 +19,20 @@ class SessionRepository {
     const key = makeKey(sessionId);
     const storageData = JSON.stringify(value);
 
-    const result = await this._storage.instance.set(key, storageData);
+    const result = await this._storage.instance.setEx(
+      key,
+      SESSION_TTL,
+      storageData
+    );
 
-    return result;
+    return !!result;
+  }
+
+  async remove(sessionId) {
+    const key = makeKey(sessionId);
+    const isDeleted = await this._storage.del(key);
+
+    return !!isDeleted;
   }
 }
 
