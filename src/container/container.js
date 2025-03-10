@@ -20,6 +20,9 @@ class DIContainer {
   }
 
   register(key, dependency) {
+    if (this.has(key)) {
+      throw new Error(`Dependency "${key}" already exist`);
+    }
     this.dependencies[key] = dependency;
   }
 
