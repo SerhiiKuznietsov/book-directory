@@ -21,6 +21,7 @@ class FastifyServer extends ServerAdapter {
   async init(container) {
     try {
       await initApi(this._instance, container);
+      this._logger.info('Server initialized');
     } catch (e) {
       this._logger.error(
         new CustomError('server initialization error').setCause(e)
@@ -32,6 +33,7 @@ class FastifyServer extends ServerAdapter {
   async listen() {
     try {
       await this._instance.listen({ port: this._port, host: this._host });
+      this._logger.info('Server started');
     } catch (e) {
       this._logger.error(
         new CustomError('server listening start error').setCause(e)
@@ -43,6 +45,7 @@ class FastifyServer extends ServerAdapter {
   async close() {
     try {
       await this._instance.close();
+      this._logger.info('Server stopped');
     } catch (e) {
       this._logger.error(
         new CustomError('server listening closure error').setCause(e)
