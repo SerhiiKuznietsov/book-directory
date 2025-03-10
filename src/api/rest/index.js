@@ -6,10 +6,13 @@ const roleRouter = require('./role/router');
 const userRouter = require('./user/router');
 // const rolePolicyRouter = require('./rolePolicy/router');
 const { rootErrorHandlers } = require('./common/hooks/rootErrorHandler');
+const { COOKIE_SECRET } = require('../../config/server');
 
 exports.initRest = async (app, container) => {
   registerSwagger(app);
-  app.register(fastifyCookie);
+  app.register(fastifyCookie, {
+    secret: COOKIE_SECRET,
+  });
 
   app.route({
     method: 'GET',

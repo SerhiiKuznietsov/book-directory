@@ -30,7 +30,7 @@ class SessionRepository {
 
   async remove(sessionId) {
     const key = makeKey(sessionId);
-    const isDeleted = await this._storage.del(key);
+    const isDeleted = await this._storage.instance.del(key);
 
     return !!isDeleted;
   }

@@ -61,7 +61,10 @@ exports.initAppContainer = (logger, dbConfig, storageConfig) => {
     'uc.signIn',
     new SignInUseCase(logger, c.get('repo.user'), c.get('repo.session'))
   );
-  c.register('uc.signOut', new SignOutUseCase(logger, c.get('repo.user')));
+  c.register(
+    'uc.signOut',
+    new SignOutUseCase(logger, c.get('repo.user'), c.get('repo.session'))
+  );
   c.register(
     'uc.registerUser',
     new RegisterUseCase(c.get('repo.user'), c.get('repo.role'))
