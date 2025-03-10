@@ -8,12 +8,6 @@ const makeHashPassword = async (password) => {
   return hash;
 };
 
-const compareHash = async (hash1, hash2) => {
-  const result = await bcrypt.compare(hash1, hash2);
-
-  return result;
-};
-
 const comparePasswordAndHash = async (password, hash) => {
   const result = await bcrypt.compare(password, hash);
 
@@ -22,6 +16,5 @@ const comparePasswordAndHash = async (password, hash) => {
 
 module.exports = {
   makeHashPassword,
-  compareHash,
   comparePasswordAndHash,
 };

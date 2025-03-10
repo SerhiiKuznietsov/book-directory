@@ -1,13 +1,18 @@
 const { AUTH_API_TAG } = require('../../../../constants/auth');
-const { email } = require('../../../../domain/auth/entities/properties');
+const {
+  email,
+  password,
+} = require('../../../../domain/auth/entities/properties');
 
 module.exports = {
   tags: [AUTH_API_TAG],
   body: {
     type: 'object',
-    required: ['email'],
+    required: ['email', 'password'],
+    additionalProperties: false,
     properties: {
       email,
+      password,
     },
   },
   response: {
