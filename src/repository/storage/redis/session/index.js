@@ -5,21 +5,20 @@ class SessionRepository {
     this._storage = storage;
   }
 
-  async add(sessionId, value) {
+  async getById(sessionId) {
     const key = makeKey(sessionId);
-    const data = JSON.stringify(value);
+    const storageData = await this._storage.instance.get(key);
 
-    const result = await this._storage.instance.set(key, data);
+    const result = JSON.parse(storageData);
 
     return result;
   }
 
-  async get(sessionId) {
+  async create(sessionId, value) {
     const key = makeKey(sessionId);
+    const storageData = JSON.stringify(value);
 
-    const storageData = await this._storage.instance.get(key);
-
-    const result = JSON.parse(storageData);
+    const result = await this._storage.instance.set(key, storageData);
 
     return result;
   }
