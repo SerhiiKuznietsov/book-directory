@@ -67,7 +67,7 @@ exports.initAppContainer = (logger, dbConfig, storageConfig) => {
   );
   c.register(
     'uc.registerUser',
-    new RegisterUseCase(c.get('repo.user'), c.get('repo.role'))
+    new RegisterUseCase(logger, c.get('repo.user'), c.get('repo.role'))
   );
   c.register('uc.refreshToken', new RefreshTokenUseCase(c.get('repo.user')));
 

@@ -54,7 +54,6 @@ class RegisterDTO {
         ERROR_TYPES.VALIDATION_ERROR
       );
     }
-    return true;
   }
 }
 

@@ -1,5 +1,6 @@
 const { AUTH_API_TAG } = require('../../../../constants/auth');
 const {
+  id,
   name,
   email,
   password,
@@ -22,9 +23,10 @@ module.exports = {
     200: {
       description: 'Successful response',
       type: 'object',
+      required: ['id'],
+      additionalProperties: false,
       properties: {
-        accessToken: { type: 'string' },
-        refreshToken: { type: 'string' },
+        id,
       },
     },
   },

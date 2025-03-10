@@ -6,6 +6,7 @@ module.exports = {
     200: {
       description: 'Successful response',
       type: 'object',
+      additionalProperties: false,
       properties: {
         ok: { type: 'boolean' },
       },

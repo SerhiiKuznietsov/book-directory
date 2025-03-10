@@ -4,7 +4,8 @@ const { CustomError } = require('../../../utils/error');
 const { makeHashPassword } = require('../../../utils/hashPassword');
 
 class RegisterUseCase {
-  constructor(userRepo, roleRepo) {
+  constructor(logger, userRepo, roleRepo) {
+    this._logger = logger;
     this._userRepo = userRepo;
     this._roleRepo = roleRepo;
   }
@@ -29,6 +30,8 @@ class RegisterUseCase {
     if (!newUser) {
       throw new CustomError('user not created', ERROR_TYPES.UNKNOWN_ERROR);
     }
+
+    this._logger.info(`user with id "${newUser.id}" registered`);
 
     return newUser.id;
   }
