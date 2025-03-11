@@ -33,8 +33,9 @@ class SignOutUseCase {
           ERROR_TYPES.UNAUTHORIZED
         ).setCause(e)
       );
-      return false;
     }
+
+    if (!accessData?.id && !refreshData?.id) return false;
 
     const user = await this._userRepo.getById(accessData.id || refreshData.id);
     if (!user) {
