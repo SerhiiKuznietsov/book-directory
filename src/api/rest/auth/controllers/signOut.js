@@ -17,7 +17,7 @@ class SignOutCtrl extends Ctrl {
     } = req;
 
     const signOutDTO = new SignOutDTO(accessToken, refreshToken);
-    await this.useCase.execute(signOutDTO);
+    const ok = await this.useCase.execute(signOutDTO);
 
     reply
       .code(HTTP_CODE.OK)
@@ -35,7 +35,7 @@ class SignOutCtrl extends Ctrl {
         secure: IS_PROD,
         expires: new Date(0),
       })
-      .send({ ok: true });
+      .send({ ok });
   };
 }
 
