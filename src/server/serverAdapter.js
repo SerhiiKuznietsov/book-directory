@@ -1,4 +1,7 @@
 class ServerAdapter {
+  get isActive() {
+    throw new Error('isActive() must be implemented');
+  }
   async init() {
     throw new Error('init() must be implemented');
   }

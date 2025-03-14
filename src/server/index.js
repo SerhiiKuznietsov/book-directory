@@ -18,6 +18,10 @@ class FastifyServer extends ServerAdapter {
     });
   }
 
+  get isActive() {
+    return this._instance.server.listening;
+  }
+
   async init(container) {
     try {
       await initApi(this._instance, container);

@@ -9,7 +9,7 @@ class App {
   }
 
   async start() {
-    if (this._isActive) return;
+    if (this._server.isActive) return;
 
     try {
       this._container = initAppContainer(this._logger, dbConfig, storageConfig);
@@ -30,7 +30,7 @@ class App {
   }
 
   async stop() {
-    if (!this._isActive) return;
+    if (!this._server.isActive) return;
 
     try {
       await this._container.get('db.postgres').disconnect();
