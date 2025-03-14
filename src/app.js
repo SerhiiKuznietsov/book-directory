@@ -5,7 +5,6 @@ class App {
   constructor(server, logger) {
     this._server = server;
     this._logger = logger.child({ context: App.name });
-    this._isActive = false;
   }
 
   async start() {
@@ -20,7 +19,6 @@ class App {
       await this._server.init(this._container);
       await this._server.listen();
 
-      this._isActive = true;
       this._logger.info('App started...');
     } catch (e) {
       this._logger.error(`Failed to start app: ${e.message}`);
@@ -38,7 +36,6 @@ class App {
 
       await this._server.close();
 
-      this._isActive = false;
       this._logger.info('App stopped...');
     } catch (e) {
       this._logger.error('Error while stopping app');
