@@ -5,12 +5,14 @@ const { createRefreshToken } = require('../../../utils/token/refresh-token');
 
 class RefreshTokenUseCase {
   constructor(logger, userRepo) {
-    this._logger = logger;
+    this._logger = logger.child({ context: RefreshTokenUseCase.name });
     this._userRepo = userRepo;
   }
 
   async execute(refreshTokenDTO) {
-    const user = await this._userRepo.getByRefreshToken(refreshTokenDTO.refreshToken);
+    const user = await this._userRepo.getByRefreshToken(
+      refreshTokenDTO.refreshToken
+    );
     if (!user) {
       throw new CustomError('invalid user credential', ERROR_TYPES.BAD_REQUEST);
     }
@@ -22,7 +24,10 @@ class RefreshTokenUseCase {
     const accessToken = createAccessToken(userData);
     const refreshToken = createRefreshToken(userData);
 
-    const isUpdated = await this._userRepo.updateRefreshToken(user.id, refreshToken);
+    const isUpdated = await this._userRepo.updateRefreshToken(
+      user.id,
+      refreshToken
+    );
     if (!isUpdated) {
       throw new CustomError('updated session error', ERROR_TYPES.BAD_REQUEST);
     }

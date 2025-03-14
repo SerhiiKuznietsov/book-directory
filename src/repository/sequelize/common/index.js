@@ -5,8 +5,8 @@ const { initModels } = require('./models');
 
 class SequelizeDB {
   constructor(config, logger) {
+    this._logger = logger.child({ context: SequelizeDB.name });
     this.instance = createSequelizeInstance(config);
-    this.logger = logger;
     this.models = this.instance.models;
 
     initModels(this.instance);
@@ -15,11 +15,11 @@ class SequelizeDB {
   async isOpenConnection() {
     try {
       await this.instance.authenticate();
-      this.logger.info('Database connection active');
+      this._logger.info('Database connection active');
 
       return true;
     } catch (e) {
-      this.logger.error('There is no database connection:', e.message);
+      this._logger.error('There is no database connection:', e.message);
 
       return false;
     }
@@ -28,7 +28,7 @@ class SequelizeDB {
   async connect() {
     try {
       await this.instance.authenticate();
-      this.logger.info(
+      this._logger.info(
         'Database connection has been established successfully.'
       );
     } catch (e) {

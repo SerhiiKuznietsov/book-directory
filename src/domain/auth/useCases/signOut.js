@@ -5,7 +5,7 @@ const { parseRefreshToken } = require('../../../utils/token/refresh-token');
 
 class SignOutUseCase {
   constructor(logger, userRepo, sessionRepo) {
-    this._logger = logger;
+    this._logger = logger.child({ context: SignOutUseCase.name });
     this._userRepo = userRepo;
     this._sessionRepo = sessionRepo;
   }

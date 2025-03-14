@@ -6,7 +6,7 @@ const { createRefreshToken } = require('../../../utils/token/refresh-token');
 
 class SignInUseCase {
   constructor(logger, userRepo, sessionRepo) {
-    this._logger = logger;
+    this._logger = logger.child({ context: SignInUseCase.name });
     this._userRepo = userRepo;
     this._sessionRepo = sessionRepo;
   }
@@ -34,7 +34,10 @@ class SignInUseCase {
     const accessToken = createAccessToken(userData);
     const refreshToken = createRefreshToken(userData);
 
-    const isUpdated = await this._userRepo.updateRefreshToken(user.id, refreshToken);
+    const isUpdated = await this._userRepo.updateRefreshToken(
+      user.id,
+      refreshToken
+    );
     if (!isUpdated) {
       throw new CustomError('updated session error', ERROR_TYPES.BAD_REQUEST);
     }

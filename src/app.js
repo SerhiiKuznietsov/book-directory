@@ -4,7 +4,7 @@ const { initAppContainer } = require('./container/appContainer');
 class App {
   constructor(server, logger) {
     this._server = server;
-    this._logger = logger;
+    this._logger = logger.child({ context: App.name });
     this._isActive = false;
   }
 
