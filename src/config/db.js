@@ -11,8 +11,8 @@ const dbConfig = {
 
   dialect: process.env.DB_DIALECT || 'postgres',
   logMode: process.env.DB_QUERY_LOG === 'true',
-  minPoolConnection: 0, // TODO - to env
-  maxPoolConnection: 10, // TODO - to env
+  minPoolConnection: +process.env.MIN_POOL_CONNECTION || 0,
+  maxPoolConnection: +process.env.MAX_POOL_CONNECTION || 10,
 
   migrationStorageTableSchema: '_migration',
   migrationStorageTableName: '_migration_meta',
