@@ -6,8 +6,8 @@ const { ROLE_API_TAG } = require('../../constants/role');
 const { USER_API_TAG } = require('../../constants/user');
 const { AUTH_API_TAG } = require('../../constants/auth');
 
-exports.registerSwagger = (fastify) => {
-  fastify.register(fastifySwagger, {
+exports.registerSwagger = (app) => {
+  app.register(fastifySwagger, {
     routePrefix: '/docs',
     swagger: {
       info: {
@@ -28,7 +28,7 @@ exports.registerSwagger = (fastify) => {
     exposeRoute: true,
   });
 
-  fastify.register(fastifySwaggerUI, {
+  app.register(fastifySwaggerUI, {
     routePrefix: '/docs',
     uiConfig: {
       docExpansion: 'full',
