@@ -1,6 +1,6 @@
 const Ajv = require('ajv');
 const { CustomError } = require('./error');
-const { IS_DEV } = require('../config/server');
+const { IS_DEV } = require('../config/env');
 const { ERROR_TYPES } = require('../constants/error');
 
 const ajv = new Ajv({

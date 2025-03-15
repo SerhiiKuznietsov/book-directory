@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const { validRedisConfig } = require('./_validations/redis');
 
 module.exports = {

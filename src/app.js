@@ -1,5 +1,6 @@
-const { db: dbConfig, redis: storageConfig } = require('./config');
 const { initAppContainer } = require('./container/appContainer');
+const storageConfig = require('./config/redis');
+const dbConfig = require('./config/db');
 
 class App {
   constructor(server, logger) {

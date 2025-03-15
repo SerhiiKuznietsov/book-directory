@@ -1,10 +1,8 @@
 const pino = require('pino');
-const {
-  logger: { level },
-} = require('../../config');
+const { level } = require('../../config/logger');
 // const { LOG_FILE_PATH, LOG_DIR_PATH } = require('../../constants/logger');
 // const { createFolderSyncIfNotExsist } = require('./logger-file-util');
-// const { IS_PROD } = require('../../config/server');
+// const { IS_PROD } = require('../../config/env');
 
 // TODO - add write to file for message logger
 

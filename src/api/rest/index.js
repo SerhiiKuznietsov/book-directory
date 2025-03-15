@@ -6,7 +6,7 @@ const roleRouter = require('./role/router');
 const userRouter = require('./user/router');
 // const rolePolicyRouter = require('./rolePolicy/router');
 const { rootErrorHandlers } = require('./common/hooks/rootErrorHandler');
-const { COOKIE_SECRET } = require('../../config/server');
+const { COOKIE_SECRET } = require('../../config/secrets');
 
 exports.initRest = async (app, container) => {
   registerSwagger(app);

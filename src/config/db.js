@@ -1,4 +1,5 @@
 require('dotenv').config();
+
 const { validDbConfig } = require('./_validations/db');
 
 const dbConfig = {

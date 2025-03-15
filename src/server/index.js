@@ -6,10 +6,10 @@ const { initApi } = require('../api');
 const { CustomError } = require('../utils/error');
 
 class FastifyServer extends ServerAdapter {
-  constructor(host, port, logger) {
+  constructor(config, logger) {
     super();
-    this._host = host;
-    this._port = port;
+    this._host = config.host;
+    this._port = config.port;
     this._logger = logger.child({ context: FastifyServer.name });
     this._instance = fastify({
       loggerInstance: logger,

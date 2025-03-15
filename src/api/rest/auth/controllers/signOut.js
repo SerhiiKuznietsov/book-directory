@@ -4,7 +4,7 @@ const {
   ACCESS_TOKEN_COOKIE_NAME,
   REFRESH_TOKEN_COOKIE_NAME,
 } = require('../../../../constants/auth');
-const { IS_PROD } = require('../../../../config/server');
+const { IS_PROD } = require('../../../../config/env');
 const { SignOutDTO } = require('../../../../domain/auth/DTO/SignOutDTO');
 
 class SignOutCtrl extends Ctrl {

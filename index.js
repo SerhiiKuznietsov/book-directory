@@ -1,9 +1,9 @@
 const { App } = require('./src/app');
 const { FastifyServer } = require('./src/server');
 const { logger } = require('./src/utils/logger');
-const { server: serverConfig } = require('./src/config');
+const serverConfig = require('./src/config/server');
 
-const server = new FastifyServer(serverConfig.host, serverConfig.port, logger);
+const server = new FastifyServer(serverConfig, logger);
 const app = new App(server, logger);
 
 (async () => {

@@ -1,5 +1,5 @@
 const { createToken, parseToken } = require('./jwt');
-const { REFRESH_TOKEN_SECRET } = require('../../config/server');
+const { REFRESH_TOKEN_SECRET } = require('../../config/secrets');
 
 const algorithm = 'HS512';
 const expiresIn = 60 * 2;
