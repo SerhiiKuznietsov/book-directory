@@ -13,13 +13,25 @@ const app = new App(server, logger);
 process
   .on('SIGTERM', async () => {
     logger.info('Received SIGTERM. Shutting down gracefully.');
+
     await app.stop();
+    process.exit(0);
   })
   .on('SIGINT', async () => {
     logger.info('Received SIGINT. Shutting down gracefully.');
+
     await app.stop();
+    process.exit(0);
   })
   .on('uncaughtException', async (err) => {
     logger.fatal(err, 'Uncaught exception detected');
+
     await app.stop();
+    process.exit(1);
+  })
+  .on('unhandledRejection', async (reason, promise) => {
+    logger.fatal({ reason, promise }, 'Unhandled rejection detected');
+
+    await app.stop();
+    process.exit(1);
   });
