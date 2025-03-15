@@ -5,19 +5,19 @@ const userRouter = require('./user/router');
 // const rolePolicyRouter = require('./rolePolicy/router');
 
 exports.registerAppRouters = (app, container) => {
-  app.register(authRouter, {
+  app.register(authRouter, { // TODO - need encapsulate
     prefix: '/api/auth',
     container,
   });
-  app.register(bookRouter, {
+  app.register(bookRouter, { // TODO - need encapsulate
     prefix: '/api/book',
     container,
   });
-  app.register(roleRouter, {
+  app.register(roleRouter, { // TODO - need encapsulate
     prefix: '/api/role',
     container,
   });
-  app.register(userRouter, {
+  app.register(userRouter, { // TODO - need encapsulate
     prefix: '/api/user',
     container,
   });
