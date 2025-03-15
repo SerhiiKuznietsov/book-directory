@@ -8,7 +8,7 @@ exports.transactionWrapper = (cb) => {
       await transaction.commit();
     } catch (e) {
       await transaction.rollback();
-      logger.error(e);
+      logger.error(e, 'transaction wrapper error');
       throw e;
     }
   };

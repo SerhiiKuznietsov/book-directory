@@ -21,8 +21,7 @@ class App {
 
       this._logger.info('App started...');
     } catch (e) {
-      this._logger.error(`Failed to start app: ${e.message}`);
-      this._logger.error(e);
+      this._logger.error(e, `Failed to start app`);
       process.exit(1);
     }
   }
@@ -38,9 +37,7 @@ class App {
 
       this._logger.info('App stopped...');
     } catch (e) {
-      this._logger.error('Error while stopping app');
-      this._logger.error(e);
-      process.exit(1);
+      this._logger.error(e, 'Error while stopping app');
     }
   }
 }

@@ -14,7 +14,7 @@ class Storage {
 
       return true;
     } catch (e) {
-      this._logger.error('There is no Redis connection:', e.message);
+      this._logger.error(e, 'there is no Redis connection');
 
       return false;
     }

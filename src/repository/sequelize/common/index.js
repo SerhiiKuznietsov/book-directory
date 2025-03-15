@@ -19,7 +19,7 @@ class SequelizeDB {
 
       return true;
     } catch (e) {
-      this._logger.error('There is no database connection:', e.message);
+      this._logger.error(e, 'There is no database connection');
 
       return false;
     }
