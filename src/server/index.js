@@ -12,7 +12,7 @@ class FastifyServer extends ServerAdapter {
     this._port = config.port;
     this._logger = logger.child({ context: FastifyServer.name });
     this._instance = fastify({
-      loggerInstance: logger,
+      loggerInstance: this._logger,
       ajv,
       genReqId: () => randomUUID(),
     });
