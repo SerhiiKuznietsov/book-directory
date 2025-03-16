@@ -6,8 +6,7 @@ const LEVEL_INFO = 'info';
 const LEVEL_WARN = 'warn';
 const LEVEL_ERROR = 'error';
 const LEVEL_FATAL = 'fatal';
-const FOLDER_PATH = path.resolve('logs');
-const FILE_PATH = path.join(FOLDER_PATH, `app.log`);
+const FILE_PATH = path.resolve('logs', `app.log`);
 const LEVELS_LIST = [
   LEVEL_FATAL,
   LEVEL_ERROR,
@@ -19,7 +18,6 @@ const LEVELS_LIST = [
 
 module.exports = {
   FILE_PATH,
-  FOLDER_PATH,
   LEVELS_LIST,
   LEVEL_FATAL,
   LEVEL_ERROR,
