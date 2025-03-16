@@ -1,5 +1,5 @@
 const fs = require('node:fs');
 
-exports.createFolderSyncIfNotExsist = (dirPath) => {
+exports.createFolderSyncIfNotExist = (dirPath) => {
   if (!fs.existsSync(dirPath)) fs.mkdirSync(dirPath);
 };

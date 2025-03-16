@@ -1,28 +1,30 @@
 const path = require('node:path');
 
-const LOG_FILE_NAME = `app.log`;
-const LOG_FOLDER_NAME = 'logs';
-const LOG_DIR_PATH = path.join(path.resolve('.'), LOG_FOLDER_NAME);
-const LOG_FILE_PATH = path.join(LOG_DIR_PATH, LOG_FILE_NAME);
-const LOG_LEVEL_TRACE = 'trace';
-const LOG_LEVEL_DEBUG = 'debug';
-const LOG_LEVEL_INFO = 'info';
-const LOG_LEVEL_WARN = 'warn';
-const LOG_LEVEL_ERROR = 'error';
-const LOG_LEVEL_FATAL = 'fatal';
-const LOG_LEVELS_LIST = [
-  LOG_LEVEL_FATAL,
-  LOG_LEVEL_ERROR,
-  LOG_LEVEL_WARN,
-  LOG_LEVEL_INFO,
-  LOG_LEVEL_DEBUG,
-  LOG_LEVEL_TRACE,
+const LEVEL_TRACE = 'trace';
+const LEVEL_DEBUG = 'debug';
+const LEVEL_INFO = 'info';
+const LEVEL_WARN = 'warn';
+const LEVEL_ERROR = 'error';
+const LEVEL_FATAL = 'fatal';
+const FOLDER_PATH = path.resolve('logs');
+const FILE_PATH = path.join(FOLDER_PATH, `app.log`);
+const LEVELS_LIST = [
+  LEVEL_FATAL,
+  LEVEL_ERROR,
+  LEVEL_WARN,
+  LEVEL_INFO,
+  LEVEL_DEBUG,
+  LEVEL_TRACE,
 ];
 
 module.exports = {
-  LOG_FILE_NAME,
-  LOG_FILE_PATH,
-  LOG_DIR_PATH,
-  LOG_LEVEL_INFO,
-  LOG_LEVELS_LIST,
+  FILE_PATH,
+  FOLDER_PATH,
+  LEVELS_LIST,
+  LEVEL_FATAL,
+  LEVEL_ERROR,
+  LEVEL_WARN,
+  LEVEL_INFO,
+  LEVEL_DEBUG,
+  LEVEL_TRACE,
 };

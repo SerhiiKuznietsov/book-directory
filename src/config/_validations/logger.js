@@ -1,4 +1,4 @@
-const { LOG_LEVELS_LIST } = require('../../constants/logger');
+const { LEVELS_LIST } = require('../../constants/logger');
 const { validAndCompileSchema } = require('../../utils/ajvValidator');
 
 exports.validLoggerConfig = (config) => {
@@ -7,7 +7,7 @@ exports.validLoggerConfig = (config) => {
     additionalProperties: false,
     required: ['level'],
     properties: {
-      level: { type: 'string', enum: LOG_LEVELS_LIST },
+      level: { type: 'string', enum: LEVELS_LIST },
     },
   };
 
