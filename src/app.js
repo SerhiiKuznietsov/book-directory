@@ -6,21 +6,20 @@ class App {
   constructor(server, logger) {
     this._server = server;
     this._logger = logger.child({ context: App.name });
+    this._container = newAppContainer(logger, dbConfig, storageConfig);
   }
 
   async start() {
     if (this._server.isActive) return;
 
     try {
-      this._container = newAppContainer(this._logger, dbConfig, storageConfig);
-
       await this._container.get('db.postgres').connect();
       await this._container.get('db.redis').connect();
 
       await this._server.init(this._container);
       await this._server.listen();
 
-      this._logger.info('App started...');
+      this._logger.info('App started');
     } catch (e) {
       this._logger.error(e, `Failed to start app`);
       process.exit(1);
