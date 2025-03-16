@@ -28,7 +28,7 @@ const { SignOutUseCase } = require('../domain/auth/useCases/signOut');
 const { RegisterUseCase } = require('../domain/auth/useCases/register');
 const { RefreshTokenUseCase } = require('../domain/auth/useCases/refreshToken');
 
-exports.initAppContainer = (logger, dbConfig, storageConfig) => {
+exports.newAppContainer = (logger, dbConfig, storageConfig) => {
   const c = new DIContainer();
 
   c.register('db.postgres', new SequelizeDB(dbConfig, logger));

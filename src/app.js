@@ -1,4 +1,4 @@
-const { initAppContainer } = require('./container/appContainer');
+const { newAppContainer } = require('./container/appContainer');
 const storageConfig = require('./config/redis');
 const dbConfig = require('./config/db');
 
@@ -12,7 +12,7 @@ class App {
     if (this._server.isActive) return;
 
     try {
-      this._container = initAppContainer(this._logger, dbConfig, storageConfig);
+      this._container = newAppContainer(this._logger, dbConfig, storageConfig);
 
       await this._container.get('db.postgres').connect();
       await this._container.get('db.redis').connect();
