@@ -1,4 +1,4 @@
-const { validAndCompileSchema } = require('../../utils/ajvValidator');
+const { validAndCompileSchema } = require('../../utils/validator');
 
 const lowerStrType = {
   type: 'string',

@@ -1,5 +1,5 @@
 const { LEVELS_LIST } = require('../../constants/logger');
-const { validAndCompileSchema } = require('../../utils/ajvValidator');
+const { validAndCompileSchema } = require('../../utils/validator');
 
 exports.validLoggerConfig = (config) => {
   const schema = {

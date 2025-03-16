@@ -1,4 +1,4 @@
-const { validAndCompileSchema } = require('../../utils/ajvValidator');
+const { validAndCompileSchema } = require('../../utils/validator');
 
 exports.validRedisConfig = (config) => {
   const schema = {

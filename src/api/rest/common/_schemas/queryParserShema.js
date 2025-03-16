@@ -5,7 +5,7 @@ const {
   DEFAULT_PAGE_LENGTH,
   ALL_GROUPING_NAME,
 } = require('../../../../constants/dbQuery');
-const { compileSchema, valid } = require('../../../../utils/ajvValidator');
+const { compileSchema, valid } = require('../../../../utils/validator');
 
 exports.queryParamsSchema = {
   type: 'object',
