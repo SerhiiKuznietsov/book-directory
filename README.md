@@ -4,10 +4,23 @@
 
 **Book Directory** is a backend application for managing a catalog of books. It allows users to create, update, delete, and view book records. This project is built using Node.js and Fastify, with integrated Swagger API documentation.
 
-## Main Technologies
+## 💻 Main Technologies
+
+![Node.js](https://img.shields.io/badge/Node.js-22.14.0-339933?logo=node.js&logoColor=white)
+![NPM](https://img.shields.io/badge/NPM-10.9.2-CB3837?logo=npm&logoColor=white)
+![Fastify](https://img.shields.io/badge/Fastify-Web_Framework-000000?logo=fastify)
+![Pino](https://img.shields.io/badge/Pino-Logger-000000?logo=pino&logoColor=white)
+![AJV](https://img.shields.io/badge/AJV-JSON_Validation-006400?logo=json)
+![Jest](https://img.shields.io/badge/Jest-Test_Library-C21325?logo=jest&logoColor=white)
+![Swagger](https://img.shields.io/badge/Swagger-API_Documentation-85EA2D?logo=swagger&logoColor=black)
+![Docker](https://img.shields.io/badge/Docker-Containerization-2496ED?logo=docker&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15.5-336791?logo=postgresql&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-7.2.4-DC382D?logo=redis&logoColor=white)
+![Kafka](https://img.shields.io/badge/Kafka-Streaming-231F20?logo=apachekafka&logoColor=white)
 
 - [**Node.js**](https://nodejs.org/) - runtime environment
 - [**Fastify**](https://www.fastify.io/) - web framework for building REST APIs
+- [**Pino**](https://github.com/pinojs/pino) - logger
 - [**AJV**](https://ajv.js.org/) - JSON schema validation
 - [**Jest**](https://jestjs.io/) - test library
 - [**Swagger**](https://swagger.io/) - API documentation
