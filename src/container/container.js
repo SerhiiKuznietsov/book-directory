@@ -1,34 +1,42 @@
 class DIContainer {
   constructor() {
-    this.dependencies = {};
+    this.dependencies = new Map();
   }
 
   has(key) {
-    return this.dependencies.hasOwnProperty(key);
+    return this.dependencies.has(key);
   }
 
   get(key) {
     if (!this.has(key)) {
-      throw new Error(`Dependency "${key}" not found`);
+      throw new Error(`Dependency "${key}" not found in DI container`);
     }
-    return this.dependencies[key];
+    return this.dependencies.get(key);
   }
 
   getFactory(key) {
-    this.get(key);
+    if (!this.has(key)) {
+      throw new Error(`Dependency "${key}" not found in DI container`);
+    }
     return () => this.get(key);
   }
 
   register(key, dependency) {
     if (this.has(key)) {
-      throw new Error(`Dependency "${key}" already exist`);
+      throw new Error(`Dependency "${key}" already exists in DI container`);
     }
-    this.dependencies[key] = dependency;
+    this.dependencies.set(key, dependency);
   }
 
   remove(key) {
-    this.get(key);
-    delete this.dependencies[key];
+    if (!this.has(key)) {
+      throw new Error(`Cannot remove "${key}": not found in DI container`);
+    }
+    this.dependencies.delete(key);
+  }
+
+  clear() {
+    this.dependencies.clear();
   }
 }
 
