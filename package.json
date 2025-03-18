@@ -16,6 +16,8 @@
     "js",
     "fastify",
     "ajv",
+    "jest",
+    "swagger",
     "sequelize",
     "docker",
     "redis"
