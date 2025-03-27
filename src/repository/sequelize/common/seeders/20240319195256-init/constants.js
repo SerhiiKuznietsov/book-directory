@@ -9,4 +9,10 @@ module.exports = {
   },
   DEFAULT_PASSWORD: 'Password123!',
   SALT_ROUNDS: 10,
+  PERMISSIONS: {
+    READ: 'read',
+    CREATE: 'create',
+    UPDATE: 'update',
+    DELETE: 'delete',
+  },
 };

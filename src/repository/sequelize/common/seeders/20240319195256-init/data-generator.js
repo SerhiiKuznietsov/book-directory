@@ -10,14 +10,7 @@ const {
   makeUserBook,
 } = require('./interfaces');
 const { range } = require('./utils');
-const { DEFAULT_PASSWORD } = require('./constants');
-
-const permissions = {
-  read: 'read',
-  create: 'create',
-  update: 'update',
-  delete: 'delete',
-};
+const { DEFAULT_PASSWORD, PERMISSIONS } = require('./constants');
 
 const makeAuthors = (roleId, authorsCount, booksInterval) => {
   const authors = [];
@@ -47,10 +40,10 @@ const makeAuthors = (roleId, authorsCount, booksInterval) => {
   return [authors, books, authorsBooks];
 };
 
-const policyPolicy = makePolicy('POLICY', permissions);
-const userPolicy = makePolicy('USER', permissions);
-const rolePolicy = makePolicy('ROLE', permissions);
-const bookPolicy = makePolicy('BOOK', permissions);
+const policyPolicy = makePolicy('POLICY', PERMISSIONS);
+const userPolicy = makePolicy('USER', PERMISSIONS);
+const rolePolicy = makePolicy('ROLE', PERMISSIONS);
+const bookPolicy = makePolicy('BOOK', PERMISSIONS);
 
 const ownerRole = makeRole('owner');
 const adminRole = makeRole('admin');
