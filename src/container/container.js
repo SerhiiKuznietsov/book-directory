@@ -38,6 +38,15 @@ class DIContainer {
   clear() {
     this.dependencies.clear();
   }
+
+  clone() {
+    const newContainer = new DIContainer();
+    this.dependencies.forEach((value, key) => {
+      newContainer.register(key, value);
+    });
+
+    return newContainer;
+  }
 }
 
 module.exports = { DIContainer };
