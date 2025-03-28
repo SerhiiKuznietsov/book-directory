@@ -1,58 +1,50 @@
 const schemas = require('./schemas');
-const hooks = require('../../common/hooks/role');
-const { RoleControllers } = require('./controllers');
-const { GetRoleListCtrl } = require('./controllers/list');
-const { GetSingleRoleCtrl } = require('./controllers/single');
-const { CreateRoleCtrl } = require('./controllers/create');
-const { UpdateRoleCtrl } = require('./controllers/update');
-const { RemoveRoleCtrl } = require('./controllers/remove');
+const { RolePolicyHook } = require('../../common/hooks/role');
 
-module.exports = async (fastify, { container }) => {
-  const roleControllers = new RoleControllers(
-    new GetRoleListCtrl(container.get('uc.getRoleList')),
-    new GetSingleRoleCtrl(container.get('uc.getRoleById')),
-    new CreateRoleCtrl(container.get('uc.createRole')),
-    new UpdateRoleCtrl(container.get('uc.updateRole')),
-    new RemoveRoleCtrl(container.get('uc.removeRole'))
-  );
+module.exports = async (fastify, { restContainer }) => {
+  const controllers = restContainer.get('controllers.role');
+  const authHook = restContainer.get('hook.user');
+  const roleHooks = new RolePolicyHook();
+
+  fastify.addHook('onRequest', authHook.use);
 
   fastify.route({
     method: 'GET',
     url: '/',
     schema: schemas.getListSchema,
-    onRequest: [hooks.readCheckMiddleware],
-    handler: roleControllers.getList,
+    onRequest: [roleHooks.read()],
+    handler: controllers.getList,
   });
 
   fastify.route({
     method: 'GET',
     url: '/:id',
     schema: schemas.getSchema,
-    onRequest: [hooks.readCheckMiddleware],
-    handler: roleControllers.getSingle,
+    onRequest: [roleHooks.read()],
+    handler: controllers.getSingle,
   });
 
   fastify.route({
     method: 'POST',
     url: '/',
     schema: schemas.createSchema,
-    onRequest: [hooks.createCheckMiddleware],
-    handler: roleControllers.create,
+    onRequest: [roleHooks.create()],
+    handler: controllers.create,
   });
 
   fastify.route({
     method: 'PUT',
     url: '/:id',
     schema: schemas.updateSchema,
-    onRequest: [hooks.updateCheckMiddleware],
-    handler: roleControllers.update,
+    onRequest: [roleHooks.update()],
+    handler: controllers.update,
   });
 
   fastify.route({
     method: 'DELETE',
     url: '/:id',
     schema: schemas.removeSchema,
-    onRequest: [hooks.deleteCheckMiddleware],
-    handler: roleControllers.remove,
+    onRequest: [roleHooks.remove()],
+    handler: controllers.remove,
   });
 };

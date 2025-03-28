@@ -1,31 +1,80 @@
 /* eslint-disable no-unused-vars */
 const {
-  READ_PERMISSION_NAME,
-  CREATE_PERMISSION_NAME,
-  UPDATE_PERMISSION_NAME,
-  DELETE_PERMISSION_NAME,
-} = require('../../../../constants/permission');
-// const {
-//   ACCESS_TOKEN_COOKIE_NAME,
-//   REFRESH_TOKEN_COOKIE_NAME,
-// } = require("../constants/token-cookie");
+  ACCESS_TOKEN_COOKIE_NAME,
+  REFRESH_TOKEN_COOKIE_NAME,
+} = require('../../../../constants/auth');
+const { ERROR_TYPES } = require('../../../../constants/error');
+const { CustomError } = require('../../../../utils/error');
+const { parseAccessToken } = require('../../../../utils/token/access-token');
+const { parseRefreshToken } = require('../../../../utils/token/refresh-token');
 
+class UserHook {
+  constructor(userRepository) {
+    this._userRepository = userRepository;
+  }
 
-const customCheckMiddleware = (policyName, permissionName) => (request, reply, done) => {
-  // TODO - fill logic
-  done();
+  use = async (req) => {
+    const {
+      cookies: {
+        [ACCESS_TOKEN_COOKIE_NAME]: accessTokenValue,
+        [REFRESH_TOKEN_COOKIE_NAME]: refreshTokenValue,
+      },
+    } = req;
+    let accessData, refreshData;
+
+    try {
+      accessData = parseAccessToken(accessTokenValue);
+    } catch (e) {
+      accessData = {};
+    }
+
+    try {
+      refreshData = parseRefreshToken(refreshTokenValue);
+    } catch (e) {
+      refreshData = {};
+    }
+
+    const id = accessData.id || refreshData.id;
+
+    if (!id) {
+      throw new CustomError('Unauthorized', ERROR_TYPES.UNAUTHORIZED);
+    }
+
+    return;
+  };
+}
+
+class PolicyHook {
+  constructor(policyName) {
+    this._policyName = policyName;
+  }
+
+  custom = (permissionName) => {
+    return (req, reply, done) => {
+      const err = new CustomError('Unauthorized', ERROR_TYPES.UNAUTHORIZED);
+
+      if (req.user) {
+        throw err;
+      }
+
+      const { [this._policyName]: permissions } = req.user.policies;
+
+      if (!permissions) {
+        throw err;
+      }
+
+      const isAccess = permissions[permissionName];
+
+      if (!isAccess) {
+        throw err;
+      }
+
+      done();
+    };
+  };
+}
+
+module.exports = {
+  UserHook,
+  PolicyHook,
 };
-
-exports.customCheckMiddleware = customCheckMiddleware;
-
-exports.readCheckMiddleware = (policyName) =>
-  customCheckMiddleware(policyName, READ_PERMISSION_NAME);
-
-exports.createCheckMiddleware = (policyName) =>
-  customCheckMiddleware(policyName, CREATE_PERMISSION_NAME);
-
-exports.updateCheckMiddleware = (policyName) =>
-  customCheckMiddleware(policyName, UPDATE_PERMISSION_NAME);
-
-exports.deleteCheckMiddleware = (policyName) =>
-  customCheckMiddleware(policyName, DELETE_PERMISSION_NAME);

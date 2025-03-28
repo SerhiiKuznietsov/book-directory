@@ -1,52 +1,50 @@
 const schemas = require('./schemas');
-const { UserControllers } = require('./controllers');
-const { CreateUserCtrl } = require('./controllers/create');
-const { GetUserListCtrl } = require('./controllers/list');
-const { RemoveUserCtrl } = require('./controllers/remove');
-const { GetSingleUserCtrl } = require('./controllers/single');
-const { UpdateUserCtrl } = require('./controllers/update');
+const { UserPolicyHook } = require('../../common/hooks/user');
 
-module.exports = async (fastify, { container }) => {
-  const userControllers = new UserControllers(
-    new GetUserListCtrl(container.get('uc.getUserList')),
-    new GetSingleUserCtrl(container.get('uc.getUserById')),
-    new CreateUserCtrl(container.get('uc.createUser')),
-    new UpdateUserCtrl(container.get('uc.updateUser')),
-    new RemoveUserCtrl(container.get('uc.removeUser'))
-  );
+module.exports = async (fastify, { restContainer }) => {
+  const controllers = restContainer.get('controllers.user');
+  const authHook = restContainer.get('hook.user');
+  const userHooks = new UserPolicyHook();
+
+  fastify.addHook('onRequest', authHook.use);
 
   fastify.route({
     method: 'GET',
     url: '/',
     schema: schemas.getListSchema,
-    handler: userControllers.getList,
+    onRequest: [userHooks.read()],
+    handler: controllers.getList,
   });
 
   fastify.route({
     method: 'GET',
     url: '/:id',
     schema: schemas.getSchema,
-    handler: userControllers.getSingle,
+    onRequest: [userHooks.read()],
+    handler: controllers.getSingle,
   });
 
   fastify.route({
     method: 'POST',
     url: '/',
     schema: schemas.createSchema,
-    handler: userControllers.create,
+    onRequest: [userHooks.create()],
+    handler: controllers.create,
   });
 
   fastify.route({
     method: 'PUT',
     url: '/:id',
     schema: schemas.updateSchema,
-    handler: userControllers.update,
+    onRequest: [userHooks.update()],
+    handler: controllers.update,
   });
 
   fastify.route({
     method: 'DELETE',
     url: '/:id',
     schema: schemas.removeSchema,
-    handler: userControllers.remove,
+    onRequest: [userHooks.remove()],
+    handler: controllers.remove,
   });
 };

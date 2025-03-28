@@ -27,16 +27,21 @@ const { SignInUseCase } = require('../domain/auth/useCases/signIn');
 const { SignOutUseCase } = require('../domain/auth/useCases/signOut');
 const { RegisterUseCase } = require('../domain/auth/useCases/register');
 const { RefreshTokenUseCase } = require('../domain/auth/useCases/refreshToken');
+const { RolePolicyRepository } = require('../repository/sequelize/role-policy');
 
 exports.newAppContainer = (logger, dbConfig, storageConfig) => {
   const c = new DIContainer();
 
-  c.register('db.postgres', new SequelizeDB(dbConfig, logger));
+  c.register('db.sequelize', new SequelizeDB(dbConfig, logger));
   c.register('db.redis', new Storage(storageConfig, logger));
 
-  c.register('repo.book', new BookRepository(c.get('db.postgres')));
-  c.register('repo.role', new RoleRepository(c.get('db.postgres')));
-  c.register('repo.user', new UserRepository(c.get('db.postgres')));
+  c.register('repo.book', new BookRepository(c.get('db.sequelize')));
+  c.register('repo.role', new RoleRepository(c.get('db.sequelize')));
+  c.register('repo.user', new UserRepository(c.get('db.sequelize')));
+  c.register(
+    'repo.rolePolicy',
+    new RolePolicyRepository(c.get('db.sequelize'))
+  );
   c.register('repo.session', new SessionRepository(c.get('db.redis')));
 
   c.register('uc.getBookList', new GetBookListUseCase(c.get('repo.book')));
@@ -59,7 +64,13 @@ exports.newAppContainer = (logger, dbConfig, storageConfig) => {
 
   c.register(
     'uc.signIn',
-    new SignInUseCase(logger, c.get('repo.user'), c.get('repo.session'))
+    new SignInUseCase(
+      logger,
+      c.get('repo.user'),
+      c.get('repo.role'),
+      c.get('repo.rolePolicy'),
+      c.get('repo.session')
+    )
   );
   c.register(
     'uc.signOut',

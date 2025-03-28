@@ -1,8 +1,8 @@
 const apiRouter = require('./api/router');
 
-exports.registerAppRouters = (app, container) => {
+exports.registerAppRouters = (app, restContainer) => {
   app.register(apiRouter, {
     prefix: '/api',
-    container,
+    restContainer,
   });
 };

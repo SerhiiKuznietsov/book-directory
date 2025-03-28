@@ -13,7 +13,7 @@ class App {
     if (this._server.isActive) return;
 
     try {
-      await this._container.get('db.postgres').connect();
+      await this._container.get('db.sequelize').connect();
       await this._container.get('db.redis').connect();
 
       await this._server.init(this._container);
@@ -30,7 +30,7 @@ class App {
     if (!this._server.isActive) return;
 
     try {
-      await this._container.get('db.postgres').disconnect();
+      await this._container.get('db.sequelize').disconnect();
       await this._container.get('db.redis').disconnect();
 
       await this._server.close();
