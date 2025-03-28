@@ -28,6 +28,7 @@ const { SignOutUseCase } = require('../domain/auth/useCases/signOut');
 const { RegisterUseCase } = require('../domain/auth/useCases/register');
 const { RefreshTokenUseCase } = require('../domain/auth/useCases/refreshToken');
 const { RolePolicyRepository } = require('../repository/sequelize/role-policy');
+const { UserAccessService } = require('../domain/auth/services/userAccess');
 
 exports.newAppContainer = (logger, dbConfig, storageConfig) => {
   const c = new DIContainer();
@@ -43,6 +44,16 @@ exports.newAppContainer = (logger, dbConfig, storageConfig) => {
     new RolePolicyRepository(c.get('db.sequelize'))
   );
   c.register('repo.session', new SessionRepository(c.get('db.redis')));
+
+  c.register(
+    'sc.userAccess',
+    new UserAccessService(
+      c.get('repo.user'),
+      c.get('repo.role'),
+      c.get('repo.rolePolicy'),
+      c.get('repo.session')
+    )
+  );
 
   c.register('uc.getBookList', new GetBookListUseCase(c.get('repo.book')));
   c.register('uc.getBookById', new GetBookByIdUseCase(c.get('repo.book')));
@@ -64,13 +75,7 @@ exports.newAppContainer = (logger, dbConfig, storageConfig) => {
 
   c.register(
     'uc.signIn',
-    new SignInUseCase(
-      logger,
-      c.get('repo.user'),
-      c.get('repo.role'),
-      c.get('repo.rolePolicy'),
-      c.get('repo.session')
-    )
+    new SignInUseCase(logger, c.get('repo.user'), c.get('sc.userAccess'))
   );
   c.register(
     'uc.signOut',

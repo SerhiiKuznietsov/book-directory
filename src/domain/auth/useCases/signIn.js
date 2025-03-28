@@ -3,12 +3,13 @@ const { CustomError } = require('../../../utils/error');
 const { comparePasswordAndHash } = require('../../../utils/hashPassword');
 const { createAccessToken } = require('../../../utils/token/access-token');
 const { createRefreshToken } = require('../../../utils/token/refresh-token');
+const { TokenPayload } = require('../entities/tokenPayload');
 
 class SignInUseCase {
-  constructor(logger, userRepo, sessionRepo) {
+  constructor(logger, userRepo, userAccessService) {
     this._logger = logger.child({ context: SignInUseCase.name });
     this._userRepo = userRepo;
-    this._sessionRepo = sessionRepo;
+    this._userAccessService = userAccessService;
   }
 
   async execute(signInDTO) {
@@ -22,25 +23,11 @@ class SignInUseCase {
       throw new CustomError('invalid user credential', ERROR_TYPES.BAD_REQUEST);
     }
 
-    const isCreated = await this._sessionRepo.create(user.id, user);
-    if (!isCreated) {
-      throw new CustomError('session error', ERROR_TYPES.BAD_REQUEST);
-    }
+    const tokenPayload = new TokenPayload(user.id);
+    const accessToken = createAccessToken(tokenPayload);
+    const refreshToken = createRefreshToken(tokenPayload);
 
-    const userData = {
-      id: user.id,
-    };
-
-    const accessToken = createAccessToken(userData);
-    const refreshToken = createRefreshToken(userData);
-
-    const isUpdated = await this._userRepo.updateRefreshToken(
-      user.id,
-      refreshToken
-    );
-    if (!isUpdated) {
-      throw new CustomError('updated session error', ERROR_TYPES.BAD_REQUEST);
-    }
+    await this._userAccessService.makeUserSession(user, refreshToken);
 
     this._logger.info(`user with id "${user.id}" has logged in`);
 

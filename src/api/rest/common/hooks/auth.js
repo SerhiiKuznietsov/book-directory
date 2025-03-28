@@ -9,8 +9,10 @@ const { parseAccessToken } = require('../../../../utils/token/access-token');
 const { parseRefreshToken } = require('../../../../utils/token/refresh-token');
 
 class UserHook {
-  constructor(userRepository) {
-    this._userRepository = userRepository;
+  constructor(userRepo, sessionRepo, userAccessService) {
+    this._userRepo = userRepo;
+    this._sessionRepo = sessionRepo;
+    this._userAccessService = userAccessService;
   }
 
   use = async (req) => {
@@ -35,12 +37,25 @@ class UserHook {
     }
 
     const id = accessData.id || refreshData.id;
-
     if (!id) {
       throw new CustomError('Unauthorized', ERROR_TYPES.UNAUTHORIZED);
     }
 
-    return;
+    const user = await this._userRepo.getById(id);
+    if (!user) {
+      throw new CustomError('Unauthorized', ERROR_TYPES.UNAUTHORIZED);
+    }
+
+    const session = await this._sessionRepo.getById(user.id);
+    if (session) {
+      req.user = session;
+      return;
+    }
+
+    req.user = await this._userAccessService.makeUserSession(
+      user,
+      refreshTokenValue
+    );
   };
 }
 
@@ -51,22 +66,19 @@ class PolicyHook {
 
   custom = (permissionName) => {
     return (req, reply, done) => {
-      const err = new CustomError('Unauthorized', ERROR_TYPES.UNAUTHORIZED);
-
-      if (req.user) {
-        throw err;
-      }
-
-      const { [this._policyName]: permissions } = req.user.policies;
-
+      const { permissions } = req.user || {};
       if (!permissions) {
-        throw err;
+        throw new CustomError('Unauthorized', ERROR_TYPES.UNAUTHORIZED);
       }
 
-      const isAccess = permissions[permissionName];
+      const policy = permissions[this._policyName];
+      if (!policy) {
+        throw new CustomError('Unauthorized', ERROR_TYPES.UNAUTHORIZED);
+      }
 
+      const isAccess = policy[permissionName];
       if (!isAccess) {
-        throw err;
+        throw new CustomError('Unauthorized', ERROR_TYPES.UNAUTHORIZED);
       }
 
       done();

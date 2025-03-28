@@ -27,7 +27,14 @@ const { UserHook } = require('./common/hooks/auth');
 exports.initRestContainer = (container) => {
   const restContainer = new DIContainer();
 
-  restContainer.register('hook.user', new UserHook(container.get('repo.user')));
+  restContainer.register(
+    'hook.user',
+    new UserHook(
+      container.get('repo.user'),
+      container.get('repo.session'),
+      container.get('sc.userAccess')
+    )
+  );
 
   restContainer.register(
     'controllers.auth',

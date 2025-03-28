@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 exports.createToken = (payload, privateKey, options) => {
-  const token = jwt.sign(payload, privateKey, options);
+  const token = jwt.sign({ ...payload }, privateKey, options);
 
   return token;
 };
