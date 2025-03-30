@@ -2,19 +2,17 @@ exports.init = (sequelize, DataTypes) => {
   const Model = sequelize.define(
     'RolePolicy',
     {
-      id: {
-        type: DataTypes.UUID,
-        defaultValue: DataTypes.UUIDV4,
-        primaryKey: true,
-        allowNull: false,
-      },
       roleId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false,
         field: 'role_id',
       },
       policyId: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUID,
+        primaryKey: true,
+        defaultValue: DataTypes.UUIDV4,
         allowNull: false,
         field: 'policy_id',
       },

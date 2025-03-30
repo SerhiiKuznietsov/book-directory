@@ -64,15 +64,14 @@ exports.addUsers = async (queryInterface, transaction, list) => {
 
 exports.addRolesPolicies = async (queryInterface, transaction, list) => {
   const query = `
-    INSERT INTO ${TABLE_NAMES.ROLE_POLICY} (id, role_id, policy_id, access_permission)
-    VALUES ($1, $2, $3, $4)
+    INSERT INTO ${TABLE_NAMES.ROLE_POLICY} (role_id, policy_id, access_permission)
+    VALUES ($1, $2, $3)
   `;
 
   for (const rolePolicy of list) {
     await queryInterface.sequelize.query(query, {
       transaction,
       bind: [
-        rolePolicy.id,
         rolePolicy.roleId,
         rolePolicy.policyId,
         JSON.stringify(rolePolicy.accessPermission),

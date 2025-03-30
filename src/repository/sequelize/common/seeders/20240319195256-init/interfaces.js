@@ -42,9 +42,8 @@ exports.makeUserBook = (userId, bookId) => {
 
 exports.makeRolePolicy = (roleId, policyId, ...accessPermission) => {
   return {
-    id: randomUUID(),
     roleId,
     policyId,
-    accessPermission,
+    accessPermission: accessPermission || [],
   };
 };

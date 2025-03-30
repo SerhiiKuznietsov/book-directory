@@ -48,11 +48,11 @@ module.exports = {
       DROP TABLE IF EXISTS ${schemaName}.${rolePolicyTableName};
       CREATE TABLE IF NOT EXISTS ${schemaName}.${rolePolicyTableName}
       (
-        id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-        role_id uuid NOT NULL,
-        policy_id uuid NOT NULL,
+        role_id UUID NOT NULL DEFAULT uuid_generate_v4(),
+        policy_id UUID NOT NULL DEFAULT uuid_generate_v4(),
         access_permission jsonb NOT NULL,
-        ${getSystemsFields()}
+        ${getSystemsFields()},
+        PRIMARY KEY (role_id, policy_id)
       );
     `);
 
