@@ -76,7 +76,7 @@ const getRolesPoliciesList = () => {
     makeRolePolicy(
       authorRole.id,
       bookPolicy.id,
-      Object.values(policyPolicy.permissions)
+      Object.values(bookPolicy.permissions)
     ),
     makeRolePolicy(userRole.id, bookPolicy.id, policyPolicy.permissions.READ),
   ];
