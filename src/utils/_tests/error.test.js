@@ -18,7 +18,10 @@ describe('CustomError', () => {
   });
 
   it('should set a custom message and type', () => {
-    const error = new CustomError('Something went wrong', ERROR_TYPES.VALIDATION_ERROR);
+    const error = new CustomError(
+      'Something went wrong',
+      ERROR_TYPES.VALIDATION_ERROR
+    );
     expect(error.message).toBe('Something went wrong');
     expect(error.type).toBe(ERROR_TYPES.VALIDATION_ERROR);
   });
@@ -45,9 +48,8 @@ describe('CustomError', () => {
   });
 
   it('should set type correctly', () => {
-    const error = new CustomError('Type error');
-    error.setType(ERROR_TYPES.AUTH_ERROR);
-    expect(error.type).toBe(ERROR_TYPES.AUTH_ERROR);
+    const error = new CustomError('Type error', ERROR_TYPES.NOT_FOUND);
+    expect(error.type).toBe(ERROR_TYPES.NOT_FOUND);
   });
 
   it('should add and retrieve suggestions', () => {

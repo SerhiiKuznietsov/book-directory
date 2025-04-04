@@ -1,49 +1,36 @@
-const { ERROR_TYPES } = require('../../../constants/error');
 const { MIN_PASSWORD_LENGTH } = require('../../../constants/user');
-const { CustomError } = require('../../../utils/error');
+const { ValidationError } = require('../../../utils/error');
 
 const validate = (confirmPassword) => {
   const { password } = this;
 
   if (password !== confirmPassword) {
-    throw new CustomError(
-      'Passwords are not equal',
-      ERROR_TYPES.VALIDATION_ERROR
-    );
+    throw new ValidationError('Passwords are not equal');
   }
 
   if (password.length < MIN_PASSWORD_LENGTH) {
-    throw new CustomError(
-      'Password must be at least 8 characters long',
-      ERROR_TYPES.VALIDATION_ERROR
-    );
+    throw new ValidationError('Password must be at least 8 characters long');
   }
 
   if (!/[A-Z]/.test(password)) {
-    throw new CustomError(
-      'Password must contain at least one uppercase letter',
-      ERROR_TYPES.VALIDATION_ERROR
+    throw new ValidationError(
+      'Password must contain at least one uppercase letter'
     );
   }
 
   if (!/[a-z]/.test(password)) {
-    throw new CustomError(
-      'Password must contain at least one lowercase letter',
-      ERROR_TYPES.VALIDATION_ERROR
+    throw new ValidationError(
+      'Password must contain at least one lowercase letter'
     );
   }
 
   if (!/\d/.test(password)) {
-    throw new CustomError(
-      'Password must contain at least one digit',
-      ERROR_TYPES.VALIDATION_ERROR
-    );
+    throw new ValidationError('Password must contain at least one digit');
   }
 
   if (!/[@$!%*?&]/.test(password)) {
-    throw new CustomError(
-      'Password must contain at least one special character (@$!%*?&)',
-      ERROR_TYPES.VALIDATION_ERROR
+    throw new ValidationError(
+      'Password must contain at least one special character (@$!%*?&)'
     );
   }
 };
