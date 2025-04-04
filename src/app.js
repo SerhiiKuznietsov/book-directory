@@ -5,7 +5,7 @@ const dbConfig = require('./config/db');
 class App {
   constructor(server, logger) {
     this._server = server;
-    this._logger = logger.child({ context: App.name });
+    this._logger = logger.child({ context: this.constructor.name });
     this._container = newAppContainer(logger, dbConfig, storageConfig);
   }
 

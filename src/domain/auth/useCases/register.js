@@ -5,7 +5,7 @@ const { makeHashPassword } = require('../../../utils/hashPassword');
 
 class RegisterUseCase {
   constructor(logger, userRepo, roleRepo) {
-    this._logger = logger.child({ context: RegisterUseCase.name });
+    this._logger = logger.child({ context: this.constructor.name });
     this._userRepo = userRepo;
     this._roleRepo = roleRepo;
   }

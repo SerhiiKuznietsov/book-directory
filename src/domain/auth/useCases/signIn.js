@@ -7,7 +7,7 @@ const { TokenPayload } = require('../entities/tokenPayload');
 
 class SignInUseCase {
   constructor(logger, userRepo, userAccessService) {
-    this._logger = logger.child({ context: SignInUseCase.name });
+    this._logger = logger.child({ context: this.constructor.name });
     this._userRepo = userRepo;
     this._userAccessService = userAccessService;
   }

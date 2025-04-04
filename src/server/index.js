@@ -10,7 +10,7 @@ class FastifyServer extends ServerAdapter {
     super();
     this._host = config.host;
     this._port = config.port;
-    this._logger = logger.child({ context: FastifyServer.name });
+    this._logger = logger.child({ context: this.constructor.name });
     this._instance = fastify({
       loggerInstance: this._logger,
       ajv,

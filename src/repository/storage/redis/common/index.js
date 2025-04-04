@@ -4,7 +4,7 @@ const { createRedisInstance } = require('./instance');
 class Storage {
   constructor(config, logger) {
     this.instance = createRedisInstance(config);
-    this._logger = logger.child({ context: Storage.name });
+    this._logger = logger.child({ context: this.constructor.name });
   }
 
   async isOpenConnection() {

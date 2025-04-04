@@ -5,7 +5,7 @@ const { createRefreshToken } = require('../../../utils/token/refresh-token');
 
 class RefreshTokenUseCase {
   constructor(logger, userRepo) {
-    this._logger = logger.child({ context: RefreshTokenUseCase.name });
+    this._logger = logger.child({ context: this.constructor.name });
     this._userRepo = userRepo;
   }
 
