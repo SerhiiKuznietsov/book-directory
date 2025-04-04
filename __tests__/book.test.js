@@ -2,7 +2,7 @@ const request = require('supertest');
 const { App } = require('../src/app');
 const { FastifyServer } = require('../src/server');
 const { logger } = require('../src/utils/logger');
-const { server: serverConfig } = require('../src/config');
+const { host, port } = require('../src/config/server');
 
 describe('API Tests', () => {
   let app;
@@ -10,7 +10,7 @@ describe('API Tests', () => {
 
   beforeAll(async () => {
     app = new App(
-      new FastifyServer(serverConfig.host, serverConfig.port, logger),
+      new FastifyServer(host, port, logger),
       logger
     );
     server = app._server._instance.server;

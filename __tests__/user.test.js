@@ -2,7 +2,7 @@ const request = require('supertest');
 const { App } = require('../src/app');
 const { FastifyServer } = require('../src/server');
 const { logger } = require('../src/utils/logger');
-const { server: serverConfig } = require('../src/config');
+const { host, port } = require('../src/config/server');
 
 describe('API Tests', () => {
   let app;
@@ -10,10 +10,7 @@ describe('API Tests', () => {
   let roleId;
 
   beforeAll(async () => {
-    app = new App(
-      new FastifyServer(serverConfig.host, serverConfig.port, logger),
-      logger
-    );
+    app = new App(new FastifyServer(host, port, logger), logger);
     server = app._server._instance.server;
     await app.start();
 
@@ -73,7 +70,11 @@ describe('API Tests', () => {
     expect(postRes.status).toBe(201);
     const userId = postRes.body.id;
 
-    const updatedData = { name: 'Updated user name', email: 'updated_user@example.com', roleId };
+    const updatedData = {
+      name: 'Updated user name',
+      email: 'updated_user@example.com',
+      roleId,
+    };
     const putRes = await request(server)
       .put(`/api/user/${userId}`)
       .send(updatedData);
