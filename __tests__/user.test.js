@@ -1,8 +1,11 @@
 const request = require('supertest');
 const { App } = require('../src/app');
 const { FastifyServer } = require('../src/server');
-const { logger } = require('../src/utils/logger');
+const { newLogger } = require('../src/utils/logger');
+const { level } = require('../src/config/logger');
 const { host, port } = require('../src/config/server');
+
+const logger = newLogger(level);
 
 describe('API Tests', () => {
   let app;

@@ -15,5 +15,5 @@ exports.initRest = async (app, container) => {
   registerHealth(app);
   registerAppRouters(app, restContainer);
 
-  registerRootErrorHandlers(app);
+  registerRootErrorHandlers(app, container.get('log'));
 };

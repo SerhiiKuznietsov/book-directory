@@ -6,7 +6,7 @@ const { initModels } = require('./models');
 class SequelizeDB {
   constructor(config, logger) {
     this._logger = logger.child({ context: this.constructor.name });
-    this.instance = createSequelizeInstance(config);
+    this.instance = createSequelizeInstance(config, logger);
     this.models = this.instance.models;
 
     initModels(this.instance);

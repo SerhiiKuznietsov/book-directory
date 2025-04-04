@@ -1,4 +1,7 @@
-const { logger } = require('../../../utils/logger');
+const { level } = require('../../../config/logger');
+const { newLogger } = require('../../../utils/logger');
+
+const logger = newLogger(level);
 
 exports.transactionWrapper = (cb) => {
   return async (queryInterface) => {

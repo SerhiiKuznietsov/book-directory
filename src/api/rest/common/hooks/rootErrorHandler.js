@@ -2,9 +2,8 @@ const {
   mapErrorTypeToHttpCode,
 } = require('../../../../utils/errorMapper/http');
 const { ERROR_TYPES } = require('../../../../constants/error');
-const { logger } = require('../../../../utils/logger');
 
-exports.registerRootErrorHandlers = (app) => {
+exports.registerRootErrorHandlers = (app, logger) => {
   app.setErrorHandler((err, _, reply) => {
     logger.error(err);
     const {

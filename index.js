@@ -1,8 +1,10 @@
 const { App } = require('./src/app');
 const { FastifyServer } = require('./src/server');
-const { logger } = require('./src/utils/logger');
+const { newLogger } = require('./src/utils/logger');
 const serverConfig = require('./src/config/server');
+const { level } = require('./src/config/logger');
 
+const logger = newLogger(level);
 const server = new FastifyServer(serverConfig, logger);
 const app = new App(server, logger);
 

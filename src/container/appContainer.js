@@ -33,8 +33,9 @@ const { UserAccessService } = require('../domain/auth/services/userAccess');
 exports.newAppContainer = (logger, dbConfig, storageConfig) => {
   const c = new DIContainer();
 
-  c.register('db.sequelize', new SequelizeDB(dbConfig, logger));
-  c.register('db.redis', new Storage(storageConfig, logger));
+  c.register('log', logger);
+  c.register('db.sequelize', new SequelizeDB(dbConfig, c.get('log')));
+  c.register('db.redis', new Storage(storageConfig, c.get('log')));
 
   c.register('repo.book', new BookRepository(c.get('db.sequelize')));
   c.register('repo.role', new RoleRepository(c.get('db.sequelize')));
@@ -75,19 +76,19 @@ exports.newAppContainer = (logger, dbConfig, storageConfig) => {
 
   c.register(
     'uc.signIn',
-    new SignInUseCase(logger, c.get('repo.user'), c.get('sc.userAccess'))
+    new SignInUseCase(c.get('log'), c.get('repo.user'), c.get('sc.userAccess'))
   );
   c.register(
     'uc.signOut',
-    new SignOutUseCase(logger, c.get('repo.user'), c.get('repo.session'))
+    new SignOutUseCase(c.get('log'), c.get('repo.user'), c.get('repo.session'))
   );
   c.register(
     'uc.registerUser',
-    new RegisterUseCase(logger, c.get('repo.user'), c.get('repo.role'))
+    new RegisterUseCase(c.get('log'), c.get('repo.user'), c.get('repo.role'))
   );
   c.register(
     'uc.refreshToken',
-    new RefreshTokenUseCase(logger, c.get('repo.user'))
+    new RefreshTokenUseCase(c.get('log'), c.get('repo.user'))
   );
 
   return c;

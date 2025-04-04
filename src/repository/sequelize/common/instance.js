@@ -1,8 +1,7 @@
 const { Sequelize } = require('sequelize');
 const { IS_DEV } = require('../../../config/env');
-const { logger } = require('../../../utils/logger');
 
-exports.createSequelizeInstance = (config) => {
+exports.createSequelizeInstance = (config, logger) => {
   const {
     database,
     schema,
