@@ -3,5 +3,6 @@ module.exports = {
   MAX_NAME_LENGTH: 128,
   MAX_EMAIL_LENGTH: 256,
   MAX_HASH_LENGTH: 60,
+  MIN_PASSWORD_LENGTH: 8,
   USER_API_TAG: 'user',
 };

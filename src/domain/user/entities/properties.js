@@ -1,4 +1,4 @@
-const { MIN_NAME_LENGTH, MAX_NAME_LENGTH } = require('../../../constants/user');
+const { MIN_NAME_LENGTH, MAX_NAME_LENGTH, MIN_PASSWORD_LENGTH } = require('../../../constants/user');
 
 module.exports = {
   id: {
@@ -20,7 +20,7 @@ module.exports = {
   },
   password: {
     type: 'string',
-    minLength: 8,
+    minLength: MIN_PASSWORD_LENGTH,
   },
   createdAt: { type: 'string', format: 'date-time' },
   updatedAt: { type: 'string', format: 'date-time' },

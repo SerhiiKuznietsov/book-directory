@@ -1,4 +1,5 @@
 const { ERROR_TYPES } = require('../../../constants/error');
+const { MIN_PASSWORD_LENGTH } = require('../../../constants/user');
 const { CustomError } = require('../../../utils/error');
 
 const validate = (confirmPassword) => {
@@ -11,7 +12,7 @@ const validate = (confirmPassword) => {
     );
   }
 
-  if (password.length < 8) {
+  if (password.length < MIN_PASSWORD_LENGTH) {
     throw new CustomError(
       'Password must be at least 8 characters long',
       ERROR_TYPES.VALIDATION_ERROR
