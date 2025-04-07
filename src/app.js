@@ -1,4 +1,4 @@
-const { newAppContainer } = require('./container/appContainer');
+const { newAppContainer } = require('./appContainer');
 const storageConfig = require('./config/redis');
 const dbConfig = require('./config/db');
 

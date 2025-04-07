@@ -1,4 +1,4 @@
-const { DIContainer } = require('../../container/container');
+const { DIContainer } = require('../../utils/container');
 const { AuthControllers } = require('./api/auth/controllers');
 const { RefreshTokenCtrl } = require('./api/auth/controllers/refreshToken');
 const { RegisterCtrl } = require('./api/auth/controllers/register');

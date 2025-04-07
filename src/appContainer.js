@@ -1,34 +1,34 @@
-const { DIContainer } = require('./container');
+const { DIContainer } = require('./utils/container');
 // DB
-const { SequelizeDB } = require('../repository/sequelize/common');
-const { Storage } = require('../repository/storage/redis/common');
+const { SequelizeDB } = require('./repository/sequelize/common');
+const { Storage } = require('./repository/storage/redis/common');
 // REPOSITORY
-const { BookRepository } = require('../repository/sequelize/book');
-const { RoleRepository } = require('../repository/sequelize/role');
-const { UserRepository } = require('../repository/sequelize/user');
-const { SessionRepository } = require('../repository/storage/redis/session');
+const { BookRepository } = require('./repository/sequelize/book');
+const { RoleRepository } = require('./repository/sequelize/role');
+const { UserRepository } = require('./repository/sequelize/user');
+const { SessionRepository } = require('./repository/storage/redis/session');
 // USE_CASE
-const { CreateBookUseCase } = require('../domain/book/useCases/create');
-const { GetBookByIdUseCase } = require('../domain/book/useCases/getById');
-const { GetBookListUseCase } = require('../domain/book/useCases/list');
-const { RemoveBookUseCase } = require('../domain/book/useCases/remove');
-const { UpdateBookUseCase } = require('../domain/book/useCases/update');
-const { GetRoleListUseCase } = require('../domain/role/useCases/list');
-const { GetRoleByIdUseCase } = require('../domain/role/useCases/getById');
-const { CreateRoleUseCase } = require('../domain/role/useCases/create');
-const { UpdateRoleUseCase } = require('../domain/role/useCases/update');
-const { RemoveRoleUseCase } = require('../domain/role/useCases/remove');
-const { GetUserListUseCase } = require('../domain/user/useCases/list');
-const { GetUserByIdUseCase } = require('../domain/user/useCases/getById');
-const { CreateUserUseCase } = require('../domain/user/useCases/create');
-const { UpdateUserUseCase } = require('../domain/user/useCases/update');
-const { RemoveUserUseCase } = require('../domain/user/useCases/remove');
-const { SignInUseCase } = require('../domain/auth/useCases/signIn');
-const { SignOutUseCase } = require('../domain/auth/useCases/signOut');
-const { RegisterUseCase } = require('../domain/auth/useCases/register');
-const { RefreshTokenUseCase } = require('../domain/auth/useCases/refreshToken');
-const { RolePolicyRepository } = require('../repository/sequelize/role-policy');
-const { UserAccessService } = require('../domain/auth/services/userAccess');
+const { CreateBookUseCase } = require('./domain/book/useCases/create');
+const { GetBookByIdUseCase } = require('./domain/book/useCases/getById');
+const { GetBookListUseCase } = require('./domain/book/useCases/list');
+const { RemoveBookUseCase } = require('./domain/book/useCases/remove');
+const { UpdateBookUseCase } = require('./domain/book/useCases/update');
+const { GetRoleListUseCase } = require('./domain/role/useCases/list');
+const { GetRoleByIdUseCase } = require('./domain/role/useCases/getById');
+const { CreateRoleUseCase } = require('./domain/role/useCases/create');
+const { UpdateRoleUseCase } = require('./domain/role/useCases/update');
+const { RemoveRoleUseCase } = require('./domain/role/useCases/remove');
+const { GetUserListUseCase } = require('./domain/user/useCases/list');
+const { GetUserByIdUseCase } = require('./domain/user/useCases/getById');
+const { CreateUserUseCase } = require('./domain/user/useCases/create');
+const { UpdateUserUseCase } = require('./domain/user/useCases/update');
+const { RemoveUserUseCase } = require('./domain/user/useCases/remove');
+const { SignInUseCase } = require('./domain/auth/useCases/signIn');
+const { SignOutUseCase } = require('./domain/auth/useCases/signOut');
+const { RegisterUseCase } = require('./domain/auth/useCases/register');
+const { RefreshTokenUseCase } = require('./domain/auth/useCases/refreshToken');
+const { RolePolicyRepository } = require('./repository/sequelize/role-policy');
+const { UserAccessService } = require('./domain/auth/services/userAccess');
 
 exports.newAppContainer = (logger, dbConfig, storageConfig) => {
   const c = new DIContainer();
