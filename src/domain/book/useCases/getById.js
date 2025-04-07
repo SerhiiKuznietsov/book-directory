@@ -8,7 +8,6 @@ class GetBookByIdUseCase {
 
   async execute(id) {
     const foundBook = await this._bookRepo.getById(id);
-
     if (!foundBook) {
       throw new CustomError(
         `book with id: "${id}" not found`,

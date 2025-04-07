@@ -15,7 +15,6 @@ exports.getRolePolicyByUUID = async (uuid) => {
       },
     ],
   });
-
   if (!foundRolePolicy) {
     throw new CustomError(
       `role and policy linkage by uuid "${uuid}" not found`
