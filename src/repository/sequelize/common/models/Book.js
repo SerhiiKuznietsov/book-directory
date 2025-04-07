@@ -1,4 +1,4 @@
-const { MAX_TITLE_LENGTH } = require('../../../../constants/book');
+const { MAX_TITLE_LENGTH, MAX_PUBLISHER_LENGTH } = require('../../../../constants/book');
 
 exports.init = (sequelize, DataTypes) => {
   const Model = sequelize.define(
@@ -14,6 +14,24 @@ exports.init = (sequelize, DataTypes) => {
         type: DataTypes.STRING(MAX_TITLE_LENGTH),
         allowNull: false,
         unique: true,
+      },
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: true,
+      },
+      publisher: {
+        type: DataTypes.STRING(MAX_PUBLISHER_LENGTH),
+        allowNull: true,
+      },
+      publishedAt: {
+        type: DataTypes.DATEONLY,
+        allowNull: true,
+        field: 'published_at',
+      },
+      pageCount: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+        field: 'page_count',
       },
       createdAt: {
         type: 'TIMESTAMP WITHOUT TIME ZONE',

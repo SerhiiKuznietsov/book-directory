@@ -75,7 +75,11 @@ module.exports = {
       CREATE TABLE IF NOT EXISTS ${schemaName}.${bookTableName}
       (
         id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
-        title character varying(255) NOT NULL,
+        title character varying(255) UNIQUE NOT NULL,
+        description TEXT,
+        publisher VARCHAR(255),
+        published_at DATE,
+        page_count INTEGER,
         ${getSystemsFields()}
       );
     `);
@@ -94,13 +98,13 @@ module.exports = {
 
   async down(queryInterface) {
     await queryInterface.sequelize.query(`
-      DROP TABLE IF EXISTS ${schemaName}.${roleTableName} CASCADE;
-      DROP TABLE IF EXISTS ${schemaName}.${policyTableName} CASCADE;
-      DROP TABLE IF EXISTS ${schemaName}.${rolePolicyTableName} CASCADE;
-      DROP TABLE IF EXISTS ${schemaName}.${userTableName} CASCADE;
-      DROP TABLE IF EXISTS ${schemaName}.${bookTableName} CASCADE;
-      DROP TABLE IF EXISTS ${schemaName}.${userBookTableName} CASCADE;
-      DROP EXTENSION IF EXISTS "uuid-ossp";
-    `);
+        DROP TABLE IF EXISTS ${schemaName}.${roleTableName} CASCADE;
+        DROP TABLE IF EXISTS ${schemaName}.${policyTableName} CASCADE;
+        DROP TABLE IF EXISTS ${schemaName}.${rolePolicyTableName} CASCADE;
+        DROP TABLE IF EXISTS ${schemaName}.${userTableName} CASCADE;
+        DROP TABLE IF EXISTS ${schemaName}.${bookTableName} CASCADE;
+        DROP TABLE IF EXISTS ${schemaName}.${userBookTableName} CASCADE;
+        DROP EXTENSION IF EXISTS "uuid-ossp";
+      `);
   },
 };

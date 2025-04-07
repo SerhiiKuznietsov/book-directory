@@ -29,7 +29,13 @@ const makeAuthors = (roleId, authorsCount, booksInterval) => {
 
     const booksCount = range(booksInterval.min, booksInterval.max);
     for (let j = 0; j < booksCount; j++) {
-      const newBook = makeBook(faker.lorem.words(3));
+      const newBook = makeBook(
+        faker.lorem.words(3),
+        faker.lorem.paragraphs(2),
+        faker.company.name(),
+        faker.date.past({ years: 20 }).toISOString().split('T')[0],
+        faker.number.int({ min: 9, max: 1000 })
+      );
       const userBook = makeUserBook(newAuthor.id, newBook.id);
 
       books.push(newBook);

@@ -25,10 +25,14 @@ exports.makePolicy = (title, permissions) => {
   };
 };
 
-exports.makeBook = (title) => {
+exports.makeBook = (title, description, publisher, publishedAt, pageCount) => {
   return {
     id: randomUUID(),
     title,
+    description,
+    publisher,
+    publishedAt,
+    pageCount,
   };
 };
 

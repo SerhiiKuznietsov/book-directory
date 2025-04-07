@@ -19,14 +19,21 @@ exports.addRoles = async (queryInterface, transaction, list) => {
 
 exports.addBooks = async (queryInterface, transaction, list) => {
   const query = `
-    INSERT INTO ${TABLE_NAMES.BOOK} (id, title)
-    VALUES ($1, $2)
+    INSERT INTO ${TABLE_NAMES.BOOK} (id, title, description, publisher, published_at, page_count)
+    VALUES ($1, $2, $3, $4, $5, $6)
   `;
 
   for (const book of list) {
     await queryInterface.sequelize.query(query, {
       transaction,
-      bind: [book.id, book.title],
+      bind: [
+        book.id,
+        book.title,
+        book.description,
+        book.publisher,
+        book.publishedAt,
+        book.pageCount,
+      ],
     });
   }
 };
