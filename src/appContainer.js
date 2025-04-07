@@ -1,5 +1,5 @@
 const { DIContainer } = require('./utils/container');
-// DB
+// DB & Storage
 const { SequelizeDB } = require('./repository/sequelize/common');
 const { Storage } = require('./repository/storage/redis/common');
 // REPOSITORY
