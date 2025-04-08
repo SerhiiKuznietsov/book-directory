@@ -4,6 +4,8 @@ const {
 const { ERROR_TYPES } = require('../../../../constants/error');
 
 exports.registerRootErrorHandlers = (app, logger) => {
+  logger = logger.child({ context: 'RootErrorHandler' });
+
   app.setErrorHandler((err, _, reply) => {
     logger.error(err);
     const {
