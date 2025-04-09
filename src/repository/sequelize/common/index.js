@@ -1,10 +1,12 @@
 const { ERROR_TYPES } = require('../../../constants/error');
 const { CustomError } = require('../../../utils/error');
+const { AbstractStorage } = require('../../abstractStorage');
 const { createSequelizeInstance } = require('./instance');
 const { initModels } = require('./models');
 
-class SequelizeDB {
+class SequelizeDB extends AbstractStorage {
   constructor(config, logger) {
+    super();
     this._logger = logger.child({ context: this.constructor.name });
     this.instance = createSequelizeInstance(config, logger);
     this.models = this.instance.models;
@@ -38,6 +40,7 @@ class SequelizeDB {
       ).setCause(e);
     }
   }
+
   async disconnect() {
     await this.instance.close();
   }

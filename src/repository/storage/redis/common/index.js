@@ -1,8 +1,10 @@
 const { CustomError } = require('../../../../utils/error');
+const { AbstractStorage } = require('../../../abstractStorage');
 const { createRedisInstance } = require('./instance');
 
-class Storage {
+class RedisStorage extends AbstractStorage {
   constructor(config, logger) {
+    super();
     this.instance = createRedisInstance(config);
     this._logger = logger.child({ context: this.constructor.name });
   }
@@ -40,5 +42,5 @@ class Storage {
 }
 
 module.exports = {
-  Storage,
+  Storage: RedisStorage,
 };
