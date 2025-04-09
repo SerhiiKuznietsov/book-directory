@@ -9,8 +9,8 @@ exports.registerRootErrorHandlers = (app, logger) => {
   app.setErrorHandler((err, _, reply) => {
     logger.error(err);
     const {
-      name = 'error',
-      message = 'something wrong',
+      name = 'Error',
+      message = 'Something wrong',
       type = ERROR_TYPES.INTERNAL_ERROR,
     } = err;
 
