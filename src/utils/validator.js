@@ -1,12 +1,11 @@
 const Ajv = require('ajv');
-const { CustomError } = require('./error');
+const { ValidationError } = require('./error');
 const { IS_DEV } = require('../config/env');
-const { ERROR_TYPES } = require('../constants/error');
 
 const ajv = new Ajv({
   allErrors: IS_DEV,
   removeAdditional: 'all',
-  coerceTypes: true,
+  coerceTypes: false,
   useDefaults: true,
   strict: true,
   verbose: true,
@@ -25,7 +24,7 @@ const valid = (validate, data) => {
   validate(data);
 
   if (validate.errors) {
-    const e = new CustomError('Validation error', ERROR_TYPES.BAD_REQUEST);
+    const e = new ValidationError('Validation error');
 
     validate.errors.forEach((item) => {
       e.addSuggestion({
